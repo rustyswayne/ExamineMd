@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+	<info>
+		<package>
+			<name>ExamineMd</name>
+			<version>0.0.0</version>
+            <license url="https://github.com/rustyswayne/ExamineMd/blob/master/LICENSE">MIT license</license>
+            <url>https://github.com/rustyswayne/ExamineMd</url>
+			<requirements>
+				<major>0</major>
+				<minor>0</minor>
+				<patch>0</patch>
+			</requirements>
+		</package>
+        <author>
+            <name>Dina Berry, Rusty Swayne</name>
+            <website>http://www.mindfly.com/</website>
+        </author>
+		<readme>
+			<![CDATA[]]>
+		</readme>
+	</info>
+	<DocumentTypes />
+	<Templates />
+	<Stylesheets />
+	<Macros />
+	<DictionaryItems />
+	<Languages />
+	<DataTypes />
+	<Actions />
+	<control />
+	<files />
+</umbPackage>

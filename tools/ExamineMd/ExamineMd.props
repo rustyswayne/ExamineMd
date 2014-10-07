@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- THIRD PARTY -->
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>..\MSBuildCommunityTasks</MSBuildCommunityTasksPath>
+    <MSBuildUmbracoTasksPath>..\MSBuildCommunityTasks</MSBuildUmbracoTasksPath>
+  </PropertyGroup>
+  
+	<!-- PROPERTIES -->
+    <PropertyGroup>
+        <VersionMajor>1</VersionMajor>
+        <VersionMinor>0</VersionMinor>
+        <VersionPatch>0</VersionPatch>
+        <VersionSuffix>0</VersionSuffix>
+        <UmbracoVersion>7.1.7</UmbracoVersion>
+    </PropertyGroup>
+
+
+    <PropertyGroup>
+        <RootDir>$(MSBuildProjectDirectory)\..</RootDir>
+        <BuildDir>$(MSBuildProjectDirectory)\Temp</BuildDir>
+        <BuildBinariesFolder>$(BuildDir)\AllBinaries</BuildBinariesFolder>
+        <PackageDir>$(MSBuildProjectDirectory)</PackageDir>
+        <ProjectDir>$(RootDir)\src\ExamineMd</ProjectDir>
+    </PropertyGroup>
+
+</Project>

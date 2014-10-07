@@ -1,0 +1,5 @@
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\ExamineMd.dll
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\ExamineMd.pdb
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\obj\Release\ExamineMd.csprojResolveAssemblyReference.cache
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\obj\Release\ExamineMd.dll
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\obj\Release\ExamineMd.pdb

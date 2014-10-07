@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+	<info>
+		<package>
+			<name>ExamineMd</name>
+			<version>1.0.0</version>
+            <license url="https://github.com/rustyswayne/ExamineMd/blob/master/LICENSE">MIT license</license>
+            <url>https://github.com/rustyswayne/ExamineMd</url>
+			<requirements>
+				<major>7</major>
+				<minor>1</minor>
+				<patch>7</patch>
+			</requirements>
+		</package>
+        <author>
+            <name>Dina Berry, Rusty Swayne</name>
+            <website>http://www.mindfly.com/</website>
+        </author>
+		<readme><![CDATA[erchello.Plugin.Payments.AuthorizeNet
+
+Plugin Payment Gateway Provider for Merchello.]]></readme>
+	</info>
+	<DocumentTypes />
+	<Templates />
+	<Stylesheets />
+	<Macros />
+	<DictionaryItems />
+	<Languages />
+	<DataTypes />
+	<Actions />
+	<control />
+	<files><file><guid>040c12d4-1f88-4d15-a638-2bfdb1e6a3ad.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>0bcc47df-f1dd-4bbd-97ac-049085e1829c.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>64bdc702-1523-409b-95b8-b281cd1433e3.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>6d0b6a1c-a68c-4b50-b284-e008db14e78e.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
+</umbPackage>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Import Project="..\tools\ExamineMd\ExamineMd.props"/>
+  <Import Project="..\tools\ExamineMd\ExamineMd.targets" />
+
+
+    
+    <!-- 
+ ****************************************************
+ TARGETS 
+ *****************************************************
+ -->
+
+    <!-- COMPILE -->
+    <Target Name="Compile" DependsOnTargets="UpdateAssemblyInfo">
+        <MSBuild Projects="$(RootDir)\src\ExamineMd.sln" Properties="Configuration=Release;Platform=Any CPU;" />
+    </Target>
+
+  <Target Name="AllBinaries"  DependsOnTargets="Compile">
+
+    <ItemGroup>
+      <PackageBinariesFiles Include="$(ProjectDir)\bin\Release\ExamineMd.*" Exclude="$(ProjectDir)\bin\Release\*Tests.*;$(ProjectDir)\bin\Release\*nunit.*;$(ProjectDir)\bin\Release\*Moq.*" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(PackageBinariesFiles)"
+				DestinationFiles="@(PackageBinariesFiles->'$(BuildBinariesFolder)\%(RecursiveDir)%(Filename)%(Extension)')"
+				OverwriteReadOnlyFiles="true"
+				SkipUnchangedFiles="false" />
+
+  </Target>
+
+  <Target Name="NuGetPackage" DependsOnTargets="AllBinaries">
+
+    <Message Text="Beginning NuGet Pack ExamineMd.$(AssemblyInformationVersion).nupkg" Importance="high" />
+
+    <Exec WorkingDirectory="$(PackageDir)" Command="..\src\.nuget\NuGet.exe pack .\nuspec\ExamineMd.nuspec" />
+
+    <Message Text="Finished NuGet Pack ExamineMd.$(AssemblyInformationVersion).nupkg" Importance="high" />
+
+  </Target>
+  
+    <!-- PREPARE FILES -->
+    <Target Name="PrepairFiles" DependsOnTargets="NuGetPackage">
+        <ItemGroup>
+            <!-- <AppPluginFiles Include="$(ProjectDir)\App_Plugins\**\*.*" /> -->
+            <BinFiles Include="$(ProjectDir)\bin\Release\ExamineMd.*" />
+            <PackageFile Include="$(PackageDir)\package.xml" />
+        </ItemGroup>
+      
+
+        <Copy SourceFiles="@(BinFiles)" DestinationFolder="$(BuildDir)\bin" />
+        <!-- <Copy SourceFiles="@(AppPluginFiles)" DestinationFiles="@(AppPluginFiles->'$(BuildDir)\App_Plugins\%(RecursiveDir)%(Filename)%(Extension)')" /> -->
+        <Copy SourceFiles="@(PackageFile)" DestinationFolder="$(BuildDir)" />
+    </Target>
+
+    <!-- MANIFEST -->
+    <Target Name="Manifest" DependsOnTargets="PrepairFiles">
+        <ItemGroup>
+            <ManifestFiles Include="$(BuildDir)\**\*" Exclude="$(BuildDir)\package.xml" />
+        </ItemGroup>
+        <ManifestUpdate ManifestFile="$(BuildDir)\package.xml"
+			WorkingDirectory="$(BuildDir)"
+			MinimumRequiredUmbracoVersion="$(UmbracoVersion)"
+			PackageVersion="$(VersionMajor).$(VersionMinor).$(VersionPatch)"
+			Readme="$([System.IO.File]::ReadAllText(readme.txt))"
+			Files="@(ManifestFiles)" />
+    </Target>
+
+    <!-- PACKAGE -->
+    <Target Name="Build" DependsOnTargets="Manifest">
+        <ItemGroup>
+            <PackageFiles Include="$(BuildDir)\**\*.*" />
+        </ItemGroup>
+        <Package ManifestFile="$(BuildDir)\package.xml"
+			WorkingDirectory="$(BuildDir)"
+			OutputDirectory="$(PackageDir)"
+			Files="@(PackageFiles)" />
+      <!--
+        <RemoveDir Directories="$(BuildDir)" Condition="Exists('$(BuildDir)')" />
+        -->
+    </Target>
+ 
+
+</Project>

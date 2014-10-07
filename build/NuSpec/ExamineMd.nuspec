@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>ExamineMd</id>
+    <version>1.0.0</version>
+    <title>ExamineMd</title>
+    <authors>Dina Berry, Rusty Swayne</authors>
+    <owners>Mindfly, Inc.</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ExamineMd loads markdown files into an Umbraco Examine index for rendering as HTML.</description>
+    <summary>
+    </summary>
+    <language>en-US</language>
+    <tags>umbraco, Examine, Markdown</tags>
+    <dependencies />
+  </metadata>
+  <files>
+    <file src="..\Temp\AllBinaries\ExamineMd.dll" target="lib\net40\ExamineMd.dll" />
+  </files>
+</package>
