@@ -73,3 +73,11 @@ C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\umbraco.DataL
 C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\umbraco.editorControls.xml
 C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\umbraco.MacroEngines.xml
 C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\umbraco.providers.xml
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\ExamineMd.dll.config
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\MarkdownDeep.dll
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\ClientDependency.Core.pdb
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\ClientDependency.Core.Mvc.pdb
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\Examine.pdb
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\HtmlAgilityPack.pdb
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\MarkdownDeep.pdb
+C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Release\MiniProfiler.pdb

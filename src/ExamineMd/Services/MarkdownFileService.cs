@@ -119,6 +119,49 @@
         }
 
         /// <summary>
+        /// Gets all the directories in the file store
+        /// </summary>
+        /// <param name="path">
+        /// The path of the directory
+        /// </param>
+        /// <returns>
+        /// The <see cref="IEnumerable{IMdDirectory}"/>.
+        /// </returns>
+        public IMdDirectory GetDirectory(string path)
+        {
+            var directory = new DirectoryInfo(this.GetPhysicalPath(path));
+
+            return _factory.Value.Build(directory);
+        }
+
+        /// <summary>
+        /// Gets all the directories in the file store
+        /// </summary>
+        /// <returns>
+        /// The <see cref="IEnumerable{IMdDirectory}"/>.
+        /// </returns>
+        public IEnumerable<IMdDirectory> GetDirectories()
+        {
+            return this.GetMarkdownDirectories(_root);
+        }
+
+        /// <summary>
+        /// Gets a collection of directories in the Markdown file store that match the starting path.
+        /// </summary>
+        /// <param name="startPath">
+        /// The start path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IEnumerable{IMdDirectory}"/>.
+        /// </returns>
+        public IEnumerable<IMdDirectory> GetDirectories(string startPath)
+        {
+            var directory = new DirectoryInfo(this.GetPhysicalPath(startPath));
+
+            return GetMarkdownDirectories(directory);
+        }
+
+        /// <summary>
         /// Recursively gets a collection of Markdown files starting at the directory specified
         /// </summary>
         /// <param name="directory">
@@ -141,43 +184,6 @@
 
             return files;
         }
-
-        /// <summary>
-        /// Gets all the directories in the file store
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IEnumerable{IMdDirectory}"/>.
-        /// </returns>
-        public IMdDirectory GetDirectory(string path)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Gets all the directories in the file store
-        /// </summary>
-        /// <returns>
-        /// The <see cref="IEnumerable{IMdDirectory}"/>.
-        /// </returns>
-        public IEnumerable<IMdDirectory> GetDirectories()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Gets a collection of directories in the Markdown file store that match the starting path.
-        /// </summary>
-        /// <param name="startPath">
-        /// The start path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IEnumerable{IMdDirectory}"/>.
-        /// </returns>
-        public IEnumerable<IMdDirectory> GetDirectories(string startPath)
-        {
-            throw new NotImplementedException();
-        }
-
 
         /// <summary>
         /// The get markdown directories.

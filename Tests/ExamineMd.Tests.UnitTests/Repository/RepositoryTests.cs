@@ -52,11 +52,14 @@
            Assert.IsFalse(files.Any(x => !x.FileName.StartsWith(NameFilter, StringComparison.InvariantCultureIgnoreCase)));
         }
 
+        /// <summary>
+        /// Test shows files can be found by name and path
+        /// </summary>
         [Test]
         public void Can_Find_Files_By_Name_And_Path()
         {
             //// Arrange
-            const string Path = "/developers";
+            const string Path = "~/developers";
             const string NameFilter = "merchello";
 
             //// Act
@@ -64,11 +67,14 @@
             this.ShowFileStoreInfo(files);
 
             //// Assert
-
-            //// Assert
             Assert.IsTrue(files.Any(), "No files found");
             Assert.IsFalse(files.Any(x => !x.FileName.StartsWith(NameFilter, StringComparison.InvariantCultureIgnoreCase)), "File name failure");
             Assert.IsFalse(files.Any(x => !x.Path.StartsWith("developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+        }
+
+        public void Can_List_All_Md_Files_On_A_Specific_Path()
+        {
+            
         }
     }
 }

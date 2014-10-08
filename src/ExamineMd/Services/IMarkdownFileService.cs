@@ -25,6 +25,7 @@
         /// </summary>
         /// <param name="path">
         /// The relative path to the file. Example \directory1\directory2\
+        /// /directory1/director2/
         /// </param>
         /// <param name="fileName">
         /// An optional file name
