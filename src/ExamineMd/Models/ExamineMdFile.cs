@@ -5,8 +5,18 @@
     /// <summary>
     /// Represents an ExamineMdFile
     /// </summary>
-    internal class ExamineMdFile : IExamineMdFile
+    public class ExamineMdFile : IExamineMdFile
     {
+        /// <summary>
+        /// Gets or sets the relative path to the file with respect to the file store root.
+        /// </summary>
+        public string Path { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the file.
+        /// </summary>
+        public string FileName { get; set; }
+
         /// <summary>
         /// Gets or sets the title.
         /// </summary>

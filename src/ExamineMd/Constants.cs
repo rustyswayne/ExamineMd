@@ -24,11 +24,11 @@
             /// <summary>
             /// Gets the Examine IndexType for an ExamineMd document.
             /// </summary>
-            public static string ExmanineMd
+            public static string ExamineMdDocument
             {
                 get
                 {
-                    return "ExamineMd";
+                    return "ExamineMdDocument";
                 }
             }
         }
