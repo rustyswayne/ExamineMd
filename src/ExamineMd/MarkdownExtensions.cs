@@ -69,7 +69,7 @@
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString Markdown(this IExamineMdFile file)
+        public static IHtmlString Markdown(this IMdFile file)
         {
             return string.IsNullOrEmpty(file.Body) ? MvcHtmlString.Empty : new MvcHtmlString(MarkdownFormatter.Transform(file.Body));
         }

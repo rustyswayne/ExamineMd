@@ -198,11 +198,14 @@
     <Compile Include="DataService\MarkdownFileIndexDataService.cs" />
     <Compile Include="Mandate.cs" />
     <Compile Include="MarkdownExtensions.cs" />
-    <Compile Include="Models\IExamineMdFile.cs" />
-    <Compile Include="Models\ExamineMdFile.cs" />
-    <Compile Include="Persistence\Factories\ExamineMdFileFactory.cs" />
-    <Compile Include="Persistence\Repositories\IMarkdownFileRepository.cs" />
-    <Compile Include="Persistence\Repositories\MarkdownFileRepository.cs" />
+    <Compile Include="Models\IMdDirectory.cs" />
+    <Compile Include="Models\IMdFile.cs" />
+    <Compile Include="Models\MdDirectory.cs" />
+    <Compile Include="Models\MdFile.cs" />
+    <Compile Include="Persistence\Factories\FileStoreFactory.cs" />
+    <Compile Include="Persistence\Factories\FileStoreFactoryBase.cs" />
+    <Compile Include="Services\IMarkdownFileService.cs" />
+    <Compile Include="Services\MarkdownFileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyVisibility.cs" />
   </ItemGroup>

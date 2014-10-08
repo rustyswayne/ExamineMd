@@ -28,7 +28,7 @@
         /// </returns>
         public IEnumerable<SimpleDataSet> GetAllData(string indexType)
         {
-            var repository = new MarkdownFileRepository();
+            var repository = new MarkdownFileService();
 
             var all = repository.GetAllMarkdownFiles();
 
@@ -50,10 +50,10 @@
                                     },
                             RowData = new Dictionary<string, string>()
                                 {
-                                    { "fileName", RemoveSpecialCharacters(md.FileName) },
-                                    { "title", RemoveSpecialCharacters(md.Title) },
-                                    { "body", RemoveSpecialCharacters(md.Body) },
-                                    { "path", RemoveSpecialCharacters(md.Path) },
+                                    { "fileName", md.FileName },
+                                    { "title", md.Title },
+                                    { "body", md.Body },
+                                    { "path", md.Path },
                                     { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }
                                 }
                         };

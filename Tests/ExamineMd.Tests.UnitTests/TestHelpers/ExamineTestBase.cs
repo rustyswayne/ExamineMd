@@ -1,6 +1,12 @@
 ﻿namespace ExamineMd.Tests.UnitTests.TestHelpers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
     using Examine;
+
+    using ExamineMd.Models;
 
     using NUnit.Framework;
 
@@ -10,6 +16,19 @@
         public void TestFixtureSetup()
         {
             ExamineManager.Instance.IndexProviderCollection["ExamineMdIndexer"].RebuildIndex();
+        }
+
+        /// <summary>
+        /// This is not a test, but used to show information about files in file store in the Console window
+        /// </summary>
+        protected void ShowFileStoreInfo(IEnumerable<IMdFile> files)
+        {
+            var mdFiles = files as IMdFile[] ?? files.ToArray();
+
+            var first = mdFiles.First();
+            Console.WriteLine(first.Markdown());
+            foreach (var f in mdFiles)
+                Console.WriteLine("{0} -> {1} = {2}", f.Path, f.FileName, f.Title);
         }
     }
 }
