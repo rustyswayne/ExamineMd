@@ -51,16 +51,11 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\D
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\UrlRewritingNet.UrlRewriter.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\AutoMapper.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\businesslogic.xml
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\ClientDependency.Core.pdb
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\ClientDependency.Core.Mvc.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\cms.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\controls.xml
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\Examine.pdb
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\HtmlAgilityPack.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\HtmlAgilityPack.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\interfaces.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\Lucene.Net.xml
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\MiniProfiler.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\MiniProfiler.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\Moq.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\Newtonsoft.Json.xml
@@ -83,3 +78,8 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\D
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\obj\Debug\ExamineMd.Integration.Tests.csprojResolveAssemblyReference.cache
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\obj\Debug\ExamineMd.Integration.Tests.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\obj\Debug\ExamineMd.Integration.Tests.pdb
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\ExamineMd.dll
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\ExamineMd.pdb
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\MarkdownSharp.dll
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\MarkdownSharp.pdb
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Integration.Tests\bin\Debug\MarkdownSharp.xml

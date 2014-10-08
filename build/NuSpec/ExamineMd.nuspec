@@ -12,7 +12,9 @@
     </summary>
     <language>en-US</language>
     <tags>umbraco, Examine, Markdown</tags>
-    <dependencies />
+    <dependencies>
+      <dependency id="MarkdownSharp" version="1.13.0.0" />
+    </dependencies>
   </metadata>
   <files>
     <file src="..\Temp\AllBinaries\ExamineMd.dll" target="lib\net40\ExamineMd.dll" />

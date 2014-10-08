@@ -29,5 +29,5 @@ Plugin Payment Gateway Provider for Merchello.]]></readme>
 	<DataTypes />
 	<Actions />
 	<control />
-	<files><file><guid>040c12d4-1f88-4d15-a638-2bfdb1e6a3ad.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>0bcc47df-f1dd-4bbd-97ac-049085e1829c.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>64bdc702-1523-409b-95b8-b281cd1433e3.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>6d0b6a1c-a68c-4b50-b284-e008db14e78e.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
+	<files><file><guid>db07201e-e0f0-4182-ac9e-b277d79b7559.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>8816fc13-f492-4aa3-b512-eb5dc528245c.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>183dc5ab-ca59-43e3-8a8d-81cd427d9682.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>a0999c00-c49e-4b1d-a1ce-598ecdd99c88.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
 </umbPackage>
