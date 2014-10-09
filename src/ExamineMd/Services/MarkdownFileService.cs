@@ -230,9 +230,10 @@
         /// </param>
         private void Initialize(string pathToRoot)
         {
-
             var fullPath = IOHelper.MapPath(pathToRoot);
 
+            if (!Directory.Exists(pathToRoot)) Directory.CreateDirectory(pathToRoot);
+                
             this._root = new DirectoryInfo(fullPath);
 
             this._factory = new Lazy<FileStoreFactory>(() => new FileStoreFactory(fullPath));

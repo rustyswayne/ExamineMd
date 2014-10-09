@@ -7,7 +7,7 @@
     <authors>Dina Berry, Rusty Swayne</authors>
     <owners>Mindfly, Inc.</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>ExamineMd loads markdown files into an Umbraco Examine index for rendering as HTML.</description>
+    <description>ExamineMd loads a directory tree of Markdown files into a Umbraco Examine index and provides a provider to search the Markdown.</description>
     <summary>
     </summary>
     <language>en-US</language>
@@ -18,5 +18,9 @@
   </metadata>
   <files>
     <file src="..\Temp\AllBinaries\ExamineMd.dll" target="lib\net40\ExamineMd.dll" />
+    <file src="..\transforms\web.config.transform" target="content\web.config.transform" />
+    <file src="..\transforms\examineindex.config.transform" target="content\config\examineindex.config.transform" />
+    <file src="..\transforms\examinesettings.config.transform" target="content\config\examinesettings.config.transform" />
+    <file src="content\App_Data\ExamineMdRoot\ExamineMd.md" target="content\App_Data\ExamineMdRoot\ExamineMd.txt" />
   </files>
 </package>

@@ -1,0 +1,14 @@
+  <Examine>
+    <ExamineIndexProviders>
+      <providers>
+        <add name="ExamineMdIndexer" type="Examine.LuceneEngine.Providers.SimpleDataIndexer, Examine" indexTypes="ExamineMdDocument" dataService="ExamineMd.DataService.MarkdownFileIndexDataService, ExamineMd" runAsync="false" />
+      </providers>
+    </ExamineIndexProviders>
+
+    <ExamineSearchProviders>
+      <providers>
+        <add name="ExamineMdSearcher" type="Examine.LuceneEngine.Providers.LuceneSearcher, Examine" />
+      </providers>
+    </ExamineSearchProviders>
+    
+  </Examine>
