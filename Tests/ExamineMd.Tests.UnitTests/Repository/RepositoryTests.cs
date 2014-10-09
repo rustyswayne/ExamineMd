@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
 
-    using ExamineMd.Persistence.Repositories;
     using ExamineMd.Services;
     using ExamineMd.Tests.UnitTests.TestHelpers;
 
@@ -72,9 +71,40 @@
             Assert.IsFalse(files.Any(x => !x.Path.StartsWith("developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
+        /// <summary>
+        /// Tests shows that files can be listed in the developers directory
+        /// </summary>
+        [Test]
         public void Can_List_All_Md_Files_On_A_Specific_Path()
         {
+            //// Arrange
+            const string Path = "~/developers";
             
+            //// Act
+            var files = _service.List(Path).ToArray();
+            this.ShowFileStoreInfo(files);
+
+            //// Assert
+            Assert.IsTrue(files.Any(), "No files found");
+            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+        }
+
+        /// <summary>
+        /// Tests shows that a files can be listed in the api directory and from all child directores
+        /// </summary>
+        [Test]
+        public void Can_List_All_Md_Files_On_A_Specific_Path_And_All_Child_Directories()
+        {
+            //// Arrange
+            const string Path = "~/api";
+
+            //// Act
+            var files = _service.List(Path, true).ToArray();
+            this.ShowFileStoreInfo(files);
+
+            //// Assert
+            Assert.IsTrue(files.Any(), "No files found");
+            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("api", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
     }
 }

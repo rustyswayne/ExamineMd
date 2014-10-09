@@ -195,15 +195,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\Api\RebuildIndexApiController.cs" />
     <Compile Include="DataService\MarkdownFileIndexDataService.cs" />
     <Compile Include="Mandate.cs" />
+    <Compile Include="MappingExtensions.cs" />
     <Compile Include="MarkdownExtensions.cs" />
     <Compile Include="Models\IMdDirectory.cs" />
     <Compile Include="Models\IMdFile.cs" />
+    <Compile Include="Models\IMdMetaItem.cs" />
     <Compile Include="Models\MdDirectory.cs" />
     <Compile Include="Models\MdFile.cs" />
-    <Compile Include="Persistence\Factories\FileStoreFactory.cs" />
-    <Compile Include="Persistence\Factories\FileStoreFactoryBase.cs" />
+    <Compile Include="Models\MdMetaItem.cs" />
+    <Compile Include="Search\SearchHelper.cs" />
+    <Compile Include="Search\IMarkdownQuery.cs" />
+    <Compile Include="Services\FileStoreFactory.cs" />
+    <Compile Include="Services\FileStoreFactoryBase.cs" />
     <Compile Include="Services\IMarkdownFileService.cs" />
     <Compile Include="Services\MarkdownFileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,6 +218,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Persistence\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

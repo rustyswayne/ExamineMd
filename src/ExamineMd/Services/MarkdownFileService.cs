@@ -1,4 +1,4 @@
-﻿namespace ExamineMd.Persistence.Repositories
+﻿namespace ExamineMd.Services
 {
     using System;
     using System.Collections.Generic;
@@ -7,8 +7,7 @@
     using System.Linq;
 
     using ExamineMd.Models;
-    using ExamineMd.Persistence.Factories;
-    using ExamineMd.Services;
+    using ExamineMd.Search;
 
     using Umbraco.Core.IO;
 
@@ -46,7 +45,7 @@
         {
             Mandate.ParameterNotNullOrEmpty(pathToRoot, "pathToRoot");
 
-            Initialize(pathToRoot);
+            this.Initialize(pathToRoot);
         }
 
         /// <summary>
@@ -77,10 +76,9 @@
         /// </returns>
         public IEnumerable<IMdFile> Find(string path, string fileName)
         {
-            path = path.StartsWith("~") ? path.Remove(0, 1) : path;
-            path = path.StartsWith("/") ? path.Remove(0, 1) : path;
+            path = SearchHelper.ValidatePath(path);
 
-            return GetAllMarkdownFiles().Where(x => x.Path.Equals(path, StringComparison.InvariantCultureIgnoreCase) && x.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
+            return this.List(path).Where(x => x.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
@@ -97,7 +95,9 @@
         /// </returns>
         public IEnumerable<IMdFile> List(string path, bool includeChildPaths = false)
         {
-            var allMatches = GetMarkdownFiles(GetDirectory(path).DirectoryInfo);
+            path = SearchHelper.ValidatePath(path);
+
+            var allMatches = this.GetMarkdownFiles(this.GetDirectory(path).DirectoryInfo);
 
             return includeChildPaths
                        ? allMatches
@@ -115,7 +115,7 @@
         /// </remarks>
         public IEnumerable<IMdFile> GetAllMarkdownFiles()
         {
-            return GetMarkdownFiles(_root);
+            return this.GetMarkdownFiles(this._root);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@
         {
             var directory = new DirectoryInfo(this.GetPhysicalPath(path));
 
-            return _factory.Value.Build(directory);
+            return this._factory.Value.Build(directory);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@
         /// </returns>
         public IEnumerable<IMdDirectory> GetDirectories()
         {
-            return this.GetMarkdownDirectories(_root);
+            return this.GetMarkdownDirectories(this._root);
         }
 
         /// <summary>
@@ -158,7 +158,7 @@
         {
             var directory = new DirectoryInfo(this.GetPhysicalPath(startPath));
 
-            return GetMarkdownDirectories(directory);
+            return this.GetMarkdownDirectories(directory);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@
         {
             var files = new List<IMdFile>();
 
-            files.AddRange(directory.GetFiles("*.md").Select(x => _factory.Value.Build(x)));
+            files.AddRange(directory.GetFiles("*.md").Select(x => this._factory.Value.Build(x)));
 
             var subs = directory.GetDirectories();
             foreach (var sub in subs)
@@ -206,12 +206,20 @@
             return directories;
         }
 
+        /// <summary>
+        /// Gets the physical path to a file.
+        /// </summary>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         private string GetPhysicalPath(string path)
-        {
-            var start = path.StartsWith(".") ? path.Remove(0, 1) : path;
-            start = start.Replace("/", "\\");
-
-            return IOHelper.MapPath(start);
+        {   
+            var start = SearchHelper.ValidatePath(path).StartsWith(".") ? path.Remove(0, 1) : path;
+            
+            return string.Format("{0}{1}", this._root.FullName, start);
         }
 
         /// <summary>
@@ -225,9 +233,9 @@
 
             var fullPath = IOHelper.MapPath(pathToRoot);
 
-            _root = new DirectoryInfo(fullPath);
+            this._root = new DirectoryInfo(fullPath);
 
-            _factory = new Lazy<FileStoreFactory>(() => new FileStoreFactory(fullPath));
+            this._factory = new Lazy<FileStoreFactory>(() => new FileStoreFactory(fullPath));
         }
     }
 }

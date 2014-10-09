@@ -8,7 +8,9 @@
     using Examine;
     using Examine.LuceneEngine;
 
-    using ExamineMd.Persistence.Repositories;
+    using ExamineMd.Services;
+
+    using Newtonsoft.Json;
 
     using umbraco.cms.businesslogic.packager;
 
@@ -17,6 +19,8 @@
     /// </summary>
     public class MarkdownFileIndexDataService : ISimpleDataService 
     {
+        private static readonly object Locker = new object();
+
         /// <summary>
         /// Returns a collection of all Markdown content data.
         /// </summary>
@@ -53,7 +57,10 @@
                                     { "fileName", md.FileName },
                                     { "title", md.Title },
                                     { "body", md.Body },
+                                    { "searchableBody", RemoveSpecialCharacters(md.Body) },
                                     { "path", md.Path },
+                                    { "metaData", JsonConvert.SerializeObject(md.MetaData) },
+                                    { "allDocs", "1" },
                                     { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }
                                 }
                         };

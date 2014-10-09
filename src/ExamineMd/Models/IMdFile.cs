@@ -1,6 +1,7 @@
 ﻿namespace ExamineMd.Models
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Defines an MdFile.
@@ -27,6 +28,8 @@
         /// </summary>
         string Body { get; set; }
 
+        IEnumerable<IMdMetaItem> MetaData { get; set; }
+            
         /// <summary>
         /// Gets or sets the date created.
         /// </summary>
