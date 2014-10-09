@@ -8,6 +8,7 @@
     using Examine;
     using Examine.LuceneEngine;
 
+    using ExamineMd.Search;
     using ExamineMd.Services;
 
     using Newtonsoft.Json;
@@ -57,8 +58,9 @@
                                     { "fileName", md.FileName },
                                     { "title", md.Title },
                                     { "body", md.Body },
-                                    { "searchableBody", RemoveSpecialCharacters(md.Body) },
+                                    { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
                                     { "path", md.Path },
+                                    { "pathSearchable", SearchHelper.RemoveSpecialCharacters(md.Path) },
                                     { "metaData", JsonConvert.SerializeObject(md.MetaData) },
                                     { "allDocs", "1" },
                                     { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }
@@ -68,12 +70,6 @@
             }
 
             return dataset;
-        }
-
-        private static string RemoveSpecialCharacters(string input)
-        {
-            var regex = new Regex("(?:[^a-z0-9 ]|(?<=['\"])s)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
-            return regex.Replace(input, string.Empty);
         }
     }
 }

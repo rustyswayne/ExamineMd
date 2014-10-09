@@ -87,7 +87,7 @@
         {
             return !result.Fields.ContainsKey(fieldName)
                        ? new MdMetaItem[] { }
-                       : JsonConvert.DeserializeObject<IEnumerable<IMdMetaItem>>(result.Fields[fieldName]);
+                       : JsonConvert.DeserializeObject<IEnumerable<MdMetaItem>>(result.Fields[fieldName]);
         }
     }
 }

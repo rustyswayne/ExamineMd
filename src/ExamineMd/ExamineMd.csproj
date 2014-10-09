@@ -206,6 +206,9 @@
     <Compile Include="Models\MdDirectory.cs" />
     <Compile Include="Models\MdFile.cs" />
     <Compile Include="Models\MdMetaItem.cs" />
+    <Compile Include="Models\SearchTerm.cs" />
+    <Compile Include="Models\SearchTermType.cs" />
+    <Compile Include="Search\MarkdownQuery.cs" />
     <Compile Include="Search\SearchHelper.cs" />
     <Compile Include="Search\IMarkdownQuery.cs" />
     <Compile Include="Services\FileStoreFactory.cs" />
