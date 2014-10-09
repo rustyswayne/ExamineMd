@@ -49,7 +49,7 @@
         }
 
         /// <summary>
-        /// Finds the Markdown file store by it's file name
+        /// Finds the MarkdownAsHtmlString file store by it's file name
         /// </summary>
         /// <param name="fileName">
         /// An optional file name
@@ -63,7 +63,7 @@
         }
 
         /// <summary>
-        /// Searches the Markdown file store by path and an optional fileNameFilter
+        /// Searches the MarkdownAsHtmlString file store by path and an optional fileNameFilter
         /// </summary>
         /// <param name="path">
         /// The relative path to the file. Example /directory1/directory2/
@@ -82,7 +82,7 @@
         }
 
         /// <summary>
-        /// Lists all Markdown files found at the path indicated
+        /// Lists all MarkdownAsHtmlString files found at the path indicated
         /// </summary>
         /// <param name="path">
         /// The path.
@@ -146,7 +146,7 @@
         }
 
         /// <summary>
-        /// Gets a collection of directories in the Markdown file store that match the starting path.
+        /// Gets a collection of directories in the MarkdownAsHtmlString file store that match the starting path.
         /// </summary>
         /// <param name="startPath">
         /// The start path.
@@ -162,7 +162,7 @@
         }
 
         /// <summary>
-        /// Recursively gets a collection of Markdown files starting at the directory specified
+        /// Recursively gets a collection of MarkdownAsHtmlString files starting at the directory specified
         /// </summary>
         /// <param name="directory">
         /// The directory.
@@ -226,7 +226,7 @@
         /// Responsible for initializing the repository.
         /// </summary>
         /// <param name="pathToRoot">
-        /// The path to the root of the Markdown file store
+        /// The path to the root of the MarkdownAsHtmlString file store
         /// </param>
         private void Initialize(string pathToRoot)
         {

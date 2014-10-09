@@ -27,7 +27,7 @@
             if (mdFiles.Any())
             {
                 var first = mdFiles.First();
-                Console.WriteLine(first.Markdown());    
+                Console.WriteLine(first.BodyHtml());    
             }
 
             foreach (var f in mdFiles)

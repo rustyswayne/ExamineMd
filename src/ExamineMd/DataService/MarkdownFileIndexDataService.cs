@@ -1,9 +1,6 @@
 ﻿namespace ExamineMd.DataService
 {
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text.RegularExpressions;
 
     using Examine;
     using Examine.LuceneEngine;
@@ -13,18 +10,14 @@
 
     using Newtonsoft.Json;
 
-    using umbraco.cms.businesslogic.packager;
-
-    using StringExtensions = Umbraco.Core.StringExtensions;
-
     /// <summary>
-    /// The Examine IndexDataService used to index Markdown file contents.
+    /// The Examine IndexDataService used to index MarkdownAsHtmlString file contents.
     /// </summary>
     public class MarkdownFileIndexDataService : ISimpleDataService 
     {
 
         /// <summary>
-        /// Returns a collection of all Markdown content data.
+        /// Returns a collection of all MarkdownAsHtmlString content data.
         /// </summary>
         /// <param name="indexType">
         /// The index type.

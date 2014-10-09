@@ -10,12 +10,12 @@
     using MarkdownDeep;
 
     /// <summary>
-    /// Extension methods for Markdown.
+    /// Extension methods for MarkdownAsHtmlString.
     /// </summary>
     public static class MarkdownExtensions
     {
         /// <summary>
-        /// The Markdown formatter.
+        /// The MarkdownAsHtmlString formatter.
         /// </summary>
         private static readonly Markdown MarkdownFormatter = new Markdown()
                                                                  {
@@ -24,7 +24,7 @@
                                                                  };
 
         /// <summary>
-        /// Transforms a Markdown (md) formatted string as Html
+        /// Transforms a MarkdownAsHtmlString (md) formatted string as Html
         /// </summary>
         /// <param name="htmlHelper">
         /// The <see cref="HtmlHelper"/>
@@ -35,25 +35,25 @@
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString Markdown(this HtmlHelper htmlHelper, string md)
+        public static IHtmlString MarkdownHtmlString(this HtmlHelper htmlHelper, string md)
         {
             return string.IsNullOrEmpty(md) ? MvcHtmlString.Empty : 
                 new MvcHtmlString(MarkdownFormatter.Transform(md).Trim());
         }
 
         /// <summary>
-        /// Transforms an Examine document field string value to Html using Markdown Transformation.
+        /// Transforms an Examine document field string value to Html using MarkdownAsHtmlString Transformation.
         /// </summary>
         /// <param name="result">
         /// The <see cref="SearchResult"/>
         /// </param>
         /// <param name="fieldName">
-        /// The Examine document field name referencing the Markdown string
+        /// The Examine document field name referencing the MarkdownAsHtmlString string
         /// </param>
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString Markdown(this SearchResult result, string fieldName)
+        public static IHtmlString MarkdownAsHtmlString(this SearchResult result, string fieldName)
         {
             return result.Fields.ContainsKey(fieldName)
                        ? new MvcHtmlString(MarkdownFormatter.Transform(result.Fields["fieldName"]).Trim())
@@ -61,7 +61,7 @@
         }
 
         /// <summary>
-        /// Transforms the file body text into Html using Markdown Transformation
+        /// Transforms the file body text into Html using MarkdownAsHtmlString Transformation
         /// </summary>
         /// <param name="file">
         /// The file.
@@ -69,7 +69,7 @@
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString Markdown(this IMdFile file)
+        public static IHtmlString BodyHtml(this IMdFile file)
         {
             return string.IsNullOrEmpty(file.Body) ? MvcHtmlString.Empty : new MvcHtmlString(MarkdownFormatter.Transform(file.Body));
         }

@@ -1,6 +1,7 @@
 ﻿namespace ExamineMd.PackageActions
 {
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Xml;
 
     using umbraco.cms.businesslogic.packager.standardPackageActions;
@@ -16,6 +17,7 @@
     /// 
     /// Original contribution from Paul Sterling
     /// </remarks>
+    [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
     public class AddAppSetting : IPackageAction
     {
         #region IPackageAction Members

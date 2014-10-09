@@ -71,7 +71,7 @@
         IEnumerable<IMdFile> List(string path);
 
         /// <summary>
-        /// Gets a list of all Markdown documents.
+        /// Gets a list of all MarkdownAsHtmlString documents.
         /// </summary>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.

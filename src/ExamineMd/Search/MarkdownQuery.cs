@@ -47,7 +47,7 @@
         }
 
         /// <summary>
-        /// Gets a Markdown document by it's path and file name
+        /// Gets a MarkdownAsHtmlString document by it's path and file name
         /// </summary>
         /// <param name="path">
         /// The path.
@@ -126,7 +126,7 @@
         }
 
         /// <summary>
-        /// Gets a list of all Markdown documents.
+        /// Gets a list of all MarkdownAsHtmlString documents.
         /// </summary>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.

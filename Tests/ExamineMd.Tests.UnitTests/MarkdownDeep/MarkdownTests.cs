@@ -20,7 +20,7 @@
         }
 
         /// <summary>
-        /// Test verifies that a Markdown string can be converted to an IHtmlString
+        /// Test verifies that a MarkdownAsHtmlString string can be converted to an IHtmlString
         /// </summary>
         [Test]
         public void Can_Transform_A_Markdown_Headline()
