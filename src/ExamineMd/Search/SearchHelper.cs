@@ -12,6 +12,8 @@
 
     using ExamineMd.Models;
 
+    using Umbraco.Core;
+
     /// <summary>
     /// A search helper class.
     /// </summary>
@@ -44,138 +46,24 @@
         /// </returns>
         internal static string ValidateSearchablePath(string path)
         {
-            return RemoveSpecialCharacters(ValidatePath(path));
+            return ValidatePath(path).Replace("\\", " ");
         }
 
         /// <summary>
-        /// Builds search criteria for a particular provider
+        /// Gets a IMdFile key.
         /// </summary>
-        /// <param name="searchTerm">
-        /// The search term.
+        /// <param name="path">
+        /// The path.
         /// </param>
-        /// <param name="providerName">
-        /// The provider name.
-        /// </param>
-        /// <param name="fields">
-        /// The fields.
+        /// <param name="fileName">
+        /// The file name.
         /// </param>
         /// <returns>
-        /// The <see cref="ISearchCriteria"/>.
+        /// The <see cref="string"/>.
         /// </returns>
-        internal static ISearchCriteria BuildCriteria(string searchTerm, string providerName, string[] fields)
+        internal static string GetFileKey(string path, string fileName)
         {
-            return BuildCriteria(searchTerm, ExamineManager.Instance.SearchProviderCollection[providerName], fields);
-        }
-
-        /// <summary>
-        /// Builds search criteria for a particular provider.
-        /// </summary>
-        /// <param name="searchTerm">
-        /// The search term.
-        /// </param>
-        /// <param name="provider">
-        /// The provider.
-        /// </param>
-        /// <param name="fields">
-        /// The fields.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ISearchCriteria"/>.
-        /// </returns>
-        internal static ISearchCriteria BuildCriteria(string searchTerm, BaseSearchProvider provider, string[] fields)
-        {
-            var criteria = provider.CreateSearchCriteria(BooleanOperation.Or);
-
-            return BuildQuery(searchTerm, criteria, fields);
-        }
-
-        /// <summary>
-        /// Assists in building search criteria
-        /// </summary>
-        /// <param name="searchString">The search term</param>
-        /// <param name="criteria">ISearchCriteria</param>
-        /// <param name="textFields">Fields in the index to search</param>
-        /// <returns>The <see cref="ISearchCriteria"/></returns>    
-        /// <remarks>// our.umbraco.org/forum/developers/extending-umbraco/19329-Search-multiple-fields-for-multiple-terms-with-examine?p=0</remarks>
-        internal static ISearchCriteria BuildQuery(string searchString, ISearchCriteria criteria, string[] textFields)
-        {
-            var terms = searchString.ToSearchTerms();
-
-            foreach (var t in terms.Where(t => !string.IsNullOrEmpty(t.Term)))
-            {
-                switch (t.SearchTermType)
-                {
-                    case SearchTermType.SingleWord:
-                        criteria.GroupedOr(
-                            textFields,
-                            new[] { t.Term });
-                        break;
-                    case SearchTermType.MultiWord:
-                        criteria.GroupedOr(
-                            textFields,
-                            new[] { t.Term.MultipleCharacterWildcard() });
-                        break;
-                }
-            }
-
-
-            return criteria;
-        }
-
-        /// <summary>
-        /// BaseSearchProvider extension to build search criteria
-        /// </summary>
-        /// <param name="provider">
-        /// The provider.
-        /// </param>
-        /// <param name="searchTerm">
-        /// The search term.
-        /// </param>
-        /// <param name="fields">
-        /// The fields.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ISearchCriteria"/>.
-        /// </returns>
-        internal static ISearchCriteria BuildCriteria(this BaseSearchProvider provider, string searchTerm, string[] fields)
-        {
-            var criteria = provider.CreateSearchCriteria(BooleanOperation.Or);
-
-            return BuildQuery(searchTerm, criteria, fields);
-        }
-
-        /// <summary>
-        /// Breaks up a search string into multiple search terms.
-        /// </summary>
-        /// <param name="searchString">
-        /// The search string.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IEnumerable{SearchTerm}"/>.
-        /// </returns>
-        internal static IEnumerable<SearchTerm> ToSearchTerms(this string searchString)
-        {
-            var terms = new List<SearchTerm>();
-
-            if (searchString.Contains(@"""") && (searchString.Count(t => t == '"') % 2 == 0)) // even number of quotes, more than zero
-            {
-                // look for any content between quotes
-                var quoteRegex = new Regex(@""".+?""");
-
-                foreach (Match item in quoteRegex.Matches(searchString))
-                {
-                    terms.Add(new SearchTerm() { Term = item.Value.Replace('"', ' ').Trim(), SearchTermType = SearchTermType.MultiWord });
-
-                    // remove them from search string for subsequent parsing
-                    searchString = Regex.Replace(searchString, item.Value, String.Empty);
-                }
-            }
-
-            var singleTerms = searchString.Split(' ').ToList();
-
-            singleTerms.ForEach(t => terms.Add(new SearchTerm() { Term = t, SearchTermType = SearchTermType.SingleWord }));
-
-            return terms;
+            return string.Format("{0}{1}", ValidatePath(path), fileName).ToMd5();
         }
 
         /// <summary>

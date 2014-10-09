@@ -9,6 +9,11 @@
     public class MdFile : IMdFile
     {
         /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        public string Key { get; set; }
+
+        /// <summary>
         /// Gets or sets the relative path to the file with respect to the file store root.
         /// </summary>
         public string Path { get; set; }

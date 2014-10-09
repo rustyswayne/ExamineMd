@@ -10,6 +10,7 @@
     using System.Xml.Linq;
 
     using ExamineMd.Models;
+    using ExamineMd.Search;
 
     /// <summary>
     /// The examine md file factory.
@@ -43,8 +44,7 @@
         /// </returns>
         public IMdFile Build(FileInfo fi)
         {
-
-            return new MdFile()
+            var md = new MdFile()
                        {
                            Path = fi.DirectoryName == null ? this.PathToRoot : fi.DirectoryName.Replace(this.PathToRoot, string.Empty),
                            FileName = fi.Name,
@@ -53,6 +53,10 @@
                            MetaData = this.GetMetaItems(fi),
                            DateCreated = fi.CreationTime
                        };
+
+            md.Key = SearchHelper.GetFileKey(md.Path, md.FileName);
+
+            return md;
         }
 
         /// <summary>

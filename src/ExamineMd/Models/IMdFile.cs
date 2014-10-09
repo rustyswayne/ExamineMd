@@ -9,6 +9,11 @@
     public interface IMdFile
     {
         /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        string Key { get; set; }
+
+        /// <summary>
         /// Gets or sets the relative path to the file with respect to the file store root.
         /// </summary>
         string Path { get; set; }
@@ -28,6 +33,9 @@
         /// </summary>
         string Body { get; set; }
 
+        /// <summary>
+        /// Gets or sets the meta data.
+        /// </summary>
         IEnumerable<IMdMetaItem> MetaData { get; set; }
             
         /// <summary>

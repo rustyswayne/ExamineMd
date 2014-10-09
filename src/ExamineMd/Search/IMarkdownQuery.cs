@@ -10,6 +10,17 @@
     public interface IMarkdownQuery
     {
         /// <summary>
+        /// Gets a file by it's key.
+        /// </summary>
+        /// <param name="key">
+        /// The key.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMdFile"/>.
+        /// </returns>
+        IMdFile Get(string key);
+
+        /// <summary>
         /// Gets a <see cref="IMdFile"/> by it's path and file name.
         /// </summary>
         /// <param name="path">
@@ -54,13 +65,10 @@
         /// <param name="path">
         /// The path.
         /// </param>
-        /// <param name="includeChildPaths">
-        /// The include child paths.
-        /// </param>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
-        IEnumerable<IMdFile> List(string path, bool includeChildPaths = false);
+        IEnumerable<IMdFile> List(string path);
 
         /// <summary>
         /// Gets a list of all Markdown documents.

@@ -15,12 +15,13 @@
 
     using umbraco.cms.businesslogic.packager;
 
+    using StringExtensions = Umbraco.Core.StringExtensions;
+
     /// <summary>
     /// The Examine IndexDataService used to index Markdown file contents.
     /// </summary>
     public class MarkdownFileIndexDataService : ISimpleDataService 
     {
-        private static readonly object Locker = new object();
 
         /// <summary>
         /// Returns a collection of all Markdown content data.
@@ -56,11 +57,12 @@
                             RowData = new Dictionary<string, string>()
                                 {
                                     { "fileName", md.FileName },
+                                    { "key", md.Key },
                                     { "title", md.Title },
                                     { "body", md.Body },
                                     { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
                                     { "path", md.Path },
-                                    { "pathSearchable", SearchHelper.RemoveSpecialCharacters(md.Path) },
+                                    { "pathSearchable", SearchHelper.ValidateSearchablePath(md.Path) },
                                     { "metaData", JsonConvert.SerializeObject(md.MetaData) },
                                     { "allDocs", "1" },
                                     { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }
