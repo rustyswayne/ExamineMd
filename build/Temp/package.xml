@@ -27,7 +27,33 @@ Plugin Payment Gateway Provider for Merchello.]]></readme>
 	<DictionaryItems />
 	<Languages />
 	<DataTypes />
-	<Actions />
+  <Actions>
+    <Action runat="install" undo="true" alias="ExamineMd_AddAppConfigKey" />
+    <Action runat="install" undo="true" alias="ExamineMd_AddExamineConfigs">
+      <ExamineMdIndexSets>
+        <IndexSet SetName="ExamineMdIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/ExamineMd/">
+          <IndexUserFields>
+            <add Name="key" />
+            <add Name="body" />
+            <add Name="searchableBody" />
+            <add Name="title" />
+            <add Name="fileName" />
+            <add Name="path" />
+            <add Name="metaData" />
+            <add Name="allDocs" />
+            <add Name="pathSearchable" />
+            <add Name="createDate" />
+          </IndexUserFields>
+        </IndexSet>
+      </ExamineMdIndexSets>
+      <ExamineMdIndexProviders>
+        <add name="ExamineMdIndexer" type="Examine.LuceneEngine.Providers.SimpleDataIndexer, Examine" indexTypes="ExamineMdDocument" dataService="ExamineMd.DataService.MarkdownFileIndexDataService, ExamineMd" />
+      </ExamineMdIndexProviders>
+      <ExamineMdSearchProviders>
+        <add name="ExamineMdSearcher" type="Examine.LuceneEngine.Providers.LuceneSearcher, Examine" />
+      </ExamineMdSearchProviders>
+    </Action>
+  </Actions>
 	<control />
-	<files><file><guid>1ec004f8-9dd1-4415-a434-d4af7f168641.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>64dc671e-8482-4212-b438-58d43b2e65f2.config</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>bfaaf927-cbb9-4706-9cde-c7a76dbfd199.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>0200423e-e6fa-42d0-a75a-05fc4b65f7c7.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>f5ec41c1-a006-494a-8357-7bfaa808acf9.config</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>1cc9e269-439c-4afb-ad4a-ff274736ed4b.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
+	<files><file><guid>f12a2a38-029f-408f-a6c4-04f25f96fe72.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>d3035967-0eb1-4b06-8308-74e9711f2c71.config</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>8bfe1c8e-aa6e-47fc-be4e-9ef9e0976fe5.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>b02a12c3-bb81-4d93-9e13-9b7cd531b42b.dll</guid><orgPath>/AllBinaries</orgPath><orgName>MarkdownDeep.dll</orgName></file><file><guid>5ba2f1de-b2d0-4903-bc77-e6be519c41dc.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>1fb979fc-ede5-4858-a472-5bf800305407.config</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>43634ee7-d7ac-4c28-99cd-04158e98b377.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
 </umbPackage>

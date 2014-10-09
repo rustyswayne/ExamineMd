@@ -1,7 +1,7 @@
   <Examine>
     <ExamineIndexProviders>
       <providers>
-        <add name="ExamineMdIndexer" type="Examine.LuceneEngine.Providers.SimpleDataIndexer, Examine" indexTypes="ExamineMdDocument" dataService="ExamineMd.DataService.MarkdownFileIndexDataService, ExamineMd" runAsync="false" />
+        <add name="ExamineMdIndexer" type="Examine.LuceneEngine.Providers.SimpleDataIndexer, Examine" indexTypes="ExamineMdDocument" dataService="ExamineMd.DataService.MarkdownFileIndexDataService, ExamineMd" />
       </providers>
     </ExamineIndexProviders>
 

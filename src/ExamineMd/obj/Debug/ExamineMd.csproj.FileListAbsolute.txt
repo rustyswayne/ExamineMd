@@ -80,4 +80,3 @@ C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Debug\HtmlAgilityPack
 C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Debug\MiniProfiler.pdb
 C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Debug\MarkdownDeep.dll
 C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\bin\Debug\MarkdownDeep.pdb
-C:\Working Repositories\GitHub\ExamineMd\src\ExamineMd\obj\Debug\ExamineMd.csprojResolveAssemblyReference.cache

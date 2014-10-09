@@ -20,7 +20,7 @@
   <Target Name="AllBinaries"  DependsOnTargets="Compile">
 
     <ItemGroup>
-      <PackageBinariesFiles Include="$(ProjectDir)\bin\Release\ExamineMd.*" Exclude="$(ProjectDir)\bin\Release\*Tests.*;$(ProjectDir)\bin\Release\*nunit.*;$(ProjectDir)\bin\Release\*Moq.*" />
+      <PackageBinariesFiles Include="$(ProjectDir)\bin\Release\ExamineMd.*;$(ProjectDir)\bin\Release\MarkdownDeep.dll" Exclude="$(ProjectDir)\bin\Release\*Tests.*;$(ProjectDir)\bin\Release\*nunit.*;$(ProjectDir)\bin\Release\*Moq.*" />
     </ItemGroup>
 
     <Copy SourceFiles="@(PackageBinariesFiles)"

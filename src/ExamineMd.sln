@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{BF9E0692
 	ProjectSection(SolutionItems) = preProject
 		..\build\build.bat = ..\build\build.bat
 		..\build\ExamineMd.build = ..\build\ExamineMd.build
+		..\build\NuSpec\content\App_Data\ExamineMdRoot\ExamineMd.md = ..\build\NuSpec\content\App_Data\ExamineMdRoot\ExamineMd.md
 		..\build\NuSpec\ExamineMd.nuspec = ..\build\NuSpec\ExamineMd.nuspec
 		..\tools\ExamineMd\ExamineMd.props = ..\tools\ExamineMd\ExamineMd.props
 		..\tools\ExamineMd\ExamineMd.targets = ..\tools\ExamineMd\ExamineMd.targets

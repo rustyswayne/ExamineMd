@@ -206,6 +206,8 @@
     <Compile Include="Models\MdDirectory.cs" />
     <Compile Include="Models\MdFile.cs" />
     <Compile Include="Models\MdMetaItem.cs" />
+    <Compile Include="PackageActions\AddAppSetting.cs" />
+    <Compile Include="PackageActions\AddExamineConfigs.cs" />
     <Compile Include="Search\MarkdownQuery.cs" />
     <Compile Include="Search\SearchHelper.cs" />
     <Compile Include="Search\IMarkdownQuery.cs" />

@@ -6,6 +6,17 @@
     public static class Constants
     {
         /// <summary>
+        /// Gets the package name.
+        /// </summary>
+        public static string PackageName
+        {
+            get
+            {
+                return "ExamineMd";
+            }
+        }
+
+        /// <summary>
         /// Gets the md root directory alias.
         /// </summary>
         public static string MdRootDirectoryAlias

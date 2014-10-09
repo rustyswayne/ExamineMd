@@ -27,7 +27,33 @@
 	<DictionaryItems />
 	<Languages />
 	<DataTypes />
-	<Actions />
+  <Actions>
+    <Action runat="install" undo="true" alias="ExamineMd_AddAppConfigKey" />
+    <Action runat="install" undo="true" alias="ExamineMd_AddExamineConfigs">
+      <ExamineMdIndexSets>
+        <IndexSet SetName="ExamineMdIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/ExamineMd/">
+          <IndexUserFields>
+            <add Name="key" />
+            <add Name="body" />
+            <add Name="searchableBody" />
+            <add Name="title" />
+            <add Name="fileName" />
+            <add Name="path" />
+            <add Name="metaData" />
+            <add Name="allDocs" />
+            <add Name="pathSearchable" />
+            <add Name="createDate" />
+          </IndexUserFields>
+        </IndexSet>
+      </ExamineMdIndexSets>
+      <ExamineMdIndexProviders>
+        <add name="ExamineMdIndexer" type="Examine.LuceneEngine.Providers.SimpleDataIndexer, Examine" indexTypes="ExamineMdDocument" dataService="ExamineMd.DataService.MarkdownFileIndexDataService, ExamineMd" />
+      </ExamineMdIndexProviders>
+      <ExamineMdSearchProviders>
+        <add name="ExamineMdSearcher" type="Examine.LuceneEngine.Providers.LuceneSearcher, Examine" />
+      </ExamineMdSearchProviders>
+    </Action>
+  </Actions>
 	<control />
 	<files />
 </umbPackage>
