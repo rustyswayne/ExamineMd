@@ -1,4 +1,6 @@
-﻿namespace ExamineMd.Models
+﻿using System.Runtime.Serialization;
+
+namespace ExamineMd.Models
 {
     using System;
     using System.Collections.Generic;
@@ -34,9 +36,9 @@
         public string Body { get; set; }
 
         /// <summary>
-        /// Gets or sets the document metadata.
+        /// Gets or sets the meta data data.
         /// </summary>
-        public IEnumerable<IMdMetaItem> MetaData { get; set; }
+        public IMdFileMetaData MetaData { get; set; }
 
         /// <summary>
         /// Gets or sets the date created.

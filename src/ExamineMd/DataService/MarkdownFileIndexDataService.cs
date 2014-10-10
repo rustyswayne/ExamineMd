@@ -49,8 +49,8 @@
                                     },
                             RowData = new Dictionary<string, string>()
                                 {
-                                    { "fileName", md.FileName },
                                     { "key", md.Key },
+                                    { "fileName", md.FileName },
                                     { "title", md.Title },
                                     { "body", md.Body },
                                     { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },

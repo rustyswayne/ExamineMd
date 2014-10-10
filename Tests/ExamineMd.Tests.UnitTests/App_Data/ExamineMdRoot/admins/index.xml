@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<mdmeta>
-	<item group="pageMeta" alias="pageTitle" value="Page title 1" />
-	<item group="pageMeta" alias="metaDescription" value="Markdown testing" />
+<mdmetadata pageTitle="This is the Index page for the Admins" metaDescription="Markdown Testing" relevance="Merchello 1.0.0" revision="1">
 	<item group="css" alias="bodyCss" value="markdown" />
-</mdmeta>
+	<item group="video" alias="jira" value="https://www.youtube.com/watch?v=tvUnF6RGD1Q" />
+</mdmetadata>

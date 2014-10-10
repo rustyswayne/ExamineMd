@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a MdMetaItem.
     /// </summary>
-    internal class MdMetaItem : IMdMetaItem
+    public class MdMetaDataItem
     {
         /// <summary>
         /// Gets or sets the group.

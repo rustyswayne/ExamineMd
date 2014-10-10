@@ -1,3 +1,4 @@
-erchello.Plugin.Payments.AuthorizeNet
+ExamineMd
+=========
 
-Plugin Payment Gateway Provider for Merchello.
+ExamineMd loads a directory tree of Markdown files into a Umbraco Examine index and provides a provider to search the Markdown.

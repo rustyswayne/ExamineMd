@@ -10,7 +10,6 @@
     using ExamineMd.Search;
 
     using Umbraco.Core.IO;
-    using Umbraco.Core.Logging;
 
     /// <summary>
     /// Represents a MarkdownFileService.

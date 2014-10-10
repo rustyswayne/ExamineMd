@@ -1,12 +1,13 @@
-﻿namespace ExamineMd.Services
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
+namespace ExamineMd.Services
 {
     using System;
     using System.Collections;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Xml.Linq;
 
     using ExamineMd.Models;
@@ -44,13 +45,17 @@
         /// </returns>
         public IMdFile Build(FileInfo fi)
         {
+           
+            var path = fi.DirectoryName == null ? string.Empty : fi.DirectoryName.Replace(PathToRoot.Substring(0, PathToRoot.Length - 1), string.Empty);
+            path = path.StartsWith("\\") ? path.Remove(0, 1) : path;
+
             var md = new MdFile()
                        {
-                           Path = fi.DirectoryName == null ? this.PathToRoot : fi.DirectoryName.Replace(this.PathToRoot, string.Empty),
+                           Path = path,
                            FileName = fi.Name,
                            Title = this.GetTitleFromFileName(fi.Name),
                            Body = File.ReadAllText(fi.FullName),
-                           MetaData = this.GetMetaItems(fi),
+                           MetaData = this.BuildMetaData(fi),
                            DateCreated = fi.CreationTime
                        };
 
@@ -102,29 +107,69 @@
         /// <summary>
         /// The get meta items.
         /// </summary>
-        /// <param name="mdFile">
+        /// <param name="md">
         /// The md file.
         /// </param>
         /// <returns>
         /// The <see cref="IEnumerable"/>.
         /// </returns>
-        private IEnumerable<IMdMetaItem> GetMetaItems(FileInfo mdFile)
+        private IMdFileMetaData BuildMetaData(FileInfo md)
         {
-            var meta = new List<IMdMetaItem>();
+            var meta = new MdFileMetaData() { Items = Enumerable.Empty<MdMetaDataItem>() };
          
-            var fullName = mdFile.FullName;
+            var fullName = md.FullName;
 
             if (!fullName.EndsWith(".md")) return meta;
 
-            var metaPath = string.Format("{0}{1}", mdFile.FullName.Substring(0, mdFile.FullName.Length - 2), "xml");
+            var metaPath = string.Format("{0}{1}", md.FullName.Substring(0, md.FullName.Length - 2), "xml");
 
             if (!File.Exists(metaPath)) return meta;
 
             var xdoc = XDocument.Parse(File.ReadAllText(metaPath));
 
-            meta.AddRange(xdoc.Descendants("item").Select(item => new MdMetaItem() { Group = item.Attribute("group").Value, Alias = item.Attribute("alias").Value, Value = item.Attribute("value").Value }));
+            var root = xdoc.Root;
+
+            if (root == null) return meta;
+
+            meta.PageTile = root.GetSafeAttribute("pageTitle");
+            meta.MetaDescription = root.GetSafeAttribute("metaDescription");
+            meta.Relevance = root.GetSafeAttribute("relevance");
+            meta.Revision = root.GetSafeAttribute("revision");
+
+            meta.Items = root.Descendants("item")
+                .Select(item => new MdMetaDataItem()
+                {
+                    Group = item.Attribute("group").Value, 
+                    Alias = item.Attribute("alias").Value, 
+                    Value = item.Attribute("value").Value
+                }).ToList();
 
             return meta;
+        }       
+    }
+
+    /// <summary>
+    /// Utiltiy extensions for XElement
+    /// </summary>
+    internal static class XElementExtensions
+    {
+        /// <summary>
+        /// Gets an attribute value
+        /// </summary>
+        /// <param name="el">
+        /// The el.
+        /// </param>
+        /// <param name="attName">
+        /// The att name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        internal static string GetSafeAttribute(this XElement el, string attName)
+        {
+            if (!el.HasAttributes) return string.Empty;
+
+            return el.Attribute(attName) == null ? string.Empty : el.Attribute(attName).Value;
         }
     }
 }

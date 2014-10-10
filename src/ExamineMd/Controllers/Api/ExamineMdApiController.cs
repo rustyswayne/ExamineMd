@@ -1,18 +1,20 @@
 ﻿namespace ExamineMd.Controllers.Api
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Web.Http;
-
-    using ExamineMd.Models;
-    using ExamineMd.Search;
-
+    using Models;
+    using Search;
+    using WebApi;
     using Umbraco.Web.Mvc;
     using Umbraco.Web.WebApi;
 
     /// <summary>
     /// The ExamineMdApiController .
     /// </summary>
-    [PluginController("ExamineMd")]
+    [AngularJsonOnlyConfiguration]
+    [JsonCamelCaseFormatter]
+    [PluginController("ExamineMd")] 
     public class ExamineMdApiController : UmbracoApiController
     {
         /// <summary>
@@ -53,7 +55,7 @@
         [HttpGet]
         public IMdFile Get(string key)
         {
-            return _query.Get(key);
+            return _query.Get(key).ConvertBody();
         }
 
         /// <summary>
@@ -71,7 +73,7 @@
         [HttpGet]
         public IMdFile Get(string path, string fileName)
         {
-            return _query.Get(path, fileName);
+            return _query.Get(path, fileName).ConvertBody();
         }
 
         /// <summary>
@@ -86,7 +88,7 @@
         [HttpGet, HttpPost]
         public IEnumerable<IMdFile> Search(string term)
         {
-            return _query.Search(term);
+            return _query.Search(term).Select(x => x.ConvertBody());
         }
 
         /// <summary>
@@ -104,7 +106,7 @@
         [HttpGet, HttpPost]
         public IEnumerable<IMdFile> Search(string term, string path)
         {
-            return _query.Search(term, path);
+            return _query.Search(term, path).Select(x => x.ConvertBody());
         }
 
         /// <summary>
@@ -119,7 +121,7 @@
         [HttpGet, HttpPost]
         public IEnumerable<IMdFile> List(string path)
         {
-            return _query.List(path);
+            return _query.List(path).Select(x => x.ConvertBody());
         }
 
         /// <summary>
@@ -131,7 +133,7 @@
         [HttpGet]
         public IEnumerable<IMdFile> GetAll()
         {
-            return _query.GetAll();
+            return _query.GetAll().Select(x => x.ConvertBody());
         }
     }
 }

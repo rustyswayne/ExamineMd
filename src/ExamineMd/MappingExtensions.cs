@@ -1,4 +1,6 @@
-﻿namespace ExamineMd
+﻿using System.Linq;
+
+namespace ExamineMd
 {
     using System;
     using System.Collections.Generic;
@@ -27,6 +29,7 @@
         {
             return new MdFile()
             {
+                Key = result.FieldAsString("key"),
                 FileName = result.FieldAsString("fileName"),
                 Path = result.FieldAsString("path"),
                 Title = result.FieldAsString("title"),
@@ -83,11 +86,18 @@
         /// <returns>
         /// The <see cref="IEnumerable{IMdMetaItem}"/>.
         /// </returns>
-        private static IEnumerable<IMdMetaItem> FieldAsMetaItemCollection(this SearchResult result, string fieldName = "metaData")
+        private static IMdFileMetaData FieldAsMetaItemCollection(this SearchResult result, string fieldName = "metaData")
         {
             return !result.Fields.ContainsKey(fieldName)
-                       ? new MdMetaItem[] { }
-                       : JsonConvert.DeserializeObject<IEnumerable<MdMetaItem>>(result.Fields[fieldName]);
+                       ? new MdFileMetaData()
+                       {
+                           MetaDescription = string.Empty,
+                           PageTile = string.Empty,
+                           Relevance = string.Empty,
+                           Revision = string.Empty,           
+                           Items   = Enumerable.Empty<MdMetaDataItem>()
+                       }
+                       : JsonConvert.DeserializeObject<MdFileMetaData>(result.Fields[fieldName]);
         }
     }
 }

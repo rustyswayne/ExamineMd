@@ -3,12 +3,12 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using Controllers.Api;
     using Examine;
-
-    using ExamineMd.Models;
-
+    
     using MarkdownDeep;
-
+    using Models;
+    
     /// <summary>
     /// Extension methods for MarkdownAsHtmlString.
     /// </summary>
@@ -72,6 +72,24 @@
         public static IHtmlString BodyHtml(this IMdFile file)
         {
             return string.IsNullOrEmpty(file.Body) ? MvcHtmlString.Empty : new MvcHtmlString(MarkdownFormatter.Transform(file.Body));
+        }
+
+        /// <summary>
+        /// Converts the body to an Html string
+        /// </summary>
+        /// <param name="file">
+        /// The file.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMdFile"/>.
+        /// </returns>
+        /// <remarks>
+        /// This is internally used by <see cref="ExamineMdApiController"/> to minimize the response size.
+        /// </remarks>
+        internal static IMdFile ConvertBody(this IMdFile file)
+        {
+            file.Body = file.BodyHtml().ToHtmlString();
+            return file;
         }
     }
 }

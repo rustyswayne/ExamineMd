@@ -3,7 +3,7 @@
 	<info>
 		<package>
 			<name>ExamineMd</name>
-			<version>1.0.2</version>
+			<version>1.0.3</version>
             <license url="https://github.com/rustyswayne/ExamineMd/blob/master/LICENSE">MIT license</license>
             <url>https://github.com/rustyswayne/ExamineMd</url>
 			<requirements>
@@ -55,5 +55,5 @@ Plugin Payment Gateway Provider for Merchello.]]></readme>
     </Action>
   </Actions>
 	<control />
-	<files><file><guid>7a355cd3-577a-42ef-98dc-5eaaf0a31e6b.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>4d2cd843-fd1c-4586-ae3c-c5bc46b016d2.config</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>91f0e7ca-f550-411f-abff-352f2f7d62cf.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>f98408b0-7897-4535-a4e8-7360fe6aabdd.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>0946eda6-68eb-4d26-8ba1-84b09210cab0.config</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>fa32c7c2-1d12-4a21-b9d2-af3f148ec639.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
+	<files><file><guid>bb84d9a1-89ca-46f2-a0af-00ac2105c378.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>1fee0742-7637-4178-ae3c-0d43c31e69c2.config</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>7f1a58bc-71d2-4c27-aa51-410047ce0e4e.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>1a492565-5780-46a4-bdae-b0677a8176ad.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>2850dc9a-8b2a-4f95-b10a-b6a08d4807d6.config</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>13f9f650-6806-4046-8ee9-c353f151db7a.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
 </umbPackage>

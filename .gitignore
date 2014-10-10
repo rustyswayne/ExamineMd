@@ -16,3 +16,8 @@ Cached/
 !**/App_Data/[Pp]ackages/
 !**/[Uu]mbraco/developer/[Pp]ackages
 Tests/ExamineMd.Tests.UnitTests/obj/
+src/ExamineMd/App_Data/NuGetBackup/
+Tests/ExamineMd.Tests.UnitTests/App_Data/NuGetBackup/
+src/ExamineMd/bin/
+Tests/ExamineMd.Tests.UnitTests/App_Data/ExamineIndexes/
+build/Temp/
