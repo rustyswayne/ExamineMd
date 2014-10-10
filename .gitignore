@@ -21,3 +21,5 @@ Tests/ExamineMd.Tests.UnitTests/App_Data/NuGetBackup/
 src/ExamineMd/bin/
 Tests/ExamineMd.Tests.UnitTests/App_Data/ExamineIndexes/
 build/Temp/
+Tests/ExamineMd.Tests.UnitTests/bin/
+src/ExamineMd/obj/

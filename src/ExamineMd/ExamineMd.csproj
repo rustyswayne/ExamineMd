@@ -229,7 +229,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutomMapperMappings.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\Api\ExamineMdApiController.cs" />
     <Compile Include="Controllers\Api\RebuildIndexApiController.cs" />
