@@ -21,7 +21,7 @@
         public void Can_Retrieve_A_List_Of_All_Markdown_files()
         {
             //// Arrange
-            const int FileCount = 47;
+            const int FileCount = 48;
 
             //// Act
             var files = this._service.GetAllMarkdownFiles().ToArray();
