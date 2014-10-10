@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-
-namespace ExamineMd.Services
+﻿namespace ExamineMd.Services
 {
     using System;
     using System.Collections;

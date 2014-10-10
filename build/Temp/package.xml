@@ -16,9 +16,10 @@
             <name>Dina Berry, Rusty Swayne</name>
             <website>http://www.mindfly.com/</website>
         </author>
-		<readme><![CDATA[erchello.Plugin.Payments.AuthorizeNet
+		<readme><![CDATA[ExamineMd
+=========
 
-Plugin Payment Gateway Provider for Merchello.]]></readme>
+ExamineMd loads a directory tree of Markdown files into a Umbraco Examine index and provides a provider to search the Markdown.]]></readme>
 	</info>
 	<DocumentTypes />
 	<Templates />
@@ -55,5 +56,5 @@ Plugin Payment Gateway Provider for Merchello.]]></readme>
     </Action>
   </Actions>
 	<control />
-	<files><file><guid>bb84d9a1-89ca-46f2-a0af-00ac2105c378.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>1fee0742-7637-4178-ae3c-0d43c31e69c2.config</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>7f1a58bc-71d2-4c27-aa51-410047ce0e4e.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>1a492565-5780-46a4-bdae-b0677a8176ad.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>2850dc9a-8b2a-4f95-b10a-b6a08d4807d6.config</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>13f9f650-6806-4046-8ee9-c353f151db7a.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
+	<files><file><guid>26c9db5c-4af1-4351-9b36-43c326bdfba8.dll</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>9ea7df83-4fe3-40ce-9c3f-51a4f7809e8b.config</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>a0908288-959a-4b37-9840-43e813f53dff.pdb</guid><orgPath>/AllBinaries</orgPath><orgName>ExamineMd.pdb</orgName></file><file><guid>d2b45094-9c8a-4add-9bf2-f9aa82892949.dll</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll</orgName></file><file><guid>2e5ccc84-581f-4f59-96f3-9db1fff97002.config</guid><orgPath>/bin</orgPath><orgName>ExamineMd.dll.config</orgName></file><file><guid>fcdb455e-6984-47b7-b0de-082c69f82d31.pdb</guid><orgPath>/bin</orgPath><orgName>ExamineMd.pdb</orgName></file></files>
 </umbPackage>

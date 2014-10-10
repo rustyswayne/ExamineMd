@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<mdmeta>
-	<item group="pageMeta" alias="pageTitle" value="Page title 1" />
-	<item group="pageMeta" alias="metaDescription" value="Markdown testing" />
-	<item group="css" alias="bodyCss" value="markdown" />
-</mdmeta>

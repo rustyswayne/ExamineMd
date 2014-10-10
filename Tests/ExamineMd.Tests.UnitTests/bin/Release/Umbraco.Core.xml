@@ -10616,6 +10616,19 @@
             Logic that is shared with the expression helpers
             </summary>
         </member>
+        <member name="T:Umbraco.Core.Persistence.Querying.QueryExtensions">
+            <summary>
+            SD: This is a horrible hack but unless we break compatibility with anyone who's actually implemented IQuery{T} there's not much we can do.
+            The IQuery{T} interface is useless without having a GetWhereClauses method and cannot be used for tests.
+            We have to wait till v8 to make this change I suppose.
+            </summary>
+        </member>
+        <member name="M:Umbraco.Core.Persistence.Querying.QueryExtensions.GetWhereClauses``1(Umbraco.Core.Persistence.Querying.IQuery{``0})">
+            <summary>
+            Returns all translated where clauses and their sql parameters
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:Umbraco.Core.Persistence.Querying.IQuery`1">
             <summary>
             Represents a query for building Linq translatable SQL queries
@@ -10628,12 +10641,6 @@
             </summary>
             <param name="predicate"></param>
             <returns>This instance so calls to this method are chainable</returns>
-        </member>
-        <member name="M:Umbraco.Core.Persistence.Querying.IQuery`1.GetWhereClauses">
-            <summary>
-            Returns all translated where clauses and their sql parameters
-            </summary>
-            <returns></returns>
         </member>
         <member name="T:Umbraco.Core.Persistence.Querying.Query`1">
             <summary>
