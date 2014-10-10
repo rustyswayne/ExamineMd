@@ -10,6 +10,7 @@
     using ExamineMd.Search;
 
     using Umbraco.Core.IO;
+    using Umbraco.Core.Logging;
 
     /// <summary>
     /// Represents a MarkdownFileService.
@@ -232,7 +233,7 @@
         {
             var fullPath = IOHelper.MapPath(pathToRoot);
 
-            if (!Directory.Exists(pathToRoot)) Directory.CreateDirectory(pathToRoot);
+            if (!Directory.Exists(fullPath)) Directory.CreateDirectory(fullPath);
                 
             this._root = new DirectoryInfo(fullPath);
 
