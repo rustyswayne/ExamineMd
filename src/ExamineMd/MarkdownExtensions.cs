@@ -84,7 +84,7 @@
         /// The <see cref="IMdFile"/>.
         /// </returns>
         /// <remarks>
-        /// This is internally used by <see cref="ExamineMdApiController"/> to minimize the response size.
+        /// This is internally used by <see cref="SearchApiController"/> to minimize the response size.
         /// </remarks>
         internal static IMdFile ConvertBody(this IMdFile file)
         {

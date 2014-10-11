@@ -28,6 +28,28 @@
         }
 
         /// <summary>
+        /// Gets the ExamineMd content type alias.
+        /// </summary>
+        public static string ExamineMdContentTypeAlias
+        {
+            get
+            {
+                return "ExamineMd";
+            }
+        }
+
+        /// <summary>
+        /// Gets the path to the App_Pluggins/ExamineMd folder.
+        /// </summary>
+        public static string AppPluginFolder
+        {
+            get
+            {
+                return "~/App_Plugins/ExamineMd/";
+            }
+        }
+
+        /// <summary>
         /// Defines the Examine Index Type.
         /// </summary>
         public static class IndexTypes

@@ -1,3 +1,7 @@
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.csprojResolveAssemblyReference.cache
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll.config
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\AutoMapper.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\AutoMapper.Net4.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\businesslogic.dll
@@ -15,6 +19,7 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Deb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\interfaces.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\log4net.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Lucene.Net.dll
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.Web.Helpers.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.Web.Infrastructure.dll
@@ -59,6 +64,7 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Deb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\HtmlAgilityPack.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\interfaces.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Lucene.Net.xml
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MiniProfiler.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MiniProfiler.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Moq.xml
@@ -79,11 +85,5 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Deb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.editorControls.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.MacroEngines.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.providers.xml
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.csprojResolveAssemblyReference.cache
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll.config
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.pdb
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.dll
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.pdb

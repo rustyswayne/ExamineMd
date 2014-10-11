@@ -25,6 +25,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ExamineMd.Web.UI", "http://
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{00265365-a838-4555-af9a-8e1ec90ca1c0}|ExamineMd.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_50378"
 		Debug.AspNetCompiler.PhysicalPath = "ExamineMd.Web.UI\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50378\"
