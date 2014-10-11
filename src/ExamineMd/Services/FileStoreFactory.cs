@@ -1,8 +1,6 @@
 ﻿namespace ExamineMd.Services
 {
-    using System;
     using System.Collections;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Xml.Linq;
@@ -15,11 +13,6 @@
     /// </summary>
     internal class FileStoreFactory : FileStoreFactoryBase
     {
-        /// <summary>
-        /// The <see cref="TextInfo"/>.
-        /// </summary>
-        private readonly TextInfo _textInfo = new CultureInfo("en", false).TextInfo;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="FileStoreFactory"/> class.
         /// </summary>
@@ -42,20 +35,17 @@
         /// </returns>
         public IMdFile Build(FileInfo fi)
         {
-           
-            var path = fi.DirectoryName == null ? string.Empty : fi.DirectoryName.Replace(PathToRoot.Substring(0, PathToRoot.Length - 1), string.Empty);
-            path = path.StartsWith("\\") ? path.Remove(0, 1) : path;
-
             var md = new MdFile()
                        {
-                           Path = path,
+                           Path = fi.DirectoryName.GetFileStoreReferencePath(),
                            FileName = fi.Name,
-                           Title = this.GetTitleFromFileName(fi.Name),
+                           Title = fi.Name.GetTitleFromFileName(),
                            Body = File.ReadAllText(fi.FullName),
-                           MetaData = this.BuildMetaData(fi),
+                           MetaData = BuildMetaData(fi),
                            DateCreated = fi.CreationTime
                        };
 
+            // Generate a unique key for this file
             md.Key = SearchHelper.GetFileKey(md.Path, md.FileName);
 
             return md;
@@ -74,31 +64,9 @@
         {
             return new MdDirectory()
             {
-                Path = directory.Name.Replace(this.PathToRoot, string.Empty),
+                Path = directory.FullName.RelativePathFromFileStoreRoot(),
                 DirectoryInfo = directory
             };
-        }
-
-        /// <summary>
-        /// The get title from file name.
-        /// </summary>
-        /// <param name="fileName">
-        /// The file name.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        private string GetTitleFromFileName(string fileName)
-        {
-            
-            var name = fileName.EndsWith(".md", StringComparison.InvariantCultureIgnoreCase)
-                           ? fileName.Remove(fileName.Length - 3, 3)
-                           : fileName;
-
-            name = name.Replace("-", " ").Replace("_", " ");
-
-
-            return this._textInfo.ToTitleCase(name);
         }
 
         /// <summary>
@@ -110,7 +78,7 @@
         /// <returns>
         /// The <see cref="IEnumerable"/>.
         /// </returns>
-        private IMdFileMetaData BuildMetaData(FileInfo md)
+        private static IMdFileMetaData BuildMetaData(FileInfo md)
         {
             var meta = new MdFileMetaData() { Items = Enumerable.Empty<MdMetaDataItem>() };
          
@@ -143,30 +111,5 @@
 
             return meta;
         }       
-    }
-
-    /// <summary>
-    /// Utiltiy extensions for XElement
-    /// </summary>
-    internal static class XElementExtensions
-    {
-        /// <summary>
-        /// Gets an attribute value
-        /// </summary>
-        /// <param name="el">
-        /// The el.
-        /// </param>
-        /// <param name="attName">
-        /// The att name.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        internal static string GetSafeAttribute(this XElement el, string attName)
-        {
-            if (!el.HasAttributes) return string.Empty;
-
-            return el.Attribute(attName) == null ? string.Empty : el.Attribute(attName).Value;
-        }
     }
 }

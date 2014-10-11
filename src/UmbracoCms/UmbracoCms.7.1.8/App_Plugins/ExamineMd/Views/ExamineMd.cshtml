@@ -1,6 +1,9 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<MarkdownVirtualContent>
 @using ClientDependency.Core.Mvc
 @using ExamineMd
+@using ExamineMd.Search
+@using ExamineMd.Models
+@using Umbraco.Core
 @{
     Layout = null;
 }
@@ -11,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Your site description." />
-    <title>Your page title</title>
+    <title>@Model.PageTitle</title>
 
     @{ Html
            .RequiresJs("//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js")
@@ -26,10 +29,45 @@
         <header role="banner" class="container">
             <div class="clearfix row">
                 <h1>Examine MD</h1>
+                @Model.Url
             </div>
         </header>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8">
+                @if (Model.Markdown != null)
+                {
+                    @Model.Markdown.BodyHtml()        
+                }
+
+                
+            </div>
+            <div class="col-xs-4">
+                <h3>Directories</h3>
+                @{
+                    var query = new MarkdownQuery();
+
+                    var files = query.GetAll().ToArray();
+                    
+                    <ul>
+                        @foreach (var f in files)
+                        {
+                            <li><a href="/documentation@(string.Format("{0}/{1}", f.Path.UseForwardSlashes(), f.FileName.Substring(0, f.FileName.Length - 3)))">@f.Title</a></li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
     @Html.RenderJsHere()
 </body>
+
+
+
+
+
+
+
 </html>

@@ -20,36 +20,6 @@
     internal static class SearchHelper
     {
         /// <summary>
-        /// Validates and or reformats a path.
-        /// </summary>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public static string ValidatePath(string path)
-        {
-            path = path.Replace("/", "\\");
-            path = path.StartsWith("~") ? path.Remove(0, 1) : path;
-            return path.StartsWith("\\") ? path.Remove(0, 1) : path;
-        }
-
-        /// <summary>
-        /// Validates a searchable path.
-        /// </summary>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        internal static string ValidateSearchablePath(string path)
-        {
-            return ValidatePath(path).Replace("\\", " ");
-        }
-
-        /// <summary>
         /// Gets a IMdFile key.
         /// </summary>
         /// <param name="path">
@@ -63,7 +33,10 @@
         /// </returns>
         internal static string GetFileKey(string path, string fileName)
         {
-            return string.Format("{0}{1}", ValidatePath(path), fileName).ToMd5();
+            path = PathHelper.ValidatePath(path).UseForwardSlashes();
+            if (path.EndsWith("/")) path = path.Remove(path.LastIndexOf('/'), 1);
+
+            return string.Format("{0}{1}", path.ToLowerInvariant(), fileName.ToLowerInvariant()).ToMd5();
         }
 
         /// <summary>

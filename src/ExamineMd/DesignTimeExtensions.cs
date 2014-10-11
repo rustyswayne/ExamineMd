@@ -14,6 +14,7 @@
     /// </summary>
     public static class DesignTimeExtensions
     {
+
         /// <summary>
         /// Adds ExamineMd Asset CSS file to ClientDependency.
         /// </summary>
@@ -46,26 +47,6 @@
         public static HtmlHelper RequiresPackageJs(this HtmlHelper html, string fileName)
         {
             return html.RequiresJs(string.Format("{0}{1}", PathHelper.GetAssetsPath(), fileName));
-        }
-
-        /// <summary>
-        /// Encodes url segments.
-        /// </summary>
-        /// <param name="urlPath">
-        /// The url path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public static string SafeEncodeUrlSegments(this string urlPath)
-        {
-            return string.Join("/",
-                urlPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)
-                    .Select(x => HttpUtility.UrlEncode(x).Replace("+", "%20"))
-                    .WhereNotNull()
-                //we are not supporting dots in our URLs it's just too difficult to
-                // support across the board with all the different config options
-                    .Select(x => x.Replace('.', '-')));
         }
     }
 }

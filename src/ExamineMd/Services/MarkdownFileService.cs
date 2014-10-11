@@ -7,7 +7,6 @@
     using System.Linq;
 
     using ExamineMd.Models;
-    using ExamineMd.Search;
 
     using Umbraco.Core.IO;
 
@@ -76,7 +75,7 @@
         /// </returns>
         public IEnumerable<IMdFile> Find(string path, string fileName)
         {
-            path = SearchHelper.ValidatePath(path);
+            path = PathHelper.ValidatePath(path);
 
             return this.List(path).Where(x => x.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
         }
@@ -95,7 +94,7 @@
         /// </returns>
         public IEnumerable<IMdFile> List(string path, bool includeChildPaths = false)
         {
-            path = SearchHelper.ValidatePath(path);
+            path = PathHelper.ValidatePath(path);
 
             var allMatches = this.GetMarkdownFiles(this.GetDirectory(path).DirectoryInfo);
 
@@ -111,7 +110,7 @@
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
         /// <remarks>
-        /// TODO Dina - This is the method used by to Index the md files in Examine 
+        /// TODO This is the method used by to Index the md files in Examine 
         /// </remarks>
         public IEnumerable<IMdFile> GetAllMarkdownFiles()
         {
@@ -217,8 +216,11 @@
         /// </returns>
         private string GetPhysicalPath(string path)
         {   
-            var start = SearchHelper.ValidatePath(path).StartsWith(".") ? path.Remove(0, 1) : path;
+            var start = PathHelper.ValidatePath(path).StartsWith(".") ? path.Remove(0, 1) : path;
             
+            //// remove the first \ - the root path with include it.
+            if (start.StartsWith("\\")) start = start.Remove(0, 1);
+
             return string.Format("{0}{1}", this._root.FullName, start);
         }
 
@@ -232,6 +234,7 @@
         {
             var fullPath = IOHelper.MapPath(pathToRoot);
 
+            // This is to assert there is actually a root.
             if (!Directory.Exists(fullPath)) Directory.CreateDirectory(fullPath);
                 
             this._root = new DirectoryInfo(fullPath);

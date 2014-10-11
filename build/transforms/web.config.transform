@@ -1,5 +1,6 @@
 <configuration>
 	<appSettings>
 		<add key="ExamineMd:MdRootDirectory" value="~/App_Data/ExamineMdRoot/" />
+		<add key="ExamineMd:DefaultRoute" value="~/Documentation" />
 	</appSettings>
 </configuration>

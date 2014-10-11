@@ -1,9 +1,6 @@
-﻿using System.Runtime.Serialization;
-
-namespace ExamineMd.Models
+﻿namespace ExamineMd.Models
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
     /// Represents an MdFile

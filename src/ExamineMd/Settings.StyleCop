@@ -4,6 +4,7 @@
       <Value>Api</Value>
       <Value>ExamineMd</Value>
       <Value>Md</Value>
+      <Value>Umbraco</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>

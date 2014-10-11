@@ -28,6 +28,17 @@
         }
 
         /// <summary>
+        /// Gets the md default route.
+        /// </summary>
+        public static string MdDefaultRoute
+        {
+            get
+            {
+                return "ExamineMd:DefaultRoute";
+            }
+        }
+
+        /// <summary>
         /// Gets the ExamineMd content type alias.
         /// </summary>
         public static string ExamineMdContentTypeAlias

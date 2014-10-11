@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
 
     using Examine;
@@ -10,6 +11,7 @@
     using Examine.SearchCriteria;
 
     using ExamineMd.Models;
+    using ExamineMd.Services;
 
     /// <summary>
     /// The markdown query.
@@ -20,6 +22,11 @@
         /// The Examine Search provider.
         /// </summary>
         private readonly BaseSearchProvider _searchProvider;
+
+        /// <summary>
+        /// The _file service.
+        /// </summary>
+        private readonly Lazy<MarkdownFileService> _fileService = new Lazy<MarkdownFileService>(() => new MarkdownFileService());
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MarkdownQuery"/> class.
@@ -64,6 +71,25 @@
             return Get(key);
         }
 
+
+        /// <summary>
+        /// Gets a <see cref="IMdFile"/> by it's Url.
+        /// </summary>
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMdFile"/>.
+        /// </returns>
+        public IMdFile GetByUrl(string url)
+        {
+            url = PathHelper.ValidatePath(url).UseForwardSlashes();
+            var path = url.Substring(0, url.LastIndexOf('/') + 1).Trim();
+            var fileName = url.Replace(path, string.Empty).Trim() + ".md";
+
+            return Get(path, fileName);
+        }
+
         /// <summary>
         /// Searches for a term
         /// </summary>
@@ -95,7 +121,7 @@
         /// </returns>
         public IEnumerable<IMdFile> Search(string term, string path)
         {
-            var searchPath = SearchHelper.ValidateSearchablePath(path);
+            var searchPath = PathHelper.ValidateSearchablePath(path);
 
             var criteria = _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
             criteria.Field("pathSearchable", searchPath)
@@ -117,7 +143,7 @@
         /// </returns>
         public IEnumerable<IMdFile> List(string path)
         {
-            var searchPath = SearchHelper.ValidateSearchablePath(path);
+            var searchPath = PathHelper.ValidateSearchablePath(path);
 
             var criteria = _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
             criteria.Field("pathSearchable", searchPath);
@@ -140,6 +166,17 @@
         }
 
         /// <summary>
+        /// Gets a collection of all paths.
+        /// </summary>
+        /// <returns>
+        /// A collection of all paths.
+        /// </returns>
+        public IEnumerable<string> GetAllPaths()
+        {
+            return _fileService.Value.GetDirectories().Select(x => x.Path);
+        }
+
+        /// <summary>
         /// The build a search criteria.
         /// </summary>
         /// <returns>
@@ -149,6 +186,5 @@
         {
             return _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument, BooleanOperation.Or);
         }
-
     }
 }

@@ -35,6 +35,17 @@
         IMdFile Get(string path, string fileName);
 
         /// <summary>
+        /// Gets a <see cref="IMdFile"/> by it's Url.
+        /// </summary>
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMdFile"/>.
+        /// </returns>
+        IMdFile GetByUrl(string url);
+
+        /// <summary>
         /// Searches the document store for documents matching the term specified
         /// </summary>
         /// <param name="term">
@@ -77,5 +88,14 @@
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
         IEnumerable<IMdFile> GetAll();
+
+        /// <summary>
+        /// Gets a collection of all paths.
+        /// </summary>
+        /// <returns>
+        /// A collection of all paths.
+        /// </returns>
+        IEnumerable<string> GetAllPaths();
+
     }
 }

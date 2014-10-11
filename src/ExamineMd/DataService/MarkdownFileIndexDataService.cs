@@ -10,6 +10,8 @@
 
     using Newtonsoft.Json;
 
+    using StringExtensions = Umbraco.Core.StringExtensions;
+
     /// <summary>
     /// The Examine IndexDataService used to index MarkdownAsHtmlString file contents.
     /// </summary>
@@ -54,8 +56,8 @@
                                     { "title", md.Title },
                                     { "body", md.Body },
                                     { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
-                                    { "path", md.Path },
-                                    { "pathSearchable", SearchHelper.ValidateSearchablePath(md.Path) },
+                                    { "path", string.IsNullOrEmpty(md.Path) ? "root" : md.Path.UseForwardSlashes() },
+                                    { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path) },
                                     { "metaData", JsonConvert.SerializeObject(md.MetaData) },
                                     { "allDocs", "1" },
                                     { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }

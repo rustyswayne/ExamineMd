@@ -42,7 +42,25 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("/developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+        }
+
+        /// <summary>
+        /// Tests shows that files can be listed in the developers directory
+        /// </summary>
+        [Test]
+        public void Can_List_All_Md_Files_On_At_Root()
+        {
+            //// Arrange
+            const string Path = "~/";
+
+            //// Act
+            var files = _markdownQuery.List(Path).ToArray();
+            this.ShowFileStoreInfo(files);
+
+            //// Assert
+            Assert.IsTrue(files.Any(), "No files found");
+            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("/", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
         /// <summary>
@@ -60,7 +78,7 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("api", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("/api", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
         [Test]
@@ -74,7 +92,7 @@
         [Test]
         public void Can_Search_For_Md_Files_With_Path()
         {
-            var files = _markdownQuery.Search("provider", "api");
+            var files = _markdownQuery.Search("/provider", "api");
             this.ShowFileStoreInfo(files);
         }
 
@@ -82,7 +100,7 @@
         public void Can_Get_An_Md_File()
         {
             //// Arrange
-            const string Path = "developers";
+            const string Path = "/developers";
             const string FileName = "merchello-history.md";
 
             //// Act

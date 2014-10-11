@@ -1,7 +1,7 @@
 <ExamineLuceneIndexSets>
  <IndexSet SetName="ExamineMdIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/ExamineMd/">
       <IndexUserFields>
-        <add Name="key" />
+	    <add Name="key" />
         <add Name="body" />
         <add Name="searchableBody" />
         <add Name="title" />

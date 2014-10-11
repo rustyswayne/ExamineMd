@@ -1,5 +1,7 @@
 ﻿namespace ExamineMd.Models
 {
+    using System;
+
     using Umbraco.Core;
     using Umbraco.Core.Models;
     using Umbraco.Core.Models.PublishedContent;
@@ -9,34 +11,42 @@
     /// <summary>
     /// A virtual content page for displaying markdown.
     /// </summary>
-    public class ExamineMdVirtualContent : PublishedContentWrapped
+    public class MarkdownVirtualContent : PublishedContentWrapped
     {
-        /// <summary>
-        /// The <see cref="IMdFile"/>.
-        /// </summary>
-        private IMdFile _md;
-
+        
         private string _urlPath;
 
         private string _pageName;
 
         private string _pageTypeAlias;
 
-        public ExamineMdVirtualContent(IPublishedContent content, MdFile md)
+        public MarkdownVirtualContent(IPublishedContent content, IMdFile md)
             : base(content)
         {
-
+            Markdown = md;
         }
 
-        internal ExamineMdVirtualContent(IPublishedContent content)
+        internal MarkdownVirtualContent(IPublishedContent content)
             : base(content)
         {
         }
 
-        public override string Url
+        public string PageTitle
         {
-            get { return base.Url.EnsureEndsWith('/') + (_urlPath ?? UrlName); }
+            get
+            {
+                return Markdown == null ? "ExamineMd" : Markdown.Title;
+            }
         }
+
+        public IMdFile Markdown { get; set; }
+
+        #region IPublishedContent
+
+        //public override string Url
+        //{
+        //    get { return base.Url.EnsureEndsWith('/') + (_urlPath ?? UrlName); }
+        //}
 
         public override PublishedContentType ContentType
         {
@@ -48,6 +58,9 @@
             get { return Content; }
         }
 
+        /// <summary>
+        /// Gets the id.
+        /// </summary>
         public override int Id
         {
             get { return int.MaxValue; }
@@ -82,5 +95,7 @@
         {
             get { return Content.Level + 1; }
         }
+
+        #endregion
     }
 }
