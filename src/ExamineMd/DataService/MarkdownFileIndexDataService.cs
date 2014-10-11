@@ -40,6 +40,7 @@
             foreach (var md in all)
             {
                 count++;
+
                 var set =
                     new SimpleDataSet()
                         {
@@ -58,6 +59,7 @@
                                     { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
                                     { "path", string.IsNullOrEmpty(md.Path) ? "root" : md.Path.UseForwardSlashes() },
                                     { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path) },
+                                    { "searchableUrl",  PathHelper.GetSearchableUrl(md.Path, md.FileName) },
                                     { "metaData", JsonConvert.SerializeObject(md.MetaData) },
                                     { "allDocs", "1" },
                                     { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }

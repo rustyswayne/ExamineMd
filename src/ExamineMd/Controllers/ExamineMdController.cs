@@ -2,6 +2,8 @@
 {
     using System.Web.Mvc;
 
+    using AutoMapper.Internal;
+
     using ExamineMd.Models;
     using ExamineMd.Search;
 
@@ -9,6 +11,9 @@
     using Umbraco.Web.Models;
     using Umbraco.Web.Mvc;
 
+    /// <summary>
+    /// The examine md controller.
+    /// </summary>
     [PluginController("ExamineMd")]
     public class ExamineMdController : RenderMvcController
     {

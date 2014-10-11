@@ -11,7 +11,7 @@ namespace ExamineMd.Models
         /// <summary>
         /// Gets or sets the page tile.
         /// </summary>
-        public string PageTile { get; set; }
+        public string PageTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the meta description.

@@ -8,6 +8,27 @@
     public class MdFile : IMdFile
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="MdFile"/> class.
+        /// </summary>
+        public MdFile()
+            : this(new MdFileMetaData())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MdFile"/> class.
+        /// </summary>
+        /// <param name="metaData">
+        /// The meta data.
+        /// </param>
+        internal MdFile(IMdFileMetaData metaData)
+        {
+            Mandate.ParameterNotNull(metaData, "metaData");
+
+            MetaData = metaData;
+        }
+
+        /// <summary>
         /// Gets or sets the key.
         /// </summary>
         public string Key { get; set; }

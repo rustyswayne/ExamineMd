@@ -7,6 +7,7 @@
         <add Name="title" />
         <add Name="fileName" />
         <add Name="path" />
+		<add Name="searchableUrl" />
         <add Name="metaData" />
         <add Name="allDocs" />
         <add Name="pathSearchable" />

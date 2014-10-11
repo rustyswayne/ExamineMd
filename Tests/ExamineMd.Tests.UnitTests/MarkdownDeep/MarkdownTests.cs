@@ -1,7 +1,9 @@
 ﻿namespace ExamineMd.Tests.UnitTests.MarkdownSharp
 {
     using System;
+    using System.Linq;
 
+    using ExamineMd.Services;
     using ExamineMd.Tests.UnitTests.TestHelpers;
 
     using MarkdownDeep;
@@ -37,5 +39,25 @@
             Assert.AreEqual(h1, converted);
         }
 
+        //// used to test event trigger to override link definitions
+        //[Test]
+        public void Can_Get_Link_Definitions()
+        {
+            var service = new MarkdownFileService();
+
+            var MarkdownFormatter   = new Markdown()
+                                        {
+                                            ExtraMode = true,
+                                            SafeMode = false
+                                        };
+
+            var files = service.Find("index").ToArray();
+
+            Assert.IsTrue(files.Any());
+
+            this.ShowFileStoreInfo(files);
+
+            
+        }
     }
 }

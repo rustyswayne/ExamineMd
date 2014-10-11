@@ -83,11 +83,10 @@
         /// </returns>
         public IMdFile GetByUrl(string url)
         {
-            url = PathHelper.ValidatePath(url).UseForwardSlashes();
-            var path = url.Substring(0, url.LastIndexOf('/') + 1).Trim();
-            var fileName = url.Replace(path, string.Empty).Trim() + ".md";
+            var criteria = this.GetBaseSearchCriteria();
+            criteria.Field("searchableUrl", url);
 
-            return Get(path, fileName);
+            return _searchProvider.Search(criteria).FirstOrDefault().ToMdFile();
         }
 
         /// <summary>

@@ -7,6 +7,9 @@
 
     using Umbraco.Core;
 
+    /// <summary>
+    /// String extensions
+    /// </summary>
     public static class StringExtensions
     {
         /// <summary>
@@ -35,7 +38,6 @@
             return name.ToTitleCase();
         }
 
-
         /// <summary>
         /// The to title case.
         /// </summary>
@@ -48,6 +50,41 @@
         public static string ToTitleCase(this string value)
         {
             return TextInfo.ToTitleCase(value);
+        }
+
+        /// <summary>
+        /// Ensures a string does not end with a character.
+        /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string EnsureNotEndsWith(this string input, char value)
+        {
+            return !input.EndsWith(value.ToString(CultureInfo.InvariantCulture)) ? input : 
+                input.Remove(input.LastIndexOf(value), 1);
+        }
+
+        /// <summary>
+        /// Ensures a string does not start with a character.
+        /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string EnsureNotStartsWith(this string input, char value)
+        {
+            return !input.StartsWith(value.ToString(CultureInfo.InstalledUICulture)) ? input : input.Remove(0, 1);
         }
 
         /// <summary>

@@ -35,13 +35,13 @@
         /// </returns>
         public IMdFile Build(FileInfo fi)
         {
-            var md = new MdFile()
+            var metaData = BuildMetaData(fi);
+            var md = new MdFile(metaData)
                        {
                            Path = fi.DirectoryName.GetFileStoreReferencePath(),
                            FileName = fi.Name,
                            Title = fi.Name.GetTitleFromFileName(),
                            Body = File.ReadAllText(fi.FullName),
-                           MetaData = BuildMetaData(fi),
                            DateCreated = fi.CreationTime
                        };
 
@@ -96,7 +96,7 @@
 
             if (root == null) return meta;
 
-            meta.PageTile = root.GetSafeAttribute("pageTitle");
+            meta.PageTitle = root.GetSafeAttribute("pageTitle");
             meta.MetaDescription = root.GetSafeAttribute("metaDescription");
             meta.Relevance = root.GetSafeAttribute("relevance");
             meta.Revision = root.GetSafeAttribute("revision");

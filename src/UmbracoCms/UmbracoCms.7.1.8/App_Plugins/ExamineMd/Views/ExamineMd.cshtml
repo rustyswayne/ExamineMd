@@ -54,7 +54,8 @@
                     <ul>
                         @foreach (var f in files)
                         {
-                            <li><a href="/documentation@(string.Format("{0}/{1}", f.Path.UseForwardSlashes(), f.FileName.Substring(0, f.FileName.Length - 3)))">@f.Title</a></li>
+                            var md = new MarkdownVirtualContent(Model.Parent, f);
+                            <li><a href="/documentation@(md.Url)">@f.Title</a></li>
                         }
                     </ul>
                 }

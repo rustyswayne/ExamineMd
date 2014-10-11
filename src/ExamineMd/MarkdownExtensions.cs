@@ -1,5 +1,6 @@
 ﻿namespace ExamineMd
 {
+    using System;
     using System.Web;
     using System.Web.Mvc;
 
@@ -14,14 +15,15 @@
     /// </summary>
     public static class MarkdownExtensions
     {
-        /// <summary>
-        /// The MarkdownAsHtmlString formatter.
-        /// </summary>
-        private static readonly Markdown MarkdownFormatter = new Markdown()
-                                                                 {
-                                                                     ExtraMode = true,
-                                                                     SafeMode = false
-                                                                 };
+        ///// <summary>
+        ///// The MarkdownAsHtmlString formatter.
+        ///// </summary>
+        //private static readonly Markdown MarkdownFormatter = new Markdown()
+        //                                                         {
+        //                                                             ExtraMode = true,
+        //                                                             SafeMode = false
+        //                                                         };
+
 
         /// <summary>
         /// Transforms a MarkdownAsHtmlString (md) formatted string as Html
@@ -37,8 +39,10 @@
         /// </returns>
         public static IHtmlString MarkdownHtmlString(this HtmlHelper htmlHelper, string md)
         {
+            var formatter = GetMarkdownFormatter();
+
             return string.IsNullOrEmpty(md) ? MvcHtmlString.Empty : 
-                new MvcHtmlString(MarkdownFormatter.Transform(md).Trim());
+                new MvcHtmlString(formatter.Transform(md).Trim());
         }
 
         /// <summary>
@@ -55,8 +59,10 @@
         /// </returns>
         public static IHtmlString MarkdownAsHtmlString(this SearchResult result, string fieldName)
         {
+            var formatter = GetMarkdownFormatter();
+
             return result.Fields.ContainsKey(fieldName)
-                       ? new MvcHtmlString(MarkdownFormatter.Transform(result.Fields["fieldName"]).Trim())
+                       ? new MvcHtmlString(formatter.Transform(result.Fields["fieldName"]).Trim())
                        : MvcHtmlString.Empty;
         }
 
@@ -71,7 +77,9 @@
         /// </returns>
         public static IHtmlString BodyHtml(this IMdFile file)
         {
-            return string.IsNullOrEmpty(file.Body) ? MvcHtmlString.Empty : new MvcHtmlString(MarkdownFormatter.Transform(file.Body));
+            var formatter = GetMarkdownFormatter();
+
+            return string.IsNullOrEmpty(file.Body) ? MvcHtmlString.Empty : new MvcHtmlString(formatter.Transform(file.Body));
         }
 
         /// <summary>
@@ -90,6 +98,44 @@
         {
             file.Body = file.BodyHtml().ToHtmlString();
             return file;
+        }
+
+        /// <summary>
+        /// The get markdown formatter.
+        /// </summary>
+        /// <returns>
+        /// The <see cref="Markdown"/>.
+        /// </returns>
+        private static Markdown GetMarkdownFormatter()
+        {
+            var formatter = new Markdown()
+                    {
+                        ExtraMode = true,
+                        SafeMode = false
+                    };
+
+            formatter.PrepareLink += PrepareLink;
+
+            return formatter;
+        }
+
+        /// <summary>
+        /// Handles the PrepareLink event
+        /// </summary>
+        /// <param name="htmlTag">
+        /// The html tag.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private static bool PrepareLink(HtmlTag htmlTag)
+        {
+            var basePath = PathHelper.GetRootRoute();
+            var href = htmlTag.attributes["href"];
+            href = string.Format("{0}{1}", basePath.EnsureNotEndsWith('/'), href);
+            htmlTag.attributes["href"] = href;
+
+            return true;
         }
     }
 }

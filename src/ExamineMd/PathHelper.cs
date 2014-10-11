@@ -2,6 +2,9 @@
 {
     using System.Configuration;
 
+    using ExamineMd.Models;
+
+    using Umbraco.Core;
     using Umbraco.Core.IO;
 
     /// <summary>
@@ -20,10 +23,12 @@
         /// </returns>
         public static string ValidatePath(string path)
         {
-            var routePath = GetRootRoute().Replace("~", string.Empty);
+            var routePath = GetRootRoute();
+
+            if (path.StartsWith(routePath)) path = path.Remove(0, routePath.Length);
 
             path = path.UseBackSlashes();
-            if (path.StartsWith(routePath)) path = path.Remove(0, routePath.Length);
+
             return path.StartsWith("~") ? path.Remove(0, 1) : path;
         }
 
@@ -46,8 +51,9 @@
         /// </returns>
         public static string GetRootRoute()
         {
-            return ConfigurationManager.AppSettings[Constants.MdRootDirectoryAlias];
+            return ConfigurationManager.AppSettings[Constants.MdDefaultRoute].Replace("~", string.Empty).ToLowerInvariant();
         }
+
 
         /// <summary>
         /// Gets the reference path for the file store.
@@ -148,6 +154,39 @@
         }
 
         /// <summary>
+        /// Gets the searchable Url.
+        /// </summary>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <returns>
+        /// The searchable Url.
+        /// </returns>
+        internal static string GetSearchableUrl(string path, string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName)) return string.Empty;
+
+            return string.Format("{0}{1}", ValidatePath(path).UseForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
+        }
+
+        /// <summary>
+        /// Gets the searchable Url.
+        /// </summary>
+        /// <param name="md">
+        /// The md.
+        /// </param>
+        /// <returns>
+        /// The searchable Url.
+        /// </returns>
+        internal static string SearchableUrl(this IMdFile md)
+        {
+            return GetSearchableUrl(md.Path, md.FileName);
+        }
+
+        /// <summary>
         /// Gets the relative path from the file store root 
         /// </summary>
         /// <param name="path">
@@ -162,6 +201,5 @@
             rootPath = rootPath.Substring(0, rootPath.Length - 1);
             return path.Replace(rootPath, string.Empty);
         }
-
     }
 }

@@ -92,7 +92,7 @@ namespace ExamineMd
                        ? new MdFileMetaData()
                        {
                            MetaDescription = string.Empty,
-                           PageTile = string.Empty,
+                           PageTitle = string.Empty,
                            Relevance = string.Empty,
                            Revision = string.Empty,           
                            Items   = Enumerable.Empty<MdMetaDataItem>()

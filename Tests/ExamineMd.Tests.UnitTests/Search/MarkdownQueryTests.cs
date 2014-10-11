@@ -82,6 +82,19 @@
         }
 
         [Test]
+        public void Can_Get_A_Md_File_By_Its_Url()
+        {
+            //// Arrange
+            var searchUrl = "/developers/jquery-standards";
+
+            //// Act
+            var file = _markdownQuery.GetByUrl(searchUrl);
+
+            //// Assert
+            Assert.NotNull(file, "File was null");
+        }
+
+        [Test]
         public void Can_Search_For_Md_Files()
         {
 
