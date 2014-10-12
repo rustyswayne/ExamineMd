@@ -83,8 +83,9 @@
         /// </returns>
         public IMdFile GetByUrl(string url)
         {
+
             var criteria = this.GetBaseSearchCriteria();
-            criteria.Field("searchableUrl", url);
+            criteria.Field("searchableUrl", PathHelper.ValidateSearchableUrl(url));
 
             return _searchProvider.Search(criteria).FirstOrDefault().ToMdFile();
         }

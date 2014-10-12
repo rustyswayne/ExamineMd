@@ -1,6 +1,8 @@
 ﻿namespace ExamineMd
 {
     using System.Configuration;
+    using System.Linq;
+    using System.Runtime.Remoting.Messaging;
 
     using ExamineMd.Models;
 
@@ -27,7 +29,7 @@
 
             if (path.StartsWith(routePath)) path = path.Remove(0, routePath.Length);
 
-            path = path.UseBackSlashes();
+            path = path.EnsureBackSlashes();
 
             return path.StartsWith("~") ? path.Remove(0, 1) : path;
         }
@@ -104,7 +106,7 @@
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string UseForwardSlashes(this string path)
+        public static string EnsureForwardSlashes(this string path)
         {
             return path.Replace("\\", "/");
         }
@@ -118,7 +120,7 @@
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string UseBackSlashes(this string path)
+        public static string EnsureBackSlashes(this string path)
         {
             return path.Replace("/", "\\");
         }
@@ -148,9 +150,23 @@
         /// </returns>
         internal static string ValidateSearchablePath(string path)
         {
-            var searchable = ValidatePath(path).Replace("\\", " ").Replace("/", " ").Trim();
+            var searchable = ValidatePath(path).Replace("\\", " ").Trim();
 
             return string.IsNullOrEmpty(searchable) ? "root" : searchable;
+        }
+
+        /// <summary>
+        /// Validates a search Url.
+        /// </summary>
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        /// <returns>
+        /// The validated search rule.
+        /// </returns>
+        internal static string ValidateSearchableUrl(string url)
+        {
+            return url.Replace(GetRootRoute(), string.Empty).EnsureForwardSlashes();
         }
 
         /// <summary>
@@ -169,7 +185,7 @@
         {
             if (string.IsNullOrEmpty(fileName)) return string.Empty;
 
-            return string.Format("{0}{1}", ValidatePath(path).UseForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
+            return string.Format("{0}{1}", ValidatePath(path).EnsureForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
         }
 
         /// <summary>
@@ -183,7 +199,7 @@
         /// </returns>
         internal static string SearchableUrl(this IMdFile md)
         {
-            return GetSearchableUrl(md.Path, md.FileName);
+            return GetSearchableUrl(md.Path.Value, md.FileName);
         }
 
         /// <summary>
@@ -200,6 +216,25 @@
             var rootPath = IOHelper.MapPath(ConfigurationManager.AppSettings[Constants.MdRootDirectoryAlias]);
             rootPath = rootPath.Substring(0, rootPath.Length - 1);
             return path.Replace(rootPath, string.Empty);
+        }
+
+        /// <summary>
+        /// Gets the virtual content level.
+        /// </summary>
+        /// <param name="md">
+        /// The md.
+        /// </param>
+        /// <param name="contentLevel">
+        /// The content level.
+        /// </param>
+        /// <returns>
+        /// The virtual level.
+        /// </returns>
+        internal static int GetContentLevel(this IMdFile md, int contentLevel)
+        {
+            var folders = md.Path.Value.EnsureNotStartsWith('/').EnsureForwardSlashes().Split('/');
+
+            return contentLevel + folders.Count();
         }
     }
 }

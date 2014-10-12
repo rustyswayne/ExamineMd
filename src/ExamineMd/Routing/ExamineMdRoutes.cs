@@ -24,13 +24,13 @@
         {
             // there can be only one
             var examineMdNode = umbracoCache.GetByXPath("//ExamineMd").FirstOrDefault();
-            var rootPath = "documentation".SafeEncodeUrlSegments().EnsureEndsWith('/');
+            var rootPath = PathHelper.GetRootRoute().SafeEncodeUrlSegments().EnsureNotEndsWith('/').EnsureEndsWith('/');
 
             if (examineMdNode == null) return;
 
             using (routes.GetWriteLock())
             {
-                RemoveExisting(routes, "examinemd_markdown");
+                RemoveExisting(routes, new[] { "examinemd_markdown", "examinemd_lists" });
 
                 routes.MapUmbracoRoute(
                 "examinemd_markdown",

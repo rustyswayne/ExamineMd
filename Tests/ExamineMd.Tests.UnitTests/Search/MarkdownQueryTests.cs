@@ -42,7 +42,7 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("/developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+            Assert.IsFalse(files.Any(x => !x.Path.Value.StartsWith("/developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
         /// <summary>
@@ -60,7 +60,7 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("/", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+            Assert.IsFalse(files.Any(x => !x.Path.Value.StartsWith("/", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
         /// <summary>
@@ -78,7 +78,7 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.Path.StartsWith("/api", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+            Assert.IsFalse(files.Any(x => !x.Path.Value.StartsWith("/api", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
         [Test]

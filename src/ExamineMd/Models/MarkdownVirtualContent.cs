@@ -32,7 +32,7 @@
         {
             Markdown = md ?? new MdFile()
                                  {
-                                     Path = content.Url
+                                     Path = new MdPath(content.Url)
                                  };
         }
 
@@ -215,10 +215,5 @@
         }
 
         #endregion
-
-        private void Initialize()
-        {
-            
-        }
     }
 }

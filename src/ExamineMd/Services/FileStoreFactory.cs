@@ -38,15 +38,15 @@
             var metaData = BuildMetaData(fi);
             var md = new MdFile(metaData)
                        {
-                           Path = fi.DirectoryName.GetFileStoreReferencePath(),
+                           Path = new MdPath(fi.DirectoryName.GetFileStoreReferencePath()),
                            FileName = fi.Name,
-                           Title = fi.Name.GetTitleFromFileName(),
+                           Title = fi.Name.AsFormattedTitle(),
                            Body = File.ReadAllText(fi.FullName),
                            DateCreated = fi.CreationTime
                        };
 
             // Generate a unique key for this file
-            md.Key = SearchHelper.GetFileKey(md.Path, md.FileName);
+            md.Key = SearchHelper.GetFileKey(md.Path.Value, md.FileName);
 
             return md;
         }

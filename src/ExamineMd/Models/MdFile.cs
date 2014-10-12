@@ -36,7 +36,7 @@
         /// <summary>
         /// Gets or sets the relative path to the file with respect to the file store root.
         /// </summary>
-        public string Path { get; set; }
+        public IMdPath Path { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the file.

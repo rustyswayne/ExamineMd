@@ -238,6 +238,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\PathHelperTests.cs" />
     <Compile Include="Repository\RepositoryTests.cs" />
     <Compile Include="MarkdownDeep\MarkdownTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

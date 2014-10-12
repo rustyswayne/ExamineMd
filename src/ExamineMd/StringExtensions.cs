@@ -17,21 +17,20 @@
         /// </summary>
         private static readonly TextInfo TextInfo = new CultureInfo("en", false).TextInfo;
 
-
         /// <summary>
         /// The get title from file name.
         /// </summary>
-        /// <param name="fileName">
+        /// <param name="value">
         /// The file name.
         /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string GetTitleFromFileName(this string fileName)
+        public static string AsFormattedTitle(this string value)
         {
-            var name = fileName.EndsWith(".md", StringComparison.InvariantCultureIgnoreCase)
-                           ? fileName.Remove(fileName.Length - 3, 3)
-                           : fileName;
+            var name = value.EndsWith(".md", StringComparison.InvariantCultureIgnoreCase)
+                           ? value.Remove(value.Length - 3, 3)
+                           : value;
 
             name = name.Replace("-", " ").Replace("_", " ");
 
@@ -53,16 +52,33 @@
         }
 
         /// <summary>
+        /// Ensures a string both starts and ends with a character.
+        /// </summary>
+        /// <param name="input">
+        /// The input string.
+        /// </param>
+        /// <param name="value">
+        /// The char value to assert
+        /// </param>
+        /// <returns>
+        /// The asserted string.
+        /// </returns>
+        public static string EnsureStartsAndEndsWith(this string input, char value)
+        {
+            return input.EnsureStartsWith(value).EnsureEndsWith(value);
+        }
+
+        /// <summary>
         /// Ensures a string does not end with a character.
         /// </summary>
         /// <param name="input">
-        /// The input.
+        /// The input string.
         /// </param>
         /// <param name="value">
-        /// The value.
+        /// The char value to assert
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// The asserted string.
         /// </returns>
         public static string EnsureNotEndsWith(this string input, char value)
         {
@@ -74,17 +90,34 @@
         /// Ensures a string does not start with a character.
         /// </summary>
         /// <param name="input">
-        /// The input.
+        /// The input string.
         /// </param>
         /// <param name="value">
-        /// The value.
+        /// The char value to assert
         /// </param>
         /// <returns>
-        /// The <see cref="string"/>.
+        /// The asserted string.
         /// </returns>
         public static string EnsureNotStartsWith(this string input, char value)
         {
             return !input.StartsWith(value.ToString(CultureInfo.InstalledUICulture)) ? input : input.Remove(0, 1);
+        }
+
+        /// <summary>
+        /// Ensures a string does not start or end with a character.
+        /// </summary>
+        /// <param name="input">
+        /// The input string.
+        /// </param>
+        /// <param name="value">
+        /// The char value to assert
+        /// </param>
+        /// <returns>
+        /// The asserted string.
+        /// </returns>
+        public static string EnsureNotStartsOrEndsWith(this string input, char value)
+        {
+            return input.EnsureNotStartsWith(value).EnsureNotEndsWith(value);
         }
 
         /// <summary>

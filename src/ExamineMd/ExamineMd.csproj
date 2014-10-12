@@ -238,6 +238,7 @@
     <Compile Include="MappingExtensions.cs" />
     <Compile Include="MarkdownExtensions.cs" />
     <Compile Include="Models\IMarkdownVirtualContent.cs" />
+    <Compile Include="Models\IMdPath.cs" />
     <Compile Include="Models\MarkdownVirtualContent.cs" />
     <Compile Include="Models\IMdDirectory.cs" />
     <Compile Include="Models\IMdFile.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Models\MdFile.cs" />
     <Compile Include="Models\MdFileMetaData.cs" />
     <Compile Include="Models\MdMetaDataItem.cs" />
+    <Compile Include="Models\MdPath.cs" />
     <Compile Include="PackageActions\AddAppSetting.cs" />
     <Compile Include="PackageActions\AddExamineConfigs.cs" />
     <Compile Include="PathHelper.cs" />

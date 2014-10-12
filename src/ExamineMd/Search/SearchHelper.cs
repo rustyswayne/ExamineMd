@@ -33,7 +33,7 @@
         /// </returns>
         internal static string GetFileKey(string path, string fileName)
         {
-            path = PathHelper.ValidatePath(path).UseForwardSlashes();
+            path = PathHelper.ValidatePath(path).EnsureForwardSlashes();
             if (path.EndsWith("/")) path = path.Remove(path.LastIndexOf('/'), 1);
 
             return string.Format("{0}{1}", path.ToLowerInvariant(), fileName.ToLowerInvariant()).ToMd5();

@@ -57,9 +57,9 @@
                                     { "title", md.Title },
                                     { "body", md.Body },
                                     { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
-                                    { "path", string.IsNullOrEmpty(md.Path) ? "root" : md.Path.UseForwardSlashes() },
-                                    { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path) },
-                                    { "searchableUrl",  PathHelper.GetSearchableUrl(md.Path, md.FileName) },
+                                    { "path", string.IsNullOrEmpty(md.Path.Value) ? "root" : md.Path.Value.EnsureForwardSlashes() },
+                                    { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path.Value) },
+                                    { "searchableUrl",  PathHelper.GetSearchableUrl(md.Path.Value, md.FileName) },
                                     { "metaData", JsonConvert.SerializeObject(md.MetaData) },
                                     { "allDocs", "1" },
                                     { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }

@@ -31,7 +31,7 @@ namespace ExamineMd
             {
                 Key = result.FieldAsString("key"),
                 FileName = result.FieldAsString("fileName"),
-                Path = result.FieldAsString("path").ReplaceRootSlash(),
+                Path = new MdPath(result.FieldAsString("path").ReplaceRootSlash()),
                 Title = result.FieldAsString("title"),
                 Body = result.FieldAsString("body"),
                 MetaData = result.FieldAsMetaItemCollection(),

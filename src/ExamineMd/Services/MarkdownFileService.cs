@@ -100,7 +100,7 @@
 
             return includeChildPaths
                        ? allMatches
-                       : allMatches.Where(x => x.Path.Equals(path, StringComparison.InvariantCultureIgnoreCase));
+                       : allMatches.Where(x => x.Path.Value.Equals(path, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
