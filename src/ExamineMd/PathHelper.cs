@@ -17,26 +17,6 @@
     public static class PathHelper
     {
         /// <summary>
-        /// Validates and or reformats a document path.
-        /// </summary>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public static string ValidateDocumentPath(string path)
-        {
-            var routePath = Constants.MarkdownDocumentRoute;
-
-            if (path.StartsWith(routePath)) path = path.Remove(0, routePath.Length);
-
-            path = path.EnsureBackSlashes();
-
-            return path.StartsWith("~") ? path.Remove(0, 1) : path;
-        }
-
-        /// <summary>
         /// Gets the physical path to the markdown file store.
         /// </summary>
         /// <returns>
@@ -150,6 +130,26 @@
         internal static string ReplaceRootSlash(this string path)
         {
             return path.Equals("root") ? "/" : path;
+        }
+
+        /// <summary>
+        /// Validates and or reformats a document path.
+        /// </summary>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string ValidateDocumentPath(string path)
+        {
+            var routePath = Constants.MarkdownDocumentRoute;
+
+            if (path.StartsWith(routePath)) path = path.Remove(0, routePath.Length);
+
+            path = path.EnsureBackSlashes();
+
+            return path.StartsWith("~") ? path.Remove(0, 1) : path;
         }
 
         /// <summary>

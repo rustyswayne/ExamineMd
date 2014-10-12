@@ -1,0 +1,15 @@
+﻿@using ExamineMd
+@model ExamineMd.Models.IMdPath
+
+@{
+    <h1> @Model.Value </h1>
+
+    var path = Model.Value.Split('/');
+
+    <ul>
+        @foreach (var p in path.Where(x => !x.IsNullOrWhiteSpace()))
+        {
+            <li><a href="/@p/">@p.ToTitleCase()</a></li>
+        }
+    </ul>
+}

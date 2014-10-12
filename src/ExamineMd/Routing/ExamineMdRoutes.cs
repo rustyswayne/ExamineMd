@@ -32,15 +32,28 @@
             
             if (examineMdNode == null) return;
 
-            var documentPath = Constants.MarkdownDocumentRoute.SafeEncodeUrlSegments().EnsureNotStartsWith('/').EnsureEndsWith('/');
-            var listingPath = Constants.MarkdownListingRoute.SafeEncodeUrlSegments().EnsureNotStartsWith('/').EnsureEndsWith('/');
+            var examineMdNodePath = examineMdNode.Url.EnsureNotStartsOrEndsWith('/');
+            var documentPath = Constants.MarkdownDocumentRoute.SafeEncodeUrlSegments().EnsureNotStartsOrEndsWith('/');
+            var listingPath = Constants.MarkdownListingRoute.SafeEncodeUrlSegments().EnsureNotStartsOrEndsWith('/');
+
+            if (!string.IsNullOrWhiteSpace(examineMdNodePath))
+            {
+                documentPath = examineMdNodePath + "/" + documentPath;
+                listingPath = examineMdNodePath + "/" + listingPath;
+            }
 
             RemoveExisting(routes, new[] { "examinemd_markdown", "examinemd_listing" });
 
             routes.MapUmbracoRoute(
+                "examinemd_listing",
+                listingPath + "/{*path}",
+                new { controller = "ExamineMd", action = "Index" },
+                new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
+
+            routes.MapUmbracoRoute(
             "examinemd-markdown",
                 documentPath + "/{*path}",
-                new { controller = "ExamineMdDocumentFile", action = "Index", path = UrlParameter.Optional },
+                new { controller = "ExamineMdDocument", action = "Index" },
                 new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
         }
 

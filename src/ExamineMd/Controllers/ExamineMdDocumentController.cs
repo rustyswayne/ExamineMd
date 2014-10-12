@@ -10,33 +10,13 @@
     using Umbraco.Web.Mvc;
 
     /// <summary>
-    /// The ExamineMdDocumentFileController is responsible for rendering ExamineMd file store markdown content.
+    /// The ExamineMdDocumentController is responsible for rendering ExamineMd file store markdown content.
     /// </summary>
     [PluginController("ExamineMd")]
-    public class ExamineMdDocumentFileController : RenderMvcController
+    public class ExamineMdDocumentController : ExamineMdControllerBase
     {
         /// <summary>
-        /// The <see cref="IMarkdownQuery"/>.
-        /// </summary>
-        private readonly IMarkdownQuery _markdownQuery = new MarkdownQuery();
-
-        /// <summary>
-        /// Declare new Index action with optional page number
-        /// </summary>
-        /// <param name="model">
-        /// The model.
-        /// </param>
-        /// <returns>
-        /// The <see cref="ActionResult"/>.
-        /// </returns>
-        [NonAction]
-        public override ActionResult Index(RenderModel model)
-        {
-            return RenderView(model, null);
-        }
-
-        /// <summary>
-        /// The default method
+        /// Declare new Index action with optional path
         /// </summary>
         /// <param name="model">
         /// The model.
@@ -53,7 +33,7 @@
 
             path = path.EnsureStartsWith('/');
 
-            var md = _markdownQuery.GetByUrl(path);
+            var md = MarkdownQuery.GetByUrl(path);
 
             return RenderView(model, md);
         }
@@ -71,9 +51,9 @@
         /// </returns>
         private ActionResult RenderView(IRenderModel model, IMdFile md)
         {
-            var virtualContent = new MarkdownVirtualContent(model.Content, md);
+            var virtualContent = new VirtualMarkdownDocument(model.Content, md);
 
-            return this.View(PathHelper.GetViewPath("ExamineMd"), virtualContent);
+            return this.View(PathHelper.GetViewPath("Document"), virtualContent);
         }
     }
 }

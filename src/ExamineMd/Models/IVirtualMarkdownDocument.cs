@@ -1,22 +1,10 @@
 ﻿namespace ExamineMd.Models
 {
-    using Umbraco.Core.Models;
-
     /// <summary>
-    /// Defines a MarkdownVirtualContent.
+    /// Defines a VirtualMarkdownDocument.
     /// </summary>
-    public interface IMarkdownVirtualContent : IPublishedContent
+    public interface IVirtualMarkdownDocument : IBaseViewModel
     {
-        /// <summary>
-        /// Gets the page title.
-        /// </summary>
-        string PageTitle { get; }
-
-        /// <summary>
-        /// Gets the meta description.
-        /// </summary>
-        string MetaDescription { get; }
-
         /// <summary>
         /// Gets the relevance.
         /// </summary>

@@ -1,7 +1,6 @@
 {
 	propertyEditors: [],       
     javascript: [
-        '~/App_Plugins/Articulate/BackOffice/Dashboards/blogimporter.controller.js',
-		'~/App_Plugins/Articulate/BackOffice/PropertyEditors/themepicker.controller.js',
+		'~/App_Plugins/ExamineMd/BackOffice/PropertyEditors/pathpicker.controller.js'
     ]
 }

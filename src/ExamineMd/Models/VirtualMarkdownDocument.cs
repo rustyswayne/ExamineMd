@@ -1,5 +1,8 @@
 ﻿namespace ExamineMd.Models
 {
+    using System;
+    using System.Globalization;
+
     using Umbraco.Core;
     using Umbraco.Core.Models;
     using Umbraco.Core.Models.PublishedContent;
@@ -9,72 +12,25 @@
     /// <summary>
     /// A virtual content page for displaying markdown.
     /// </summary>
-    public class MarkdownVirtualContent : PublishedContentWrapped, IMarkdownVirtualContent
+    public class VirtualMarkdownDocument : BaseViewModel, IVirtualMarkdownDocument
     {
-        private string _pageTitle;
-
-        private string _metaDescription;
-
-        private string _url;
-
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="MarkdownVirtualContent"/> class.
+        /// Initializes a new instance of the <see cref="VirtualMarkdownDocument"/> class.
         /// </summary>
         /// <param name="content">
         /// The content.
         /// </param>
         /// <param name="md">
-        /// The md.
+        /// The <see cref="IMdFile"/>
         /// </param>
-        public MarkdownVirtualContent(IPublishedContent content, IMdFile md)
+        public VirtualMarkdownDocument(IPublishedContent content, IMdFile md)
             : base(content)
         {
-            Markdown = md ?? new MdFile()
-                                 {
-                                     Path = new MdPath(content.Url)
-                                 };
-        }
+            Mandate.ParameterNotNull(md, "md");
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MarkdownVirtualContent"/> class.
-        /// </summary>
-        /// <param name="content">
-        /// The content.
-        /// </param>
-        internal MarkdownVirtualContent(IPublishedContent content)
-            : this(content, null)
-        {
-        }
+            Markdown = md;
 
-        /// <summary>
-        /// Gets the HTML page title.
-        /// </summary>
-        public string PageTitle
-        {
-            get
-            {
-                return Markdown == null
-                           ? Content.Name
-                           : string.IsNullOrEmpty(Markdown.MetaData.PageTitle)
-                                 ? Markdown.Title
-                                 : Markdown.MetaData.PageTitle;
-            }
-        }
-
-        /// <summary>
-        /// Gets the meta description.
-        /// </summary>
-        public string MetaDescription
-        {
-            get
-            {
-                return Markdown == null
-                    ? string.Empty
-                    : string.IsNullOrEmpty(Markdown.MetaData.MetaDescription)
-                    ? string.Empty
-                    : Markdown.MetaData.MetaDescription;
-            }
+            this.Initialize();
         }
 
         /// <summary>
@@ -84,9 +40,7 @@
         {
             get
             {
-                return Markdown == null
-                    ? string.Empty
-                    : string.IsNullOrEmpty(Markdown.MetaData.Relevance)
+                return string.IsNullOrEmpty(Markdown.MetaData.Relevance)
                     ? string.Empty
                     : Markdown.MetaData.Relevance;
             }
@@ -99,9 +53,7 @@
         {
             get
             {
-                return Markdown == null
-                    ? string.Empty
-                    : string.IsNullOrEmpty(Markdown.MetaData.Revision)
+                return string.IsNullOrEmpty(Markdown.MetaData.Revision)
                     ? string.Empty
                     : Markdown.MetaData.Revision;
             }
@@ -124,9 +76,9 @@
         {
             get
             {
-                return Markdown == null ?
-                    base.Url.EnsureNotEndsWith('/') :
-                    base.Url.EnsureNotEndsWith('/') + (Markdown.SearchableUrl() ?? UrlName);
+                return !Content.Url.EnsureNotStartsOrEndsWith('/').Equals(Constants.MarkdownDocumentRoute, StringComparison.InvariantCultureIgnoreCase) ?
+                    Content.Parent.Url.EnsureStartsWith('/').EnsureNotEndsWith('/')  :
+                    Content.Url.EnsureStartsWith('/').EnsureNotEndsWith('/') + UrlName;
             }
         }
 
@@ -144,6 +96,7 @@
         /// <remarks>
         /// This is always the <see cref="IPublishedContent"/> of the rendering node
         /// </remarks>
+        //// TODO - this should go to the parent list
         public override IPublishedContent Parent
         {
             get { return Content; }
@@ -167,7 +120,7 @@
         {
             get
             {
-                return string.IsNullOrEmpty(Markdown.Title) ? Content.Name : Markdown.Title;
+                return Markdown.Title;
             }
         }
 
@@ -178,7 +131,8 @@
         {
             get
             {
-                return (string.IsNullOrEmpty(Markdown.Title) ? Content.Name : Markdown.Title).ToLowerInvariant();
+                var lastIndex = Markdown.SearchableUrl().LastIndexOf('/') + 1;
+                return Markdown.SearchableUrl().Substring(lastIndex, Markdown.SearchableUrl().Length - lastIndex);
             }
         }
 
@@ -215,5 +169,22 @@
         }
 
         #endregion
+
+        /// <summary>
+        /// Performs Initialization
+        /// </summary>
+        private void Initialize()
+        {
+
+            HeadleLine = Markdown.Title;
+
+            PageTitle = string.IsNullOrEmpty(Markdown.MetaData.PageTitle)
+                                 ? Markdown.Title
+                                 : Markdown.MetaData.PageTitle;
+
+            MetaDescription = string.IsNullOrEmpty(Markdown.MetaData.MetaDescription)
+                                ? string.Empty
+                                : Markdown.MetaData.MetaDescription;
+        }
     }
 }
