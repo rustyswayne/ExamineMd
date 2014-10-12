@@ -1,10 +1,14 @@
 ﻿namespace ExamineMd.Routing
 {
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Web.Mvc;
     using System.Web.Routing;
 
     using Umbraco.Core;
     using Umbraco.Web.PublishedCache;
+
+    using Constants = ExamineMd.Constants;
 
     /// <summary>
     /// Manages ExamineMd MVC routes.
@@ -25,23 +29,19 @@
             // For this version there I'm assuming only one node but it'd be cool if multiple nodes 
             // could be used to start at various points in the file store tree.
             var examineMdNode = umbracoCache.GetByXPath("//ExamineMd").FirstOrDefault();
-            var rootPath = PathHelper.GetRootRoute().SafeEncodeUrlSegments().EnsureNotEndsWith('/').EnsureEndsWith('/');
-
+            
             if (examineMdNode == null) return;
 
-            RemoveExisting(routes, new[] { "examinemd_markdown", "examinemd_search" });
+            var documentPath = Constants.MarkdownDocumentRoute.SafeEncodeUrlSegments().EnsureNotStartsWith('/').EnsureEndsWith('/');
+            var listingPath = Constants.MarkdownListingRoute.SafeEncodeUrlSegments().EnsureNotStartsWith('/').EnsureEndsWith('/');
+
+            RemoveExisting(routes, new[] { "examinemd_markdown", "examinemd_listing" });
 
             routes.MapUmbracoRoute(
-            "examinemd_markdown",
-            rootPath + "{*path}",
-            new { controller = "ExamineMd", action = "Index" },
-            new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
-
-            routes.MapUmbracoRoute(
-            "examinemd_searcch",
-            rootPath + "search/{term}",
-            new { controller = "ExamineMd", action = "Search" },
-            new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
+            "examinemd-markdown",
+                documentPath + "/{*path}",
+                new { controller = "ExamineMdDocumentFile", action = "Index", path = UrlParameter.Optional },
+                new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
         }
 
         /// <summary>

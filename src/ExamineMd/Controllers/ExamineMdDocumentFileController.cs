@@ -2,8 +2,6 @@
 {
     using System.Web.Mvc;
 
-    using AutoMapper.Internal;
-
     using ExamineMd.Models;
     using ExamineMd.Search;
 
@@ -12,10 +10,10 @@
     using Umbraco.Web.Mvc;
 
     /// <summary>
-    /// The examine md controller.
+    /// The ExamineMdDocumentFileController is responsible for rendering ExamineMd file store markdown content.
     /// </summary>
     [PluginController("ExamineMd")]
-    public class ExamineMdController : RenderMvcController
+    public class ExamineMdDocumentFileController : RenderMvcController
     {
         /// <summary>
         /// The <see cref="IMarkdownQuery"/>.

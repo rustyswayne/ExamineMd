@@ -130,7 +130,7 @@
         /// </returns>
         private static bool PrepareLink(HtmlTag htmlTag)
         {
-            var basePath = PathHelper.GetRootRoute();
+            var basePath = Constants.MarkdownDocumentRoute;
             var href = htmlTag.attributes["href"];
             href = string.Format("{0}{1}", basePath.EnsureNotEndsWith('/'), href);
             htmlTag.attributes["href"] = href;

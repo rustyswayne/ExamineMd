@@ -75,7 +75,7 @@
         /// </returns>
         public IEnumerable<IMdFile> Find(string path, string fileName)
         {
-            path = PathHelper.ValidatePath(path);
+            path = PathHelper.ValidateDocumentPath(path);
 
             return this.List(path).Where(x => x.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
         }
@@ -94,7 +94,7 @@
         /// </returns>
         public IEnumerable<IMdFile> List(string path, bool includeChildPaths = false)
         {
-            path = PathHelper.ValidatePath(path);
+            path = PathHelper.ValidateDocumentPath(path);
 
             var allMatches = this.GetMarkdownFiles(this.GetDirectory(path).DirectoryInfo);
 
@@ -216,7 +216,7 @@
         /// </returns>
         private string GetPhysicalPath(string path)
         {   
-            var start = PathHelper.ValidatePath(path).StartsWith(".") ? path.Remove(0, 1) : path;
+            var start = PathHelper.ValidateDocumentPath(path).StartsWith(".") ? path.Remove(0, 1) : path;
             
             //// remove the first \ - the root path with include it.
             if (start.StartsWith("\\")) start = start.Remove(0, 1);

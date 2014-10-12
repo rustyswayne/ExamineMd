@@ -1,5 +1,7 @@
 ﻿namespace ExamineMd
 {
+    using System.Configuration;
+
     /// <summary>
     /// ExamineMd package constants
     /// </summary>
@@ -28,13 +30,24 @@
         }
 
         /// <summary>
-        /// Gets the md default route.
+        /// Gets the markdown document route.
         /// </summary>
-        public static string MdDefaultRoute
+        public static string MarkdownDocumentRoute
         {
             get
             {
-                return "ExamineMd:DefaultRoute";
+                return ConfigurationManager.AppSettings["ExamineMd:DocumentRoute"].ToLowerInvariant();
+            }
+        }
+
+        /// <summary>
+        /// Gets the markdown listing route.
+        /// </summary>
+        public static string MarkdownListingRoute
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ExamineMd:ListingRoute"].ToLowerInvariant();
             }
         }
 

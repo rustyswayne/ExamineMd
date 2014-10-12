@@ -9,26 +9,13 @@
     public class PathHelperTests : ExamineTestBase
     {
         [Test]
-        public void Can_Get_Default_Route()
-        {
-            //// Arrange
-            const string Expected = "/documentation";
-
-            //// Act
-            var defaultRoute = PathHelper.GetRootRoute();
-
-            //// Assert
-            Assert.AreEqual(Expected, defaultRoute);
-        }
-
-        [Test]
         public void Can_Get_Default_Route_Name()
         {
             //// Arrange
             const string Expected = "documentation";
 
             //// Act
-            var routeName = PathHelper.GetRootRoute().EnsureNotStartsOrEndsWith('/');
+            var routeName = Constants.MarkdownDocumentRoute;
 
             //// Assert
             Assert.AreEqual(Expected, routeName);

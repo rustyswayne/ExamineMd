@@ -17,7 +17,7 @@
     public static class PathHelper
     {
         /// <summary>
-        /// Validates and or reformats a path.
+        /// Validates and or reformats a document path.
         /// </summary>
         /// <param name="path">
         /// The path.
@@ -25,9 +25,9 @@
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        public static string ValidatePath(string path)
+        public static string ValidateDocumentPath(string path)
         {
-            var routePath = GetRootRoute();
+            var routePath = Constants.MarkdownDocumentRoute;
 
             if (path.StartsWith(routePath)) path = path.Remove(0, routePath.Length);
 
@@ -48,18 +48,6 @@
         }
 
         /// <summary>
-        /// Gets the route to the Route.
-        /// </summary>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public static string GetRootRoute()
-        {
-            return ConfigurationManager.AppSettings[Constants.MdDefaultRoute].Replace("~", string.Empty).ToLowerInvariant();
-        }
-
-
-        /// <summary>
         /// Gets the reference path for the file store.
         /// </summary>
         /// <param name="path">
@@ -70,7 +58,7 @@
         /// </returns>
         public static string GetFileStoreReferencePath(this string path)
         {
-            return string.IsNullOrEmpty(path) ? "/" : ValidatePath(path.RelativePathFromFileStoreRoot());
+            return string.IsNullOrEmpty(path) ? "/" : ValidateDocumentPath(path.RelativePathFromFileStoreRoot());
         }
 
         /// <summary>
@@ -175,7 +163,7 @@
         /// </returns>
         internal static string ValidateSearchablePath(string path)
         {
-            var searchable = ValidatePath(path).Replace("\\", " ").Trim();
+            var searchable = ValidateDocumentPath(path).Replace("\\", " ").Trim();
 
             return string.IsNullOrEmpty(searchable) ? "root" : searchable;
         }
@@ -191,7 +179,7 @@
         /// </returns>
         internal static string ValidateSearchableUrl(string url)
         {
-            return url.Replace(GetRootRoute(), string.Empty).EnsureForwardSlashes();
+            return url.Replace(Constants.MarkdownDocumentRoute, string.Empty).EnsureForwardSlashes();
         }
 
         /// <summary>
@@ -210,7 +198,7 @@
         {
             if (string.IsNullOrEmpty(fileName)) return string.Empty;
 
-            return string.Format("{0}{1}", ValidatePath(path).EnsureForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
+            return string.Format("{0}{1}", ValidateDocumentPath(path).EnsureForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
         }
 
         /// <summary>
