@@ -1,8 +1,10 @@
 ﻿namespace ExamineMd
 {
+    using System;
     using System.Configuration;
     using System.Linq;
     using System.Runtime.Remoting.Messaging;
+    using System.Web;
 
     using ExamineMd.Models;
 
@@ -123,6 +125,29 @@
         public static string EnsureBackSlashes(this string path)
         {
             return path.Replace("/", "\\");
+        }
+
+        /// <summary>
+        /// Encodes url segments.
+        /// </summary>
+        /// <param name="urlPath">
+        /// The url path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        /// <remarks>   
+        /// https://github.com/Shandem/Articulate/blob/master/Articulate/StringExtensions.cs
+        /// </remarks>
+        public static string SafeEncodeUrlSegments(this string urlPath)
+        {
+            return string.Join("/",
+                urlPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => HttpUtility.UrlEncode(x).Replace("+", "%20"))
+                    .WhereNotNull()
+                //we are not supporting dots in our URLs it's just too difficult to
+                // support across the board with all the different config options
+                    .Select(x => x.Replace('.', '-')));
         }
 
         /// <summary>
