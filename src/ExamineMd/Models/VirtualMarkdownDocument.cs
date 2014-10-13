@@ -6,6 +6,7 @@
     using Umbraco.Core;
     using Umbraco.Core.Models;
     using Umbraco.Core.Models.PublishedContent;
+    using Umbraco.Web;
 
     using Constants = ExamineMd.Constants;
 
@@ -14,6 +15,11 @@
     /// </summary>
     public class VirtualMarkdownDocument : BaseViewModel, IVirtualMarkdownDocument
     {
+        /// <summary>
+        /// The document route.
+        /// </summary>
+        private static readonly string DocumentsRoute = Constants.MarkdownDocumentRoute.EnsureStartsAndEndsWith('/');
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VirtualMarkdownDocument"/> class.
         /// </summary>
@@ -76,9 +82,19 @@
         {
             get
             {
-                return !Content.Url.EnsureNotStartsOrEndsWith('/').Equals(Constants.MarkdownDocumentRoute, StringComparison.InvariantCultureIgnoreCase) ?
-                    Content.Parent.Url.EnsureStartsWith('/').EnsureNotEndsWith('/')  :
-                    Content.Url.EnsureStartsWith('/').EnsureNotEndsWith('/') + UrlName;
+                return Content.Url.EnsureNotEndsWith('/') + DocumentsRoute + UrlName;
+
+                var url = Content.Url;
+                if (url.Equals("/"))
+                {
+                    url = DocumentsRoute + UrlName;
+                }
+                else
+                {
+                    var examineNd = Content.AncestorOrSelf("ExamineMd");
+                    url = examineNd.Url.EnsureNotEndsWith('/') + DocumentsRoute + Markdown.SearchableUrl();
+                }
+                return url;
             }
         }
 
@@ -90,17 +106,17 @@
             get { return null; }
         }
 
-        /// <summary>
-        /// Gets the parent.
-        /// </summary>
-        /// <remarks>
-        /// This is always the <see cref="IPublishedContent"/> of the rendering node
-        /// </remarks>
-        //// TODO - this should go to the parent list
-        public override IPublishedContent Parent
-        {
-            get { return Content; }
-        }
+        ///// <summary>
+        ///// Gets the parent.
+        ///// </summary>
+        ///// <remarks>
+        ///// This is always the <see cref="IPublishedContent"/> of the rendering node
+        ///// </remarks>
+        ////// TODO - this should go to the parent list
+        //public override IPublishedContent Parent
+        //{
+        //    get { return Content; }
+        //}
 
         /// <summary>
         /// Gets the id.

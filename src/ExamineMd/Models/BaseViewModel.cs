@@ -28,7 +28,7 @@
         {
             get
             {
-                return Content;
+                return Content.AncestorOrSelf("ExamineMd");
             } 
         }
 

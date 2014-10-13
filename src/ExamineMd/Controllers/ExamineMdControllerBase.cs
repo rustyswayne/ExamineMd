@@ -26,7 +26,18 @@
         }
 
         /// <summary>
-        /// This method is abandoned but must be overriden.
+        /// Gets the <see cref="IMarkdownQuery"/>.
+        /// </summary>
+        protected IMarkdownQuery MarkdownQuery
+        {
+            get
+            {
+                return _markdownQuery;
+            }
+        }
+
+        /// <summary>
+        /// This method is abandoned but must have an override.
         /// </summary>
         /// <param name="model">
         /// The model.
@@ -38,18 +49,6 @@
         public override ActionResult Index(RenderModel model)
         {
             return null;
-        }
-
-
-        /// <summary>
-        /// Gets the <see cref="IMarkdownQuery"/>.
-        /// </summary>
-        protected IMarkdownQuery MarkdownQuery
-        {
-            get
-            {
-                return _markdownQuery;
-            }
         }
     }
 }
