@@ -82,17 +82,21 @@
         {
             get
             {
-                return Content.Url.EnsureNotEndsWith('/') + DocumentsRoute + UrlName;
+                //return Markdown.Path.Value.Equals("/", StringComparison.InvariantCultureIgnoreCase)
+                //    ? Content.Url.EnsureNotEndsWith('/') + DocumentsRoute + UrlName
+                //    : Content.Url.Substring(0, Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase)).EnsureNotEndsWith('/') + Markdown.SearchableUrl();
 
                 var url = Content.Url;
-                if (url.Equals("/"))
+
+                var routeIndex = Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase);
+
+                if (routeIndex <= 0)
                 {
-                    url = DocumentsRoute + UrlName;
+                    url = Content.Url.EnsureNotEndsWith('/') + DocumentsRoute + UrlName;
                 }
                 else
                 {
-                    var examineNd = Content.AncestorOrSelf("ExamineMd");
-                    url = examineNd.Url.EnsureNotEndsWith('/') + DocumentsRoute + Markdown.SearchableUrl();
+                    url = Content.Url.Substring(0, Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase) + DocumentsRoute.Length).EnsureNotEndsWith('/') + Markdown.SearchableUrl();
                 }
                 return url;
             }

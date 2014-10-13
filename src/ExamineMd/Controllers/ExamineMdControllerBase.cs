@@ -1,4 +1,6 @@
-﻿namespace ExamineMd.Controllers
+﻿using Umbraco.Web;
+
+namespace ExamineMd.Controllers
 {
     using System.Web.Mvc;
 
@@ -49,6 +51,22 @@
         public override ActionResult Index(RenderModel model)
         {
             return null;
+        }
+
+        /// <summary>
+        /// The gets the starting path default queries.
+        /// </summary>
+        /// <param name="model">
+        /// The model.
+        /// </param>
+        /// <returns>
+        /// The starting path.
+        /// </returns>
+        protected static string GetSafeStartPath(IRenderModel model)
+        {
+            return model.Content.HasProperty("startingPath") && model.Content.HasValue("startingPath")
+                       ? model.Content.GetPropertyValue<string>("startingPath")
+                       : "/";
         }
     }
 }
