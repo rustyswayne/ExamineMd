@@ -13,7 +13,10 @@
             @foreach (var doc in Model.Documents)
             {
                 <li>
-                    <h3><a href="@doc.Url">@doc.Name</a></h3>
+                    <h3>
+                        <a href="@doc.Url">@doc.Name</a>
+                        <p>This is the brief content</p>
+                    </h3>
                 </li>
             }
         </ul>

@@ -138,17 +138,21 @@
         /// <param name="path">
         /// The path.
         /// </param>
+        /// <param name="includeChildPaths">If true, the search returns all document on child paths as well</param>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
-        public IEnumerable<IMdFile> List(string path)
+        public IEnumerable<IMdFile> List(string path, bool includeChildPaths = false)
         {
             var searchPath = PathHelper.ValidateSearchablePath(path);
 
-            var criteria = _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
+            var criteria = includeChildPaths
+                ? GetBaseSearchCriteria()
+                : _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
+
             criteria.Field("pathSearchable", searchPath);
 
-            return _searchProvider.Search(criteria).Select(x => x.ToMdFile());
+                return _searchProvider.Search(criteria).Select(x => x.ToMdFile());            
         }
 
         /// <summary>

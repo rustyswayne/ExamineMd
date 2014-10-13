@@ -14,7 +14,7 @@
         private readonly IMarkdownQuery _markdownQuery = new MarkdownQuery();
 
         [Test]
-        public void Can_Retrieve_A_List_Of_All_Docs()
+        public void Can_Retrieve_A_GetAll_Of_All_Docs()
         {
             //// Arrange
             const int FileCount = 48;
@@ -121,6 +121,20 @@
 
             //// Assert
             Assert.NotNull(file);
+        }
+
+        [Test]
+        public void Can_List_All_Md_Files_From_Root()
+        {
+            //// Arrange
+            const int FileCount = 48;
+            //// Act
+            var files = _markdownQuery.List("/");
+            this.ShowFileStoreInfo(files);
+
+            //// Assert
+            Assert.IsTrue(files.Any(), "No files were found in the repository");
+            Assert.AreEqual(FileCount, files.Count());            
         }
     }
 }
