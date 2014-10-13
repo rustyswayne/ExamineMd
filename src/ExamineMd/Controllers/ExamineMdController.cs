@@ -61,21 +61,7 @@
             return this.View(PathHelper.GetViewPath("Listing"), virtualContent);
         }
 
-        /// <summary>
-        /// The gets the starting path default queries.
-        /// </summary>
-        /// <param name="model">
-        /// The model.
-        /// </param>
-        /// <returns>
-        /// The starting path.
-        /// </returns>
-        private static string GetSafeStartPath(IRenderModel model)
-        {
-            return model.Content.HasProperty("startingPath") && model.Content.HasValue("startingPath")
-                       ? model.Content.GetPropertyValue<string>("startingPath")
-                       : "/";
-        }
+
 
     }
 }

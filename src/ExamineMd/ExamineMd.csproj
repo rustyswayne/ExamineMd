@@ -265,7 +265,7 @@
     <Compile Include="Routing\UmbracoVirtualNodeByIdRouteHandler.cs" />
     <Compile Include="Routing\UmbracoVirtualNodeRouteHandler.cs" />
     <Compile Include="Search\MarkdownQuery.cs" />
-    <Compile Include="Search\SearchHelper.cs" />
+    <Compile Include="SearchHelper.cs" />
     <Compile Include="Search\IMarkdownQuery.cs" />
     <Compile Include="Services\FileStoreFactory.cs" />
     <Compile Include="Services\FileStoreFactoryBase.cs" />

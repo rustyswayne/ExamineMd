@@ -76,10 +76,13 @@
         /// <param name="path">
         /// The path.
         /// </param>
+        /// <param name="includeChildPaths">
+        /// Optional parameter to list all documents with paths matching
+        /// </param>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
-        IEnumerable<IMdFile> List(string path);
+        IEnumerable<IMdFile> List(string path, bool includeChildPaths = false);
 
         /// <summary>
         /// Gets a list of all MarkdownAsHtmlString documents.

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
 
@@ -12,6 +13,10 @@
 
     using ExamineMd.Models;
     using ExamineMd.Services;
+
+    using Umbraco.Core;
+
+    using Constants = ExamineMd.Constants; 
 
     /// <summary>
     /// The markdown query.
@@ -138,15 +143,37 @@
         /// <param name="path">
         /// The path.
         /// </param>
+        /// <param name="includeChildPaths">
+        /// Optional parameter to list all documents with paths matching
+        /// </param>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
-        public IEnumerable<IMdFile> List(string path)
+        public IEnumerable<IMdFile> List(string path, bool includeChildPaths = false)
         {
             var searchPath = PathHelper.ValidateSearchablePath(path);
 
-            var criteria = _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
-            criteria.Field("pathSearchable", searchPath);
+            ISearchCriteria criteria;
+
+            if (includeChildPaths)
+            {
+                criteria = this.GetBaseSearchCriteria();
+
+                if (searchPath.Equals("root", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    criteria.Field("allDocs", "1");
+                }
+                else
+                {
+                    criteria.Field("pathSearchable", searchPath);
+                }
+            }
+            else
+            {
+                criteria = _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
+                criteria.Field("pathKey", SearchHelper.GetPathKey(path));
+            }
+
 
             return _searchProvider.Search(criteria).Select(x => x.ToMdFile());
         }

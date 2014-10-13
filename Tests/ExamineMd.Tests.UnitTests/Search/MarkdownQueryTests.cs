@@ -122,5 +122,62 @@
             //// Assert
             Assert.NotNull(file);
         }
+
+        [Test]
+        public void Can_List_Root_Files()
+        {
+            //// Arrange
+            const int FileCount = 1;
+            //// Act
+            var files = _markdownQuery.List("/");
+            this.ShowFileStoreInfo(files);
+
+            //// Assert
+            Assert.IsTrue(files.Any(), "No files were found in the repository");
+            Assert.AreEqual(FileCount, files.Count());
+        }
+
+        [Test]
+        public void Can_List_All_Files_Starting_At_Root()
+        {
+            //// Arrange
+            const int FileCount = 48;
+            //// Act
+            var files = _markdownQuery.List("/", true);
+            this.ShowFileStoreInfo(files);
+
+            //// Assert
+            Assert.IsTrue(files.Any(), "No files were found in the repository");
+            Assert.AreEqual(FileCount, files.Count());
+        }
+
+        [Test]
+        public void Can_List_Only_Api_Files()
+        {
+            //// Arrange
+            const int FileCount = 2;
+            //// Act
+            var files = _markdownQuery.List("/api");
+            this.ShowFileStoreInfo(files);
+
+            //// Assert
+            Assert.IsTrue(files.Any(), "No files were found in the repository");
+            Assert.AreEqual(FileCount, files.Count());
+            
+        }
+
+        [Test]
+        public void Can_List_All_Files_Under_Api()
+        {
+            //// Arrange
+            const int FileCount = 23;
+            //// Act
+            var files = _markdownQuery.List("/api", true);
+            this.ShowFileStoreInfo(files);
+
+            //// Assert
+            Assert.IsTrue(files.Any(), "No files were found in the repository");
+            Assert.AreEqual(FileCount, files.Count());
+        }
     }
 }

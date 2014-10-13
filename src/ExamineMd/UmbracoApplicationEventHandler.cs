@@ -6,6 +6,8 @@
     using System.Web.Mvc;
     using System.Web.Routing;
 
+    using Examine.LuceneEngine.Providers;
+
     using ExamineMd.Controllers.Api;
     using ExamineMd.Routing;
 
