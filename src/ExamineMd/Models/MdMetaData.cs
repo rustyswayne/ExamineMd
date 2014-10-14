@@ -6,7 +6,7 @@ namespace ExamineMd.Models
     /// <summary>
     /// Represents an MdFileMeta.
     /// </summary>
-    internal class MdFileMetaData : IMdFileMetaData
+    internal class MdMetaData : IMdMetaData
     {
         /// <summary>
         /// Gets or sets the page tile.
@@ -29,8 +29,8 @@ namespace ExamineMd.Models
         public string Revision { get; set; }
 
         /// <summary>
-        /// Gets or sets the a custom collection of <see cref="MdMetaDataItem"/>.
+        /// Gets or sets the a custom collection of <see cref="MdDataItem"/>.
         /// </summary>
-        public IEnumerable<MdMetaDataItem> Items { get; set; }
+        public IEnumerable<MdDataItem> Items { get; set; }
     }
 }

@@ -40,6 +40,20 @@ namespace ExamineMd
         }
 
         /// <summary>
+        /// Maps an examine <see cref="SearchResult"/> to a <see cref="IMdPath"/>.
+        /// </summary>
+        /// <param name="result">
+        /// The result.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMdPath"/>.
+        /// </returns>
+        public static IMdPath ToMdPath(this SearchResult result)
+        {
+            return new MdPath(result.FieldAsString("pathKey"), result.FieldAsString("path").EnsureBackSlashes());
+        }
+
+        /// <summary>
         /// Returns the field as a string.
         /// </summary>
         /// <param name="result">
@@ -86,18 +100,18 @@ namespace ExamineMd
         /// <returns>
         /// The <see cref="IEnumerable{IMdMetaItem}"/>.
         /// </returns>
-        private static IMdFileMetaData FieldAsMetaItemCollection(this SearchResult result, string fieldName = "metaData")
+        private static IMdMetaData FieldAsMetaItemCollection(this SearchResult result, string fieldName = "metaData")
         {
             return !result.Fields.ContainsKey(fieldName)
-                       ? new MdFileMetaData()
+                       ? new MdMetaData()
                        {
                            MetaDescription = string.Empty,
                            PageTitle = string.Empty,
                            Relevance = string.Empty,
                            Revision = string.Empty,           
-                           Items   = Enumerable.Empty<MdMetaDataItem>()
+                           Items   = Enumerable.Empty<MdDataItem>()
                        }
-                       : JsonConvert.DeserializeObject<MdFileMetaData>(result.Fields[fieldName]);
+                       : JsonConvert.DeserializeObject<MdMetaData>(result.Fields[fieldName]);
         }
     }
 }

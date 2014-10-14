@@ -1,4 +1,4 @@
-﻿namespace ExamineMd.Services
+﻿namespace ExamineMd.Factories
 {
     using System.Collections;
     using System.IO;
@@ -6,7 +6,7 @@
     using System.Xml.Linq;
 
     using ExamineMd.Models;
-    using ExamineMd.Search;
+    using ExamineMd.Services;
 
     /// <summary>
     /// The examine md file factory.
@@ -64,7 +64,7 @@
         {
             return new MdDirectory()
             {
-                Path = directory.FullName.RelativePathFromFileStoreRoot(),
+                Path = new MdPath(directory.FullName.RelativePathFromFileStoreRoot()),
                 DirectoryInfo = directory
             };
         }
@@ -78,9 +78,9 @@
         /// <returns>
         /// The <see cref="IEnumerable"/>.
         /// </returns>
-        private static IMdFileMetaData BuildMetaData(FileInfo md)
+        private static IMdMetaData BuildMetaData(FileInfo md)
         {
-            var meta = new MdFileMetaData() { Items = Enumerable.Empty<MdMetaDataItem>() };
+            var meta = new MdMetaData() { Items = Enumerable.Empty<MdDataItem>() };
          
             var fullName = md.FullName;
 
@@ -102,7 +102,7 @@
             meta.Revision = root.GetSafeAttribute("revision");
 
             meta.Items = root.Descendants("item")
-                .Select(item => new MdMetaDataItem()
+                .Select(item => new MdDataItem()
                 {
                     Group = item.Attribute("group").Value, 
                     Alias = item.Attribute("alias").Value, 

@@ -1,7 +1,5 @@
 ﻿namespace ExamineMd.Models
 {
-    using System.Collections.Generic;
-
     /// <summary>
     /// Defines the VirtualMarkdownListing
     /// </summary>
@@ -18,13 +16,8 @@
         int MaxListCount { get; set; }
 
         /// <summary>
-        /// Gets or sets the starting path.  
+        /// Gets the starting path.  
         /// </summary>
-        string StartingPath { get; set; }
-
-        /// <summary>
-        /// Gets the collection of <see cref="IVirtualMarkdownDocument"/>
-        /// </summary>
-        IEnumerable<IVirtualMarkdownDocument> Documents { get; } 
+        IMdPath StartingPath { get; }
     }
 }

@@ -6,6 +6,7 @@
     using System.IO;
     using System.Linq;
 
+    using ExamineMd.Factories;
     using ExamineMd.Models;
 
     using Umbraco.Core.IO;

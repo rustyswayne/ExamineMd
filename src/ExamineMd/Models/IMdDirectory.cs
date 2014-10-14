@@ -10,7 +10,7 @@
         /// <summary>
         /// Gets or sets the path.
         /// </summary>
-        string Path { get; set; }
+        IMdPath Path { get; set; }
 
         /// <summary>
         /// Gets or sets the directory info.

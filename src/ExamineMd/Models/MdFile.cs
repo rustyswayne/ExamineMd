@@ -11,7 +11,7 @@
         /// Initializes a new instance of the <see cref="MdFile"/> class.
         /// </summary>
         public MdFile()
-            : this(new MdFileMetaData())
+            : this(new MdMetaData())
         {
         }
 
@@ -21,7 +21,7 @@
         /// <param name="metaData">
         /// The meta data.
         /// </param>
-        internal MdFile(IMdFileMetaData metaData)
+        internal MdFile(IMdMetaData metaData)
         {
             Mandate.ParameterNotNull(metaData, "metaData");
 
@@ -56,7 +56,7 @@
         /// <summary>
         /// Gets or sets the meta data data.
         /// </summary>
-        public IMdFileMetaData MetaData { get; set; }
+        public IMdMetaData MetaData { get; set; }
 
         /// <summary>
         /// Gets or sets the date created.

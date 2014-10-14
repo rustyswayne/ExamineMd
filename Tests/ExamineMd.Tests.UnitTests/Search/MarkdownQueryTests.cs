@@ -19,7 +19,7 @@
             //// Arrange
             const int FileCount = 48;
             //// Act
-            var files = _markdownQuery.GetAll();
+            var files = _markdownQuery.Files.GetAll();
             this.ShowFileStoreInfo(files);
 
             //// Assert
@@ -37,7 +37,7 @@
             const string Path = "~/developers";
 
             //// Act
-            var files = _markdownQuery.List(Path).ToArray();
+            var files = _markdownQuery.Files.List(Path).ToArray();
             this.ShowFileStoreInfo(files);
 
             //// Assert
@@ -55,7 +55,7 @@
             const string Path = "~/";
 
             //// Act
-            var files = _markdownQuery.List(Path).ToArray();
+            var files = _markdownQuery.Files.List(Path).ToArray();
             this.ShowFileStoreInfo(files);
 
             //// Assert
@@ -73,7 +73,7 @@
             const string Path = "~/api/basket";
 
             //// Act
-            var files = _markdownQuery.List(Path).ToArray();
+            var files = _markdownQuery.Files.List(Path).ToArray();
             this.ShowFileStoreInfo(files);
 
             //// Assert
@@ -88,7 +88,7 @@
             var searchUrl = "/developers/jquery-standards";
 
             //// Act
-            var file = _markdownQuery.GetByUrl(searchUrl);
+            var file = _markdownQuery.Files.GetByUrl(searchUrl);
 
             //// Assert
             Assert.NotNull(file, "File was null");
@@ -98,14 +98,14 @@
         public void Can_Search_For_Md_Files()
         {
 
-            var files = _markdownQuery.Search("AngularJS");
+            var files = _markdownQuery.Files.Search("AngularJS");
             this.ShowFileStoreInfo(files);
         }
 
         [Test]
         public void Can_Search_For_Md_Files_With_Path()
         {
-            var files = _markdownQuery.Search("/provider", "api");
+            var files = _markdownQuery.Files.Search("/provider", "api");
             this.ShowFileStoreInfo(files);
         }
 
@@ -117,7 +117,7 @@
             const string FileName = "merchello-history.md";
 
             //// Act
-            var file = _markdownQuery.Get(Path, FileName);
+            var file = _markdownQuery.Files.Get(Path, FileName);
 
             //// Assert
             Assert.NotNull(file);
@@ -129,7 +129,7 @@
             //// Arrange
             const int FileCount = 1;
             //// Act
-            var files = _markdownQuery.List("/");
+            var files = _markdownQuery.Files.List("/");
             this.ShowFileStoreInfo(files);
 
             //// Assert
@@ -143,7 +143,7 @@
             //// Arrange
             const int FileCount = 48;
             //// Act
-            var files = _markdownQuery.List("/", true);
+            var files = _markdownQuery.Files.List("/", true);
             this.ShowFileStoreInfo(files);
 
             //// Assert
@@ -157,7 +157,7 @@
             //// Arrange
             const int FileCount = 2;
             //// Act
-            var files = _markdownQuery.List("/api");
+            var files = _markdownQuery.Files.List("/api");
             this.ShowFileStoreInfo(files);
 
             //// Assert
@@ -172,12 +172,26 @@
             //// Arrange
             const int FileCount = 23;
             //// Act
-            var files = _markdownQuery.List("/api", true);
+            var files = _markdownQuery.Files.List("/api", true);
             this.ShowFileStoreInfo(files);
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files were found in the repository");
             Assert.AreEqual(FileCount, files.Count());
+        }
+
+        [Test]
+        public void Can_List_All_Paths()
+        {
+            //// Arrange
+            const int FileCount = 10;
+
+            //// Act
+            var paths = _markdownQuery.Paths.GetAll();
+
+            //// Assert
+            Assert.IsTrue(paths.Any());
+            Assert.AreEqual(FileCount, paths.Count());
         }
     }
 }

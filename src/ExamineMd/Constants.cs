@@ -52,15 +52,45 @@
         }
 
         /// <summary>
-        /// Gets the ExamineMd content type alias.
+        /// The content types.
         /// </summary>
-        public static string ExamineMdContentTypeAlias
+        public static class ContentTypes
         {
-            get
+            /// <summary>
+            /// Gets the ExamineMd content type alias.
+            /// </summary>
+            public static string ExamineMd
             {
-                return "ExamineMd";
+                get
+                {
+                    return "ExamineMd";
+                }
+            }
+
+            /// <summary>
+            /// Gets the content type for an ExamineMd document.
+            /// </summary>
+            public static string ExamineMdMarkdownDocument
+            {
+                get
+                {
+                    return "ExamineMdMarkdownDocument";
+                }
+            }
+
+
+            /// <summary>
+            /// Gets the content type for an ExamineMd listing.
+            /// </summary>
+            public static string ExamineMdMarkdownListing
+            {
+                get
+                {
+                    return "ExamineMdMarkdownListing";
+                }
             }
         }
+        
 
         /// <summary>
         /// Gets the path to the App_Pluggins/ExamineMd folder.
@@ -79,13 +109,24 @@
         public static class IndexTypes
         {
             /// <summary>
-            /// Gets the Examine IndexType for an ExamineMd document.
+            /// Gets the Examine IndexType for an ExamineMd markdown documents.
             /// </summary>
             public static string ExamineMdDocument
             {
                 get
                 {
                     return "ExamineMdDocument";
+                }
+            }
+
+            /// <summary>
+            /// Gets the Examine IndexType for an ExamineMd document directory.
+            /// </summary>
+            public static string ExamineMdDirectory
+            {
+                get
+                {
+                    return "ExamineMdDirectory";
                 }
             }
         }

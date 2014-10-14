@@ -42,7 +42,7 @@
             </div>
             <div class="col-xs-4">
                 <h3>Directories</h3>
-                @{
+                @*@{
                     var query = new MarkdownQuery();
 
                     var files = query.GetAll().ToArray();
@@ -54,7 +54,7 @@
                             <li><a href="@md.Url">@md.Name</a></li>
                         }
                     </ul>
-                }
+                }*@
             </div>
         </div>
     </div>

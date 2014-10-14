@@ -10,7 +10,7 @@
         /// <summary>
         /// Gets or sets the path.
         /// </summary>
-        public string Path { get; set; }
+        public IMdPath Path { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="DirectoryInfo"/>.

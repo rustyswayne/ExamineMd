@@ -7,11 +7,12 @@
  
 
 @{
-    if (Model.Documents.Any())
+    if (Model.Children.Any())
     {
         <ul>
-            @foreach (var doc in Model.Documents)
+            @foreach (var doc in Model.Children)
             {
+                
                 <li>
                     <h3>
                         <a href="@doc.Url">@doc.Name</a>

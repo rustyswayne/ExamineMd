@@ -52,6 +52,34 @@
         }
 
         /// <summary>
+        /// Replaces \ with / in a path.
+        /// </summary>
+        /// <param name="value">
+        /// The value to replace backslashes.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string EnsureForwardSlashes(this string value)
+        {
+            return value.Replace("\\", "/");
+        }
+
+        /// <summary>
+        /// Replaces \ with / in a path.
+        /// </summary>
+        /// <param name="value">
+        /// The value to replace forwardslashes.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string EnsureBackSlashes(this string value)
+        {
+            return value.Replace("/", "\\");
+        }
+
+        /// <summary>
         /// Ensures a string both starts and ends with a character.
         /// </summary>
         /// <param name="input">

@@ -28,7 +28,7 @@
         public MdPath(string key, string path)
         {
             this.Key = key;
-            this.Value = path.IsNullOrWhiteSpace() ? "\\" : path;
+            this.Value = path.IsNullOrWhiteSpace() ? "\\" : path.EnsureBackSlashes();
         }
 
 

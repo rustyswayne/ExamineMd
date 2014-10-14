@@ -26,17 +26,18 @@
         /// <param name="content">
         /// The content.
         /// </param>
+        /// <param name="parent">
+        /// The parent List.
+        /// </param>
         /// <param name="md">
         /// The <see cref="IMdFile"/>
         /// </param>
-        public VirtualMarkdownDocument(IPublishedContent content, IMdFile md)
-            : base(content)
+        public VirtualMarkdownDocument(IPublishedContent content, IPublishedContent parent, IMdFile md)
+            : base(content, parent)
         {
             Mandate.ParameterNotNull(md, "md");
 
             Markdown = md;
-
-            this.Initialize();
         }
 
         /// <summary>
@@ -93,26 +94,6 @@
         }
 
         /// <summary>
-        /// Gets the content type which is N/A - so is ALWAYS null
-        /// </summary>
-        public override PublishedContentType ContentType
-        {
-            get { return null; }
-        }
-
-        ///// <summary>
-        ///// Gets the parent.
-        ///// </summary>
-        ///// <remarks>
-        ///// This is always the <see cref="IPublishedContent"/> of the rendering node
-        ///// </remarks>
-        ////// TODO - this should go to the parent list
-        //public override IPublishedContent Parent
-        //{
-        //    get { return Content; }
-        //}
-
-        /// <summary>
         /// Gets the id.
         /// </summary>
         /// <remarks>
@@ -151,50 +132,10 @@
         /// </summary>
         public override string DocumentTypeAlias
         {
-            get { return Constants.ExamineMdContentTypeAlias; }
-        }
-
-        /// <summary>
-        /// Gets the document type id.
-        /// </summary>
-        public override int DocumentTypeId
-        {
-            get { return int.MaxValue; }
-        }
-
-        /// <summary>
-        /// Gets the Umbraco path.
-        /// </summary>
-        public override string Path
-        {
-            get { return Content.Path.EnsureEndsWith(',') + Id; }
-        }
-
-        /// <summary>
-        /// Gets the Umbraco level.
-        /// </summary>
-        public override int Level
-        {
-            get { return Content.Level + 1; }
+            get { return Constants.ContentTypes.ExamineMdMarkdownDocument; }
         }
 
         #endregion
 
-        /// <summary>
-        /// Performs Initialization
-        /// </summary>
-        private void Initialize()
-        {
-
-            HeadleLine = Markdown.Title;
-
-            PageTitle = string.IsNullOrEmpty(Markdown.MetaData.PageTitle)
-                                 ? Markdown.Title
-                                 : Markdown.MetaData.PageTitle;
-
-            MetaDescription = string.IsNullOrEmpty(Markdown.MetaData.MetaDescription)
-                                ? string.Empty
-                                : Markdown.MetaData.MetaDescription;
-        }
     }
 }

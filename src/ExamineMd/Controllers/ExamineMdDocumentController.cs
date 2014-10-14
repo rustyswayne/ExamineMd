@@ -5,6 +5,8 @@
     using ExamineMd.Models;
     using ExamineMd.Search;
 
+    using umbraco.cms.businesslogic.datatype.controls;
+
     using Umbraco.Core;
     using Umbraco.Web.Models;
     using Umbraco.Web.Mvc;
@@ -31,11 +33,7 @@
         {
             if (path == null) return RenderView(model, null);
 
-            path = path.EnsureStartsWith('/');
-
-            var md = MarkdownQuery.GetByUrl(path);
-
-            return RenderView(model, md);
+            return RenderView(model, path);
         }
 
 
@@ -45,13 +43,13 @@
         /// <param name="model">
         /// The model.
         /// </param>
-        /// <param name="md">The <see cref="IMdFile"/></param>
+        /// <param name="url">The virtual url of the document</param>
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
-        private ActionResult RenderView(IRenderModel model, IMdFile md)
+        private ActionResult RenderView(IRenderModel model, string url)
         {
-            var virtualContent = new VirtualMarkdownDocument(model.Content, md);
+            var virtualContent = VirtualContentFactory.BuildDocument(model, url);
 
             return this.View(PathHelper.GetViewPath("Document"), virtualContent);
         }

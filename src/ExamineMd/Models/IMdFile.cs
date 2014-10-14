@@ -35,7 +35,7 @@
         /// <summary>
         /// Gets or sets the meta data.
         /// </summary>
-        IMdFileMetaData MetaData { get; set; }
+        IMdMetaData MetaData { get; set; }
             
         /// <summary>
         /// Gets or sets the date created.

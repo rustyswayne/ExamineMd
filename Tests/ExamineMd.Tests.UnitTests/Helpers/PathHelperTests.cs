@@ -32,7 +32,7 @@
 
             // the url nees to be /api/merchellocontext/merchellocontext-current-cache - but the query object
             // needs to remove it
-            var file = query.GetByUrl("/document/api/merchellocontext/merchellocontext-current-cache");
+            var file = query.Files.GetByUrl("/document/api/merchellocontext/merchellocontext-current-cache");
             Assert.NotNull(file, "File was null");
             var calc = file.GetContentLevel(1);
 
