@@ -12,8 +12,13 @@
         <ul>
             @foreach (var doc in Model.Documents)
             {
+                var brief = doc.Markdown.MetaData.Items.FirstOrDefault(x => x.Alias == "brief");
+                
                 <li>
-                    <h3><a href="@doc.Url">@doc.Name</a></h3>
+                    <h3>
+                        <a href="@doc.Url">@doc.Name</a>
+                        <p>This is the brief content</p>
+                    </h3>
                 </li>
             }
         </ul>

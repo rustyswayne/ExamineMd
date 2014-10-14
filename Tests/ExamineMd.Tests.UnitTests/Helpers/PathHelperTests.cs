@@ -12,7 +12,7 @@
         public void Can_Get_Default_Route_Name()
         {
             //// Arrange
-            const string Expected = "documentation";
+            const string Expected = "document";
 
             //// Act
             var routeName = Constants.MarkdownDocumentRoute;
@@ -32,7 +32,7 @@
 
             // the url nees to be /api/merchellocontext/merchellocontext-current-cache - but the query object
             // needs to remove it
-            var file = query.GetByUrl("/documentation/api/merchellocontext/merchellocontext-current-cache");
+            var file = query.GetByUrl("/document/api/merchellocontext/merchellocontext-current-cache");
             Assert.NotNull(file, "File was null");
             var calc = file.GetContentLevel(1);
 
