@@ -98,7 +98,7 @@
         /// <returns>
         /// A collection of all paths.
         /// </returns>
-        IEnumerable<string> GetAllPaths();
+        IEnumerable<IMdPath> GetAllPaths();
 
     }
 }

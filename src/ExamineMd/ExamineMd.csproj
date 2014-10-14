@@ -230,7 +230,6 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\Api\ExamineMdPropertyEditorsController.cs" />
-    <Compile Include="Controllers\Api\SearchApiController.cs" />
     <Compile Include="Controllers\Api\RebuildIndexApiController.cs" />
     <Compile Include="Controllers\ExamineMdControllerBase.cs" />
     <Compile Include="Controllers\ExamineMdDocumentController.cs" />

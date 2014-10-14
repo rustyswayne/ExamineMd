@@ -82,23 +82,13 @@
         {
             get
             {
-                //return Markdown.Path.Value.Equals("/", StringComparison.InvariantCultureIgnoreCase)
-                //    ? Content.Url.EnsureNotEndsWith('/') + DocumentsRoute + UrlName
-                //    : Content.Url.Substring(0, Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase)).EnsureNotEndsWith('/') + Markdown.SearchableUrl();
-
-                var url = Content.Url;
-
                 var routeIndex = Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase);
-
                 if (routeIndex <= 0)
                 {
-                    url = Content.Url.EnsureNotEndsWith('/') + DocumentsRoute + UrlName;
+                    return Content.Url.EnsureNotEndsWith('/') + DocumentsRoute.EnsureNotEndsWith('/') + Markdown.SearchableUrl();
                 }
-                else
-                {
-                    url = Content.Url.Substring(0, Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase) + DocumentsRoute.Length).EnsureNotEndsWith('/') + Markdown.SearchableUrl();
-                }
-                return url;
+
+                return this.Content.Url.Substring(0, this.Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase) + DocumentsRoute.Length).EnsureNotEndsWith('/') + this.Markdown.SearchableUrl();
             }
         }
 

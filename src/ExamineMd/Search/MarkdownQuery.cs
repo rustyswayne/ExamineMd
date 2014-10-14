@@ -198,9 +198,9 @@
         /// <returns>
         /// A collection of all paths.
         /// </returns>
-        public IEnumerable<string> GetAllPaths()
+        public IEnumerable<IMdPath> GetAllPaths()
         {
-            return _fileService.Value.GetDirectories().Select(x => x.Path);
+            return _fileService.Value.GetDirectories().Select(x => new MdPath(x.Path));
         }
 
         /// <summary>

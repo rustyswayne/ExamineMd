@@ -9,8 +9,8 @@ level: 2
 Adds either IProduct or IProductVariant to the basket item collection.  Overloads exist for overriding quantity and name.  Optionally you can also supply an ExtendedData collection of key-value pairs.
 
 ##Dependencies##
-- [IProduct](/api/interfaces/iproduct/)
-- [IProductVariant](/api/interfaces/iproductvariant/)
+- [IProduct](../interfaces/iproduct/)
+- [IProductVariant](../interfaces/iproductvariant/)
 
 
 ##Usage##
