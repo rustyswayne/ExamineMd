@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
 
@@ -12,6 +13,10 @@
 
     using ExamineMd.Models;
     using ExamineMd.Services;
+
+    using Umbraco.Core;
+
+    using Constants = ExamineMd.Constants; 
 
     /// <summary>
     /// The markdown query.
@@ -138,7 +143,9 @@
         /// <param name="path">
         /// The path.
         /// </param>
-        /// <param name="includeChildPaths">If true, the search returns all document on child paths as well</param>
+        /// <param name="includeChildPaths">
+        /// Optional parameter to list all documents with paths matching
+        /// </param>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
@@ -146,13 +153,29 @@
         {
             var searchPath = PathHelper.ValidateSearchablePath(path);
 
-            var criteria = includeChildPaths
-                ? GetBaseSearchCriteria()
-                : _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
+            ISearchCriteria criteria;
 
-            criteria.Field("pathSearchable", searchPath);
+            if (includeChildPaths)
+            {
+                criteria = this.GetBaseSearchCriteria();
 
-                return _searchProvider.Search(criteria).Select(x => x.ToMdFile());            
+                if (searchPath.Equals("root", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    criteria.Field("allDocs", "1");
+                }
+                else
+                {
+                    criteria.Field("pathSearchable", searchPath);
+                }
+            }
+            else
+            {
+                criteria = _searchProvider.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
+                criteria.Field("pathKey", SearchHelper.GetPathKey(path));
+            }
+
+
+            return _searchProvider.Search(criteria).Select(x => x.ToMdFile());
         }
 
         /// <summary>
@@ -175,9 +198,9 @@
         /// <returns>
         /// A collection of all paths.
         /// </returns>
-        public IEnumerable<string> GetAllPaths()
+        public IEnumerable<IMdPath> GetAllPaths()
         {
-            return _fileService.Value.GetDirectories().Select(x => x.Path);
+            return _fileService.Value.GetDirectories().Select(x => new MdPath(x.Path));
         }
 
         /// <summary>

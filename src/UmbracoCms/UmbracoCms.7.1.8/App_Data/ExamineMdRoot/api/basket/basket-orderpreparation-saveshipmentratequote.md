@@ -11,7 +11,7 @@ This routine applies the provided shipping method to the shipment in the basket.
 Note that the shipping method is stored as a line item in the OrderPreparation.ItemCache collection.  It is not persisted to the original basket line items.
 
 ##Dependencies##
-- [IShipmentRateQuote](/api/interfaces/ishipmentratequote/)
+- [IShipmentRateQuote](../interfaces/ishipmentratequote/)
 
 ##Usage##
 	// build a list of available shipping methods and rates

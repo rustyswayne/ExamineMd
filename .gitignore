@@ -25,3 +25,7 @@ Tests/ExamineMd.Tests.UnitTests/bin/
 src/ExamineMd/obj/
 src/ExamineMd.Web.UI/Bin/
 *.suo
+src/UmbracoCms/UmbracoCms.7.1.8/App_Data/TEMP/ExamineIndexes/
+src/UmbracoCms/UmbracoCms.7.1.8/App_Data/TEMP/
+src/UmbracoCms/UmbracoCms.7.1.8/App_Data/Logs/
+src/UmbracoCms/UmbracoCms.7.1.8/App_Data/umbraco.config

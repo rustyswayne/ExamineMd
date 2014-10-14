@@ -1,16 +1,6 @@
-﻿namespace ExamineMd.Search
+﻿namespace ExamineMd
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text.RegularExpressions;
-
-    using Examine;
-    using Examine.LuceneEngine.SearchCriteria;
-    using Examine.Providers;
-    using Examine.SearchCriteria;
-
-    using ExamineMd.Models;
 
     using Umbraco.Core;
 
@@ -37,6 +27,20 @@
             if (path.EndsWith("/")) path = path.Remove(path.LastIndexOf('/'), 1);
 
             return string.Format("{0}{1}", path.ToLowerInvariant(), fileName.ToLowerInvariant()).ToMd5();
+        }
+
+        /// <summary>
+        /// Gets a IMdPath key.
+        /// </summary>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        internal static string GetPathKey(string path)
+        {
+            return PathHelper.ValidateSearchablePath(path).ToLowerInvariant().ToMd5();
         }
 
         /// <summary>

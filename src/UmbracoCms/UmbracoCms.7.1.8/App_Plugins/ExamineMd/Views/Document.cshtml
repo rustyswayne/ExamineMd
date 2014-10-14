@@ -4,5 +4,8 @@
 @{
     Layout = "Base.cshtml";
 }
+@Html.ExamineMdPartial("BreadCrumbNavBar", new ViewDataDictionary(new MdPath(Model.Markdown.Path.Value)))
+
+<h2>@Model.HeadleLine</h2>
  
-@Model.Markdown.BodyHtml()
+@Model.BodyHtml()

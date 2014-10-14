@@ -196,9 +196,9 @@
         /// </returns>
         internal static string GetSearchableUrl(string path, string fileName)
         {
-            if (string.IsNullOrEmpty(fileName)) return string.Empty;
-
-            return string.Format("{0}{1}", ValidateDocumentPath(path).EnsureForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
+            return string.IsNullOrEmpty(fileName) ? 
+                string.Empty : 
+                string.Format("{0}{1}", ValidateDocumentPath(path).EnsureForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
         }
 
         /// <summary>
@@ -249,5 +249,42 @@
 
             return contentLevel + folders.Count();
         }
+
+        /// <summary>
+        /// Gets the absolute absolut url.
+        /// </summary>
+        /// <param name="relativeUrl">
+        /// The relative url.
+        /// </param>
+        /// <param name="queryString">
+        /// The query string.
+        /// </param>
+        /// <returns>
+        /// The absolute url.
+        /// </returns>
+        /// <exception cref="NullReferenceException">
+        /// Throws a null reference exception if the HttpContext is null.
+        /// </exception>
+        /// <remarks>
+        /// https://github.com/rustyswayne/Buzz.Hybrid/blob/master/src/Buzz.Hybrid/HttpContextExtensions.cs
+        /// </remarks>
+        internal static string MakeAbsolutUrl(string relativeUrl, string queryString)
+        {
+            if (relativeUrl.StartsWith("http")) return relativeUrl;
+
+            var context = HttpContext.Current;
+            if (context == null) throw new NullReferenceException("The HttpContext is null");
+
+            var protocol = context.Request.IsSecureConnection ? "https://" : "http://";
+            var host = context.Request.ServerVariables["SERVER_NAME"];
+            var port = context.Request.ServerVariables["SERVER_PORT"];
+            port = port == "80" ? string.Empty : string.Format(":{0}", port);
+
+            if (!relativeUrl.StartsWith("/")) relativeUrl = string.Format("/{0}", relativeUrl);
+            if (!string.IsNullOrEmpty(queryString) && !queryString.StartsWith("?")) queryString = string.Format("?{0}", queryString);
+
+            return string.Format("{0}{1}{2}{3}{4}", protocol, host, port, relativeUrl, queryString);
+        } 
+
     }
 }

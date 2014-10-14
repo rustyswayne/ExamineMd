@@ -9,10 +9,10 @@ level: 2
 Allows the developer to supply a custom class that filters line items in a custom way. 
 
 ##Dependencies##
-- [ILineItemVisitor](/api/interfaces/ilineitemvisitor/)
+- [ILineItemVisitor](../interfaces/ilineitemvisitor/)
  
 ##Usage##
-Basket.Accept([ILineItemVisitor](/api/interfaces/ilineitemvisitor/) visitor)
+Basket.Accept([ILineItemVisitor](../interfaces/ilineitemvisitor/) visitor)
 
 ##Returns##
 void

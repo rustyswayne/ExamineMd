@@ -76,6 +76,9 @@
         /// <param name="path">
         /// The path.
         /// </param>
+        /// <param name="includeChildPaths">
+        /// Optional parameter to list all documents with paths matching
+        /// </param>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
@@ -95,7 +98,7 @@
         /// <returns>
         /// A collection of all paths.
         /// </returns>
-        IEnumerable<string> GetAllPaths();
+        IEnumerable<IMdPath> GetAllPaths();
 
     }
 }

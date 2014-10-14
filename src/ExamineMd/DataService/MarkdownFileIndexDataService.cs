@@ -1,6 +1,7 @@
 ﻿namespace ExamineMd.DataService
 {
     using System.Collections.Generic;
+    using System.Globalization;
 
     using Examine;
     using Examine.LuceneEngine;
@@ -59,6 +60,7 @@
                                     { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
                                     { "path", string.IsNullOrEmpty(md.Path.Value) ? "root" : md.Path.Value.EnsureForwardSlashes() },
                                     { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path.Value) },
+                                    { "pathKey", md.Path.Key },
                                     { "searchableUrl",  PathHelper.GetSearchableUrl(md.Path.Value, md.FileName) },
                                     { "metaData", JsonConvert.SerializeObject(md.MetaData) },
                                     { "allDocs", "1" },

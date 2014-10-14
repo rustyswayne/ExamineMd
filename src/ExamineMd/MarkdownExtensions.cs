@@ -67,6 +67,24 @@
         }
 
         /// <summary>
+        /// Transforms the file body text into Html using MarkdownAsHtmlString Transformation.
+        /// </summary>
+        /// <param name="document">
+        /// The document.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHtmlString"/>.
+        /// </returns>
+        public static IHtmlString BodyHtml(this IVirtualMarkdownDocument document)
+        {
+            var formatter = GetMarkdownFormatter();
+            formatter.UrlBaseLocation = PathHelper.MakeAbsolutUrl(document.Url, string.Empty);
+            formatter.UrlRootLocation = PathHelper.MakeAbsolutUrl("/", string.Empty);
+
+            return string.IsNullOrEmpty(document.Markdown.Body) ? MvcHtmlString.Empty : new MvcHtmlString(formatter.Transform(document.Markdown.Body));
+        }
+
+        /// <summary>
         /// Transforms the file body text into Html using MarkdownAsHtmlString Transformation
         /// </summary>
         /// <param name="file">
@@ -75,30 +93,30 @@
         /// <returns>
         /// The <see cref="IHtmlString"/>.
         /// </returns>
-        public static IHtmlString BodyHtml(this IMdFile file)
+        internal static IHtmlString BodyHtml(this IMdFile file)
         {
             var formatter = GetMarkdownFormatter();
 
             return string.IsNullOrEmpty(file.Body) ? MvcHtmlString.Empty : new MvcHtmlString(formatter.Transform(file.Body));
         }
 
-        /// <summary>
-        /// Converts the body to an Html string
-        /// </summary>
-        /// <param name="file">
-        /// The file.
-        /// </param>
-        /// <returns>
-        /// The <see cref="IMdFile"/>.
-        /// </returns>
-        /// <remarks>
-        /// This is internally used by <see cref="SearchApiController"/> to minimize the response size.
-        /// </remarks>
-        internal static IMdFile ConvertBody(this IMdFile file)
-        {
-            file.Body = file.BodyHtml().ToHtmlString();
-            return file;
-        }
+        ///// <summary>
+        ///// Converts the body to an Html string
+        ///// </summary>
+        ///// <param name="file">
+        ///// The file.
+        ///// </param>
+        ///// <returns>
+        ///// The <see cref="IMdFile"/>.
+        ///// </returns>
+        ///// <remarks>
+        ///// This is internally used by <see cref="SearchApiController"/> to minimize the response size.
+        ///// </remarks>
+        //internal static IMdFile ConvertBody(this IMdFile file)
+        //{
+        //    file.Body = file.BodyHtml().ToHtmlString();
+        //    return file;
+        //}
 
         /// <summary>
         /// The get markdown formatter.
@@ -111,7 +129,8 @@
             var formatter = new Markdown()
                     {
                         ExtraMode = true,
-                        SafeMode = false
+                        SafeMode = false,
+                        NewWindowForExternalLinks = true
                     };
 
             formatter.PrepareLink += PrepareLink;
@@ -130,11 +149,7 @@
         /// </returns>
         private static bool PrepareLink(HtmlTag htmlTag)
         {
-            var basePath = Constants.MarkdownDocumentRoute;
-            var href = htmlTag.attributes["href"];
-            href = string.Format("{0}{1}", basePath.EnsureNotEndsWith('/'), href);
-            htmlTag.attributes["href"] = href;
-
+            htmlTag.attributes["class"] = "markdown-link";
             return true;
         }
     }
