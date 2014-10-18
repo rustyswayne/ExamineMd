@@ -5,12 +5,20 @@
     /// <summary>
     /// Represents a MdDirectory.
     /// </summary>
-    internal class MdDirectory : IMdDirectory
+    internal class MdDirectory : MdEntity, IMdDirectory
     {
         /// <summary>
-        /// Gets or sets the path.
+        /// Initializes a new instance of the <see cref="MdDirectory"/> class.
         /// </summary>
-        public IMdPath Path { get; set; }
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        public MdDirectory(IMdPath path)
+            : base(path.Key)
+        {
+            Mandate.ParameterNotNull(path, "path");
+            Path = path;
+        }
 
         /// <summary>
         /// Gets or sets the <see cref="DirectoryInfo"/>.

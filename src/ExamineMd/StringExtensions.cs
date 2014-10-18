@@ -5,6 +5,8 @@
     using System.Linq;
     using System.Web;
 
+    using Lucene.Net.Search;
+
     using Umbraco.Core;
 
     /// <summary>
@@ -112,6 +114,23 @@
         {
             return !input.EndsWith(value.ToString(CultureInfo.InvariantCulture)) ? input : 
                 input.Remove(input.LastIndexOf(value), 1);
+        }
+
+        /// <summary>
+        /// Ensures a string does not end with a string.
+        /// </summary>
+        /// <param name="input">
+        /// The input.
+        /// </param>
+        /// <param name="value">
+        /// The value.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string EnsureNotEndsWith(this string input, string value)
+        {
+            return !input.EndsWith(value) ? input : input.Remove(input.LastIndexOf(value, StringComparison.OrdinalIgnoreCase), value.Length);
         }
 
         /// <summary>

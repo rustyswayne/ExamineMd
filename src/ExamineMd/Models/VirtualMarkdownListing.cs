@@ -16,15 +16,11 @@
     /// </summary>
     public class VirtualMarkdownListing : BaseViewModel, IVirtualMarkdownListing
     {
-        /// <summary>
-        /// The document route.
-        /// </summary>
-        private static readonly string ListingRoute = Constants.MarkdownListingRoute.EnsureStartsAndEndsWith('/');
 
         /// <summary>
         /// The Documents.
         /// </summary>
-        private readonly IEnumerable<IPublishedContent> _children; 
+        private readonly Lazy<IEnumerable<IPublishedContent>> _children;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VirtualMarkdownListing"/> class.
@@ -35,15 +31,16 @@
         /// <param name="parent">
         /// The parent node (can be virtual)
         /// </param>
+        /// <param name="path">The <see cref="IMdPath"/> to this virtual content</param>
         /// <param name="children">
         /// The collection of <see cref="IPublishedContent"/> children
         /// </param>
-        public VirtualMarkdownListing(IPublishedContent content, IPublishedContent parent, IEnumerable<IPublishedContent> children)
+        public VirtualMarkdownListing(IPublishedContent content, IPublishedContent parent, IMdPath path, Func<string, IEnumerable<IPublishedContent>> children)
             : base(content, parent)
         {
             Mandate.ParameterNotNull(children, "children");
 
-            _children = children;
+            _children = new Lazy<IEnumerable<IPublishedContent>>(() => children(path.Key));
         }
 
         /// <summary>
@@ -55,17 +52,6 @@
         /// Gets or sets the max list count.
         /// </summary>
         public int MaxListCount { get; set; }
-
-        /// <summary>
-        /// Gets the starting path.
-        /// </summary>
-        public IMdPath StartingPath 
-        {
-            get
-            {
-                return new MdPath(RootContent.GetPropertyValue<string>("startingPath").EnsureBackSlashes());      
-            } 
-        }
 
         #region IPublishedContent
 
@@ -142,7 +128,7 @@
         {
             get
             {
-                return _children;
+                return _children.Value;
             }
         }
 

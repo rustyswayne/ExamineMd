@@ -32,6 +32,17 @@
         IEnumerable<IMdPath> GetByPathKey(string pathKey);
 
         /// <summary>
+        /// Gets a <see cref="IMdPath"/> by it's Url.
+        /// </summary>
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMdPath"/>.
+        /// </returns>
+        IMdPath GetByUrl(string url); 
+            
+        /// <summary>
         /// Gets a collection of all paths.
         /// </summary>
         /// <returns>

@@ -52,7 +52,7 @@
 
             path = path.StartsWith(startPath, StringComparison.InvariantCultureIgnoreCase) ? path : startPath;
 
-            var virtualContent = VirtualContentFactory.BuildListing(model, new MdPath(path));
+            var virtualContent = VirtualContentFactory.Build(model, new MdPath(path));
                 
                 //new VirtualMarkdownListing(model.Content, documents);
 

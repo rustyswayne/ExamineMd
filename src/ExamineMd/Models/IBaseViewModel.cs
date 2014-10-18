@@ -12,6 +12,11 @@
         /// </summary>
         IPublishedContent RootContent { get; }
 
+          /// <summary>
+        /// Gets the starting path.
+        /// </summary>
+        IMdPath StartingPath { get; }
+
         /// <summary>
         /// Gets or sets the HTML Page Title.
         /// </summary>

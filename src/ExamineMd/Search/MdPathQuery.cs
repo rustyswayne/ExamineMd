@@ -56,6 +56,24 @@
             return Searcher.Search(criteria).Select(x => x.ToMdPath());
         }
 
+
+        /// <summary>
+        /// Gets a <see cref="IMdPath"/> by it's Url.
+        /// </summary>
+        /// <param name="url">
+        /// The url.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMdPath"/>.
+        /// </returns>
+        public IMdPath GetByUrl(string url)
+        {
+            var criteria = this.Searcher.CreateSearchCriteria();
+            criteria.Field("pathSearchable", PathHelper.ValidateSearchablePath(url));
+
+            return Searcher.Search(criteria).Select(x => x.ToMdPath()).FirstOrDefault();
+        }
+
         /// <summary>
         /// Gets a collection of all paths.
         /// </summary>

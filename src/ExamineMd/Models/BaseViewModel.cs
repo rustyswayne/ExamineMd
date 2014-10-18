@@ -15,6 +15,7 @@
         /// </summary>
         private readonly IPublishedContent _parent;
 
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseViewModel"/> class.
         /// </summary>
@@ -28,6 +29,7 @@
             : base(content)
         {
             Mandate.ParameterNotNull(parent, "parent");
+
             _parent = parent;
         }
 
@@ -41,6 +43,17 @@
             {
                 return Content.AncestorOrSelf("ExamineMd");
             } 
+        }
+
+        /// <summary>
+        /// Gets the starting path.
+        /// </summary>
+        public IMdPath StartingPath
+        {
+            get
+            {
+                return new MdPath(RootContent.GetPropertyValue<string>("startingPath").EnsureBackSlashes());
+            }
         }
 
         /// <summary>

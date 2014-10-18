@@ -89,10 +89,6 @@
         {
             if (string.IsNullOrEmpty(path)) return "\\";
 
-            var routePath = Constants.MarkdownDocumentRoute;
-
-            if (path.StartsWith(routePath)) path = path.Remove(0, routePath.Length);
-
             path = path.EnsureBackSlashes();
 
             return path.StartsWith("~") ? path.Remove(0, 1) : path;
@@ -125,7 +121,7 @@
         /// </returns>
         internal static string ValidateSearchableUrl(string url)
         {
-            return url.Replace(Constants.MarkdownDocumentRoute, string.Empty).EnsureForwardSlashes();
+            return url.EnsureForwardSlashes();
         }
 
         /// <summary>

@@ -35,23 +35,26 @@
         }
 
         /// <summary>
-        /// Builds a <see cref="IVirtualMarkdownDocument"/>
+        /// Builds <see cref="IPublishedContent"/>.
         /// </summary>
         /// <param name="model">
         /// The model.
         /// </param>
-        /// <param name="url">
-        /// The url.
+        /// <param name="path">
+        /// The path.
         /// </param>
         /// <returns>
-        /// The <see cref="IVirtualMarkdownDocument"/>.
+        /// The <see cref="IPublishedContent"/>.
         /// </returns>
-        public IVirtualMarkdownDocument BuildDocument(IRenderModel model, string url)
+        public IPublishedContent Build(IRenderModel model, IMdPath path)
         {
-            
-            var md = _query.Files.GetByUrl(url);
+            if (path.IsDocument)
+            {
+                var md = _query.Files.Get(path.Key);
+                return this.BuildDocument(model, md);
+            }
 
-            return BuildDocument(model, md);
+            return this.BuildListing(model, path);
         }
 
         /// <summary>
@@ -99,13 +102,17 @@
 
             //var parent = model.Content.Parent;
 
-            return new VirtualMarkdownListing(model.Content, model.Content.Parent, GetChildren(model, path));
+            //return new VirtualMarkdownListing(model.Content, model.Content.Parent, GetChildren(model, path));
+
+            throw new NotImplementedException();
         }
 
         private IVirtualMarkdownListing _rootListing;
         private IVirtualMarkdownListing BuildRootListing(IRenderModel model)
         {
-            return _rootListing ?? new VirtualMarkdownListing(model.Content, model.Content.Parent, GetChildren(model, new MdPath("\\")));
+            //return _rootListing ?? new VirtualMarkdownListing(model.Content, model.Content.Parent, GetChildren(model, new MdPath("\\")));
+
+            throw new NotImplementedException();
         }
 
         /// <summary>

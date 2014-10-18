@@ -59,7 +59,7 @@
         /// </returns>
         public IEnumerable<IMdFile> Find(string fileName)
         {
-            return this.GetAllMarkdownFiles().Where(x => x.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
+            return this.GetAllMarkdownFiles().Where(x => x.Path.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
@@ -78,7 +78,7 @@
         {
             path = PathHelper.ValidateDocumentPath(path);
 
-            return this.List(path).Where(x => x.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
+            return this.List(path).Where(x => x.Path.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>

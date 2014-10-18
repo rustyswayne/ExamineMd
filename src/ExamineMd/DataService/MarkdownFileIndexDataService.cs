@@ -127,14 +127,14 @@
                     RowData = new Dictionary<string, string>()
                             {
                                 { "key", md.Key },
-                                { "fileName", md.FileName },
+                                { "fileName", md.Path.FileName },
                                 { "title", md.Title },
                                 { "body", md.Body },
                                 { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
                                 { "path", string.IsNullOrEmpty(md.Path.Value) ? "root" : md.Path.Value.EnsureForwardSlashes() },
-                                { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path.Value) },
+                                { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path.Value) + " " + md.Path.FileName.EnsureNotEndsWith(".md") },
                                 { "pathKey", md.Path.Key },
-                                { "searchableUrl",  PathHelper.GetSearchableUrl(md.Path.Value, md.FileName) },
+                                { "searchableUrl",  PathHelper.GetSearchableUrl(md.Path.Value, md.Path.FileName) },
                                 { "metaData", JsonConvert.SerializeObject(md.MetaData) },
                                 { "allDocs", "1" },
                                 { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }

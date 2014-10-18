@@ -29,27 +29,27 @@
             }
         }
 
-        /// <summary>
-        /// Gets the markdown document route.
-        /// </summary>
-        public static string MarkdownDocumentRoute
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["ExamineMd:DocumentRoute"].ToLowerInvariant();
-            }
-        }
+        ///// <summary>
+        ///// Gets the markdown document route.
+        ///// </summary>
+        //public static string MarkdownDocumentRoute
+        //{
+        //    get
+        //    {
+        //        return ConfigurationManager.AppSettings["ExamineMd:DocumentRoute"].ToLowerInvariant();
+        //    }
+        //}
 
-        /// <summary>
-        /// Gets the markdown listing route.
-        /// </summary>
-        public static string MarkdownListingRoute
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["ExamineMd:ListingRoute"].ToLowerInvariant();
-            }
-        }
+        ///// <summary>
+        ///// Gets the markdown listing route.
+        ///// </summary>
+        //public static string MarkdownListingRoute
+        //{
+        //    get
+        //    {
+        //        return ConfigurationManager.AppSettings["ExamineMd:ListingRoute"].ToLowerInvariant();
+        //    }
+        //}
 
         /// <summary>
         /// The content types.

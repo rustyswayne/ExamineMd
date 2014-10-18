@@ -1,5 +1,6 @@
 ﻿namespace ExamineMd.Routing
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Web.Mvc;
     using System.Web.Routing;
@@ -49,6 +50,19 @@
             var route = RouteTable.Routes.MapRoute(name, url, defaults, constraints, namespaces);
             route.RouteHandler = virtualNodeHandler;
             return route;
+        }
+
+        /// <summary>
+        /// Returns a route path from a given node's URL since a node's Url might contain a domain which we can't use in our routing.
+        /// </summary>
+        /// <param name="routePath"></param>
+        /// <returns></returns>
+        internal static string RoutePathFromNodeUrl(string routePath)
+        {
+            Uri result;
+            return Uri.TryCreate(routePath, UriKind.Absolute, out result)
+                ? result.PathAndQuery.TrimStart('/')
+                : routePath.TrimStart('/');
         }
     }
 }

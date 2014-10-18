@@ -48,7 +48,7 @@
 
            //// Assert
            Assert.IsTrue(files.Any(), "No files found");
-           Assert.IsFalse(files.Any(x => !x.FileName.StartsWith(NameFilter, StringComparison.InvariantCultureIgnoreCase)));
+           Assert.IsFalse(files.Any(x => !x.Path.FileName.StartsWith(NameFilter, StringComparison.InvariantCultureIgnoreCase)));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.FileName.StartsWith(NameFilter, StringComparison.InvariantCultureIgnoreCase)), "File name failure");
+            Assert.IsFalse(files.Any(x => !x.Path.FileName.StartsWith(NameFilter, StringComparison.InvariantCultureIgnoreCase)), "File name failure");
             Assert.IsFalse(files.Any(x => !x.Path.Value.StartsWith("\\developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 

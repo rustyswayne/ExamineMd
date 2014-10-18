@@ -1,12 +1,8 @@
 ﻿namespace ExamineMd.Models
 {
     using System;
-    using System.Globalization;
 
-    using Umbraco.Core;
     using Umbraco.Core.Models;
-    using Umbraco.Core.Models.PublishedContent;
-    using Umbraco.Web;
 
     using Constants = ExamineMd.Constants;
 
@@ -14,12 +10,7 @@
     /// A virtual content page for displaying markdown.
     /// </summary>
     public class VirtualMarkdownDocument : BaseViewModel, IVirtualMarkdownDocument
-    {
-        /// <summary>
-        /// The document route.
-        /// </summary>
-        private static readonly string DocumentsRoute = Constants.MarkdownDocumentRoute.EnsureStartsAndEndsWith('/');
-
+    {        
         /// <summary>
         /// Initializes a new instance of the <see cref="VirtualMarkdownDocument"/> class.
         /// </summary>
@@ -83,13 +74,14 @@
         {
             get
             {
-                var routeIndex = Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase);
+                var start = StartingPath.Value.EnsureForwardSlashes();
+                var routeIndex = Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase);
                 if (routeIndex <= 0)
                 {
-                    return Content.Url.EnsureNotEndsWith('/') + DocumentsRoute.EnsureNotEndsWith('/') + Markdown.SearchableUrl();
+                    return Content.Url.EnsureNotEndsWith('/') + Markdown.SearchableUrl();
                 }
 
-                return this.Content.Url.Substring(0, this.Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase) + DocumentsRoute.Length).EnsureNotEndsWith('/') + this.Markdown.SearchableUrl();
+                return this.Content.Url.Substring(0, this.Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase) + start.Length).EnsureNotEndsWith('/') + this.Markdown.SearchableUrl();
             }
         }
 

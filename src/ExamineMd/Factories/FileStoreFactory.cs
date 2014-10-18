@@ -36,18 +36,14 @@
         public IMdFile Build(FileInfo fi)
         {
             var metaData = BuildMetaData(fi);
-            var md = new MdFile(metaData)
+            var md = new MdFile(SearchHelper.GetFileKey(fi.DirectoryName.GetFileStoreReferencePath(), fi.Name), metaData)
                        {
-                           Path = new MdPath(fi.DirectoryName.GetFileStoreReferencePath()),
-                           FileName = fi.Name,
+                           Path = new MdPath(SearchHelper.GetPathKey(fi.DirectoryName.GetFileStoreReferencePath()), fi.DirectoryName.GetFileStoreReferencePath(), fi.Name),                           
                            Title = fi.Name.AsFormattedTitle(),
                            Body = File.ReadAllText(fi.FullName),
                            DateCreated = fi.CreationTime
                        };
-
-            // Generate a unique key for this file
-            md.Key = SearchHelper.GetFileKey(md.Path.Value, md.FileName);
-
+            
             return md;
         }
 
@@ -62,9 +58,8 @@
         /// </returns>
         internal IMdDirectory Build(DirectoryInfo directory)
         {
-            return new MdDirectory()
+            return new MdDirectory(new MdPath(directory.FullName.RelativePathFromFileStoreRoot()))
             {
-                Path = new MdPath(directory.FullName.RelativePathFromFileStoreRoot()),
                 DirectoryInfo = directory
             };
         }

@@ -5,43 +5,36 @@
     /// <summary>
     /// Represents an MdFile
     /// </summary>
-    public class MdFile : IMdFile
+    public class MdFile : MdEntity, IMdFile
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="MdFile"/> class.
         /// </summary>
-        public MdFile()
-            : this(new MdMetaData())
+        /// <param name="key">
+        /// The key.
+        /// </param>
+        public MdFile(string key)
+            : this(key, new MdMetaData())
         {
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MdFile"/> class.
         /// </summary>
+        /// <param name="key">
+        /// The key.
+        /// </param>
         /// <param name="metaData">
         /// The meta data.
         /// </param>
-        internal MdFile(IMdMetaData metaData)
+        internal MdFile(string key, IMdMetaData metaData)
+            : base(key)
         {
             Mandate.ParameterNotNull(metaData, "metaData");
 
             MetaData = metaData;
         }
 
-        /// <summary>
-        /// Gets or sets the key.
-        /// </summary>
-        public string Key { get; set; }
-
-        /// <summary>
-        /// Gets or sets the relative path to the file with respect to the file store root.
-        /// </summary>
-        public IMdPath Path { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the file.
-        /// </summary>
-        public string FileName { get; set; }
 
         /// <summary>
         /// Gets or sets the title.

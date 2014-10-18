@@ -9,19 +9,6 @@
     public class PathHelperTests : ExamineTestBase
     {
         [Test]
-        public void Can_Get_Default_Route_Name()
-        {
-            //// Arrange
-            const string Expected = "document";
-
-            //// Act
-            var routeName = Constants.MarkdownDocumentRoute;
-
-            //// Assert
-            Assert.AreEqual(Expected, routeName);
-        }
-
-        [Test]
         public void Can_Get_The_Virtual_Level()
         {
             //// Arrage
@@ -32,7 +19,7 @@
 
             // the url nees to be /api/merchellocontext/merchellocontext-current-cache - but the query object
             // needs to remove it
-            var file = query.Files.GetByUrl("/document/api/merchellocontext/merchellocontext-current-cache");
+            var file = query.Files.GetByUrl("/api/merchellocontext/merchellocontext-current-cache");
             Assert.NotNull(file, "File was null");
             var calc = file.GetContentLevel(1);
 

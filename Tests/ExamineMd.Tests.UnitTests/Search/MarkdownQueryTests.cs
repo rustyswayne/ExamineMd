@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Text;
 
     using ExamineMd.Search;
     using ExamineMd.Tests.UnitTests.TestHelpers;
@@ -42,7 +43,7 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.Path.Value.StartsWith("/developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+            Assert.IsFalse(files.Any(x => !x.Path.Value.EnsureForwardSlashes().StartsWith("/developers", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
         /// <summary>
@@ -60,7 +61,7 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.Path.Value.StartsWith("/", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+            Assert.IsFalse(files.Any(x => !x.Path.Value.EnsureForwardSlashes().StartsWith("/", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
         /// <summary>
@@ -78,7 +79,7 @@
 
             //// Assert
             Assert.IsTrue(files.Any(), "No files found");
-            Assert.IsFalse(files.Any(x => !x.Path.Value.StartsWith("/api", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
+            Assert.IsFalse(files.Any(x => !x.Path.Value.EnsureForwardSlashes().StartsWith("/api", StringComparison.InvariantCultureIgnoreCase)), "Path failure");
         }
 
         [Test]
@@ -192,6 +193,15 @@
             //// Assert
             Assert.IsTrue(paths.Any());
             Assert.AreEqual(FileCount, paths.Count());
+        }
+
+        [Test]
+        public void Can_Find_File_By_Searchable_Path()
+        {
+            var file = _markdownQuery.Paths.GetByUrl("/api/merchellocontext/merchellocontext-current-cache");
+            Assert.NotNull(file);
+
+            Assert.IsTrue(file.IsDocument);
         }
     }
 }

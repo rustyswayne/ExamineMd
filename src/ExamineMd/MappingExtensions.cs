@@ -27,11 +27,9 @@ namespace ExamineMd
         /// </returns>
         public static IMdFile ToMdFile(this SearchResult result)
         {
-            return new MdFile()
+            return new MdFile(result.FieldAsString("key"))
             {
-                Key = result.FieldAsString("key"),
-                FileName = result.FieldAsString("fileName"),
-                Path = new MdPath(result.FieldAsString("path").ReplaceRootSlash()),
+                Path = new MdPath(SearchHelper.GetPathKey(result.FieldAsString("path")), result.FieldAsString("path").ReplaceRootSlash(), result.FieldAsString("fileName")),
                 Title = result.FieldAsString("title"),
                 Body = result.FieldAsString("body"),
                 MetaData = result.FieldAsMetaItemCollection(),
@@ -50,7 +48,7 @@ namespace ExamineMd
         /// </returns>
         public static IMdPath ToMdPath(this SearchResult result)
         {
-            return new MdPath(result.FieldAsString("pathKey"), result.FieldAsString("path").EnsureBackSlashes());
+            return new MdPath(result.FieldAsString("key"), result.FieldAsString("path").EnsureBackSlashes(), result.FieldAsString("fileName"));
         }
 
         /// <summary>

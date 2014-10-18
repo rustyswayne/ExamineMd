@@ -20,7 +20,7 @@
         /// </returns>
         internal static string SearchableUrl(this IMdFile md)
         {
-            return PathHelper.GetSearchableUrl(md.Path.Value, md.FileName);
+            return PathHelper.GetSearchableUrl(md.Path.Value, md.Path.FileName);
         }
 
         /// <summary>
@@ -37,7 +37,7 @@
         /// </returns>
         internal static int GetContentLevel(this IMdFile md, int contentLevel)
         {
-            var folders = md.Path.Value.EnsureNotStartsWith('/').EnsureForwardSlashes().Split('/');
+            var folders = md.Path.Value.EnsureForwardSlashes().EnsureNotStartsWith('/').Split('/');
 
             return contentLevel + folders.Count();
         }
