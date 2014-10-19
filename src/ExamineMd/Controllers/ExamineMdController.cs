@@ -5,6 +5,7 @@
 
     using ExamineMd.Models;
 
+    using Umbraco.Core;
     using Umbraco.Web.Models;
     using Umbraco.Web.Mvc;
 
@@ -45,21 +46,14 @@
         /// The <see cref="ActionResult"/>.
         /// </returns>
         private ActionResult RenderView(IRenderModel model, string path)
-        {
-            var startPath = GetSafeStartPath(model);
-            
-            path = PathHelper.ValidateDocumentPath(path).EnsureForwardSlashes();
+        {            
+            var url = PathHelper.ValidateDocumentPath(path).EnsureForwardSlashes().EnsureStartsWith('/');
+         
+            var virtualContent = VirtualContentFactory.Build(model, url);
 
-            path = path.StartsWith(startPath, StringComparison.InvariantCultureIgnoreCase) ? path : startPath;
+            var viewName = virtualContent.IsDocument ? "Document" : "Listing";
 
-            var virtualContent = VirtualContentFactory.Build(model, new MdPath(path));
-                
-                //new VirtualMarkdownListing(model.Content, documents);
-
-            return this.View(PathHelper.GetViewPath("Listing"), virtualContent);
+            return this.View(PathHelper.GetViewPath(viewName), virtualContent);
         }
-
-
-
     }
 }

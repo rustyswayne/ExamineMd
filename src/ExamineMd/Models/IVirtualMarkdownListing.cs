@@ -3,7 +3,7 @@
     /// <summary>
     /// Defines the VirtualMarkdownListing
     /// </summary>
-    public interface IVirtualMarkdownListing : IBaseViewModel
+    public interface IVirtualMarkdownListing : IVirtualMarkdownBase
     {
         /// <summary>
         /// Gets or sets the brief summary of the contents.  Applies to listings only.

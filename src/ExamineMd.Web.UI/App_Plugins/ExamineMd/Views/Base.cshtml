@@ -1,9 +1,6 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IBaseViewModel>
-@using System.Web.Mvc
-@using System.Web.Mvc.Html
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IVirtualMarkdownBase>
 @using ClientDependency.Core.Mvc
 @using ExamineMd
-@using ExamineMd.Search
 @using ExamineMd.Models
 @{
     Layout = null;
@@ -36,8 +33,11 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-8">
- 
-            @RenderBody()
+                <h2>@Model.Name - @Model.DocumentTypeAlias</h2>
+                
+                <p><a href="@Model.Parent.Url">Parent</a></p>
+
+                @RenderBody()
              
             </div>
             <div class="col-xs-4">

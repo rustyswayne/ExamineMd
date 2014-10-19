@@ -3,7 +3,7 @@
     /// <summary>
     /// Defines a VirtualMarkdownDocument.
     /// </summary>
-    public interface IVirtualMarkdownDocument : IBaseViewModel
+    public interface IVirtualMarkdownDocument : IVirtualMarkdownBase
     {
         /// <summary>
         /// Gets the relevance.

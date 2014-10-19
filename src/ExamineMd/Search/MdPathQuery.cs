@@ -70,8 +70,11 @@
         {
             var criteria = this.Searcher.CreateSearchCriteria();
             criteria.Field("pathSearchable", PathHelper.ValidateSearchablePath(url));
+            
+            // this ensures that a directory will come first
+            var paths = Searcher.Search(criteria).Select(x => x.ToMdPath()).OrderBy(x => x.FileName);
 
-            return Searcher.Search(criteria).Select(x => x.ToMdPath()).FirstOrDefault();
+            return paths.FirstOrDefault();
         }
 
         /// <summary>

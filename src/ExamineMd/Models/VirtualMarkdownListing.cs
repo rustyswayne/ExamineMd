@@ -14,7 +14,7 @@
     /// <summary>
     /// Represents a VirtualMarkdownListing.
     /// </summary>
-    public class VirtualMarkdownListing : BaseViewModel, IVirtualMarkdownListing
+    public class VirtualMarkdownListing : VirtualMarkdownBase, IVirtualMarkdownListing
     {
 
         /// <summary>
@@ -35,12 +35,12 @@
         /// <param name="children">
         /// The collection of <see cref="IPublishedContent"/> children
         /// </param>
-        public VirtualMarkdownListing(IPublishedContent content, IPublishedContent parent, IMdPath path, Func<string, IEnumerable<IPublishedContent>> children)
-            : base(content, parent)
+        public VirtualMarkdownListing(IPublishedContent content, IPublishedContent parent, IMdPath path, Func<IPublishedContent, string, IEnumerable<IPublishedContent>> children)
+            : base(content, parent, path)
         {
             Mandate.ParameterNotNull(children, "children");
 
-            _children = new Lazy<IEnumerable<IPublishedContent>>(() => children(path.Key));
+            _children = new Lazy<IEnumerable<IPublishedContent>>(() => children(RootContent, path.Key));
         }
 
         /// <summary>
@@ -54,26 +54,6 @@
         public int MaxListCount { get; set; }
 
         #region IPublishedContent
-
-        /// <summary>
-        /// Gets the url.
-        /// </summary>
-        /// <remarks>
-        /// This is a virtual path not associated with an actual Umbraco content node. 
-        /// </remarks>
-        public override string Url
-        {
-            get
-            {
-                var routeIndex = Content.Url.IndexOf(ListingRoute, StringComparison.InvariantCultureIgnoreCase);
-                if (routeIndex <= 0)
-                {
-                    return Content.Url.EnsureNotEndsWith('/') + ListingRoute.EnsureNotEndsWith('/') + MdPath.Value.EnsureForwardSlashes();
-                }
-
-                return this.Content.Url.Substring(0, this.Content.Url.IndexOf(ListingRoute, StringComparison.InvariantCultureIgnoreCase) + ListingRoute.Length).EnsureNotEndsWith('/') + MdPath.Value.EnsureForwardSlashes();
-            }
-        }
 
         /// <summary>
         /// Gets the id.

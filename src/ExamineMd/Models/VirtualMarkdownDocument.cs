@@ -9,7 +9,7 @@
     /// <summary>
     /// A virtual content page for displaying markdown.
     /// </summary>
-    public class VirtualMarkdownDocument : BaseViewModel, IVirtualMarkdownDocument
+    public class VirtualMarkdownDocument : VirtualMarkdownBase, IVirtualMarkdownDocument
     {        
         /// <summary>
         /// Initializes a new instance of the <see cref="VirtualMarkdownDocument"/> class.
@@ -24,7 +24,7 @@
         /// The <see cref="IMdFile"/>
         /// </param>
         public VirtualMarkdownDocument(IPublishedContent content, IPublishedContent parent, IMdFile md)
-            : base(content, parent)
+            : base(content, parent, md.Path)
         {
             Mandate.ParameterNotNull(md, "md");
 
@@ -64,26 +64,26 @@
 
         #region IPublishedContent
 
-        /// <summary>
-        /// Gets the url.
-        /// </summary>
-        /// <remarks>
-        /// This is a virtual path not associated with an actual Umbraco content node. 
-        /// </remarks>
-        public override string Url
-        {
-            get
-            {
-                var start = StartingPath.Value.EnsureForwardSlashes();
-                var routeIndex = Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase);
-                if (routeIndex <= 0)
-                {
-                    return Content.Url.EnsureNotEndsWith('/') + Markdown.SearchableUrl();
-                }
+        ///// <summary>
+        ///// Gets the url.
+        ///// </summary>
+        ///// <remarks>
+        ///// This is a virtual path not associated with an actual Umbraco content node. 
+        ///// </remarks>
+        //public override string Url
+        //{
+        //    get
+        //    {
+        //        var start = StartingPath.Value.EnsureForwardSlashes();
+        //        var routeIndex = Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase);
+        //        if (routeIndex <= 0)
+        //        {
+        //            return Content.Url.EnsureNotEndsWith('/') + Markdown.SearchableUrl();
+        //        }
 
-                return this.Content.Url.Substring(0, this.Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase) + start.Length).EnsureNotEndsWith('/') + this.Markdown.SearchableUrl();
-            }
-        }
+        //        return this.Content.Url.Substring(0, this.Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase) + start.Length).EnsureNotEndsWith('/') + this.Markdown.SearchableUrl();
+        //    }
+        //}
 
         /// <summary>
         /// Gets the id.

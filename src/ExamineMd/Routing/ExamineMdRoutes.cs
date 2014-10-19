@@ -1,18 +1,10 @@
 ﻿namespace ExamineMd.Routing
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Mvc;
     using System.Web.Routing;
 
-    using Umbraco.Core;
     using Umbraco.Core.Logging;
-
-    using umbraco.MacroEngines;
-
     using Umbraco.Web.PublishedCache;
-
-    using Constants = ExamineMd.Constants;
 
     /// <summary>
     /// Manages ExamineMd MVC routes.
@@ -37,7 +29,6 @@
 
             using (routes.GetWriteLock())
             {
-
                 var groups = examineMdNodes.GroupBy(x => RouteCollectionExtensions.RoutePathFromNodeUrl(x.Url));
 
                 foreach (var group in groups)
@@ -46,17 +37,22 @@
 
                     var examineMdNode = group.First();
 
-                    RemoveExisting(routes, new[] { "examinemd-" + groupHash });
-                    
+                    RemoveExisting(routes, new[] { "examinemd_" + groupHash });
+
+                    var routeName = "examinemd_" + groupHash;
+                    var routeUrl = examineMdNode.Url.EnsureNotStartsOrEndsWith('/') + "/{*path}";
+
+                    LogHelper.Info(typeof(ExamineMdRoutes), string.Format("{0}, {1}", routeName, routeUrl));
+
                     routes.MapUmbracoRoute(
-                    "examinemd-" + groupHash,
-                        examineMdNode.Url.EnsureNotStartsOrEndsWith('/') + "/{*path}",
+                    routeName,
+                        routeUrl,
                         new { controller = "ExamineMd", action = "Index" },
                         new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
                 }
-            }
-            
+            }            
         }
+
 
         /// <summary>
         /// Removes existing routes
@@ -67,7 +63,7 @@
         /// <param name="names">
         /// The names.
         /// </param>
-        private static void RemoveExisting(RouteCollection routes, params string[] names)
+        public static void RemoveExisting(RouteCollection routes, params string[] names)
         {
             foreach (var name in names)
             {

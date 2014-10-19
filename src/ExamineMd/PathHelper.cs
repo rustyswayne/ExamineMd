@@ -107,7 +107,7 @@
         {
             var searchable = ValidateDocumentPath(path).Replace("\\", " ").Trim();
 
-            return string.IsNullOrEmpty(searchable) ? "root" : searchable;
+            return string.IsNullOrEmpty(searchable) ? "root" : SearchHelper.RemoveSpecialCharacters(searchable);
         }
 
         /// <summary>
@@ -140,9 +140,22 @@
         {
             return string.IsNullOrEmpty(fileName) ? 
                 string.Empty : 
-                string.Format("{0}{1}", ValidateDocumentPath(path).EnsureForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
+                string.Format("{0}{1}", ValidateDocumentPath(path).EnsureForwardSlashes().EnsureEndsWith('/'), GetFileNameForUrl(fileName));
         }
 
+        /// <summary>
+        /// Gets the file name for use in a Url.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        internal static string GetFileNameForUrl(string fileName)
+        {
+            return fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments();
+        }
 
         /// <summary>
         /// Gets the absolute absolut url.

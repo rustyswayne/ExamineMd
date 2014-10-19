@@ -203,5 +203,16 @@
 
             Assert.IsTrue(file.IsDocument);
         }
+
+        [Test]
+        public void Can_Get_Directory_By_Url()
+        {
+            var url= "/old/api/interfaces/";
+
+            var dir = _markdownQuery.Paths.GetByUrl(url);
+
+            Assert.NotNull(dir);
+            Assert.IsFalse(dir.IsDocument);
+        }
     }
 }

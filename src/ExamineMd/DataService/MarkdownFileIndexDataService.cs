@@ -132,7 +132,7 @@
                                 { "body", md.Body },
                                 { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
                                 { "path", string.IsNullOrEmpty(md.Path.Value) ? "root" : md.Path.Value.EnsureForwardSlashes() },
-                                { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path.Value) + " " + md.Path.FileName.EnsureNotEndsWith(".md") },
+                                { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path.Value) + " " + SearchHelper.RemoveSpecialCharacters(md.Path.FileName.EnsureNotEndsWith(".md")) },
                                 { "pathKey", md.Path.Key },
                                 { "searchableUrl",  PathHelper.GetSearchableUrl(md.Path.Value, md.Path.FileName) },
                                 { "metaData", JsonConvert.SerializeObject(md.MetaData) },

@@ -40,9 +40,11 @@
         {
             if (path.IsRootPath()) return path;
 
+            var pathString = path.IsDocument && !path.FileName.Equals("index.md", StringComparison.OrdinalIgnoreCase) ? path.Value + "\\" : path.Value;
+            
             var lastIndex = path.Value.LastIndexOf("\\", StringComparison.Ordinal);
 
-            var pathString = lastIndex <= 0 ? "\\" : path.Value.Substring(0, path.Value.LastIndexOf("\\", StringComparison.Ordinal));
+            pathString = lastIndex <= 0 ? "\\" : path.Value.Substring(0, pathString.LastIndexOf("\\", StringComparison.Ordinal));
 
             return pathString.Equals("\\", StringComparison.Ordinal) 
                 ? new MdPath(pathString) : 
