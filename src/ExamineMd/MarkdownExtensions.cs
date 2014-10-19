@@ -15,16 +15,6 @@
     /// </summary>
     public static class MarkdownExtensions
     {
-        ///// <summary>
-        ///// The MarkdownAsHtmlString formatter.
-        ///// </summary>
-        //private static readonly Markdown MarkdownFormatter = new Markdown()
-        //                                                         {
-        //                                                             ExtraMode = true,
-        //                                                             SafeMode = false
-        //                                                         };
-
-
         /// <summary>
         /// Transforms a MarkdownAsHtmlString (md) formatted string as Html
         /// </summary>
@@ -79,7 +69,7 @@
         {
             var formatter = GetMarkdownFormatter();
             formatter.UrlBaseLocation = PathHelper.MakeAbsolutUrl(document.Url, string.Empty);
-            formatter.UrlRootLocation = PathHelper.MakeAbsolutUrl("/", string.Empty);
+            formatter.UrlRootLocation = PathHelper.MakeAbsolutUrl(document.RootContent.Url, string.Empty);
 
             return string.IsNullOrEmpty(document.Markdown.Body) ? MvcHtmlString.Empty : new MvcHtmlString(formatter.Transform(document.Markdown.Body));
         }

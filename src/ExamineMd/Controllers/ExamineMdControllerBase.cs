@@ -2,8 +2,10 @@
 
 namespace ExamineMd.Controllers
 {
+    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Web.Mvc;
 
+    using ExamineMd.Factories;
     using ExamineMd.Search;
 
     using Umbraco.Web.Models;
@@ -15,28 +17,17 @@ namespace ExamineMd.Controllers
     public abstract class ExamineMdControllerBase : RenderMvcController
     {
         /// <summary>
-        /// The <see cref="IMarkdownQuery"/>.
-        /// </summary>
-        private readonly IMarkdownQuery _markdownQuery;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ExamineMdControllerBase"/> class.
         /// </summary>
         protected ExamineMdControllerBase()
         {
-            _markdownQuery = new MarkdownQuery();
+            VirtualContentFactory = new VirtualContentFactory(new MarkdownQuery());
         }
 
         /// <summary>
-        /// Gets the <see cref="IMarkdownQuery"/>.
+        /// Gets the <see cref="VirtualContentFactory"/>.
         /// </summary>
-        protected IMarkdownQuery MarkdownQuery
-        {
-            get
-            {
-                return _markdownQuery;
-            }
-        }
+        internal VirtualContentFactory VirtualContentFactory { get; private set; }
 
         /// <summary>
         /// This method is abandoned but must have an override.

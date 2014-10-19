@@ -27,19 +27,6 @@
             return ConfigurationManager.AppSettings[Constants.MdRootDirectoryAlias];
         }
 
-        /// <summary>
-        /// Gets the reference path for the file store.
-        /// </summary>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public static string GetFileStoreReferencePath(this string path)
-        {
-            return string.IsNullOrEmpty(path) ? "/" : ValidateDocumentPath(path.RelativePathFromFileStoreRoot());
-        }
 
         /// <summary>
         /// Gets the virtual path to the ExamineMd View folder.
@@ -66,35 +53,6 @@
             return string.Format("{0}{1}", Constants.AppPluginFolder, "Assets/");
         }
 
-
-        /// <summary>
-        /// Replaces \ with / in a path.
-        /// </summary>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public static string EnsureForwardSlashes(this string path)
-        {
-            return path.Replace("\\", "/");
-        }
-
-        /// <summary>
-        /// Replaces \ with / in a path.
-        /// </summary>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        public static string EnsureBackSlashes(this string path)
-        {
-            return path.Replace("/", "\\");
-        }
-
         /// <summary>
         /// Encodes url segments.
         /// </summary>
@@ -117,21 +75,7 @@
                 // support across the board with all the different config options
                     .Select(x => x.Replace('.', '-')));
         }
-
-        /// <summary>
-        /// Replaces the indexed value "root" with / for special case root level documents.
-        /// </summary>
-        /// <param name="path">
-        /// The path.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        internal static string ReplaceRootSlash(this string path)
-        {
-            return path.Equals("root") ? "/" : path;
-        }
-
+        
         /// <summary>
         /// Validates and or reformats a document path.
         /// </summary>
@@ -143,9 +87,7 @@
         /// </returns>
         public static string ValidateDocumentPath(string path)
         {
-            var routePath = Constants.MarkdownDocumentRoute;
-
-            if (path.StartsWith(routePath)) path = path.Remove(0, routePath.Length);
+            if (string.IsNullOrEmpty(path)) return "\\";
 
             path = path.EnsureBackSlashes();
 
@@ -165,7 +107,7 @@
         {
             var searchable = ValidateDocumentPath(path).Replace("\\", " ").Trim();
 
-            return string.IsNullOrEmpty(searchable) ? "root" : searchable;
+            return string.IsNullOrEmpty(searchable) ? "root" : SearchHelper.RemoveSpecialCharacters(searchable);
         }
 
         /// <summary>
@@ -179,7 +121,7 @@
         /// </returns>
         internal static string ValidateSearchableUrl(string url)
         {
-            return url.Replace(Constants.MarkdownDocumentRoute, string.Empty).EnsureForwardSlashes();
+            return url.EnsureForwardSlashes();
         }
 
         /// <summary>
@@ -198,56 +140,21 @@
         {
             return string.IsNullOrEmpty(fileName) ? 
                 string.Empty : 
-                string.Format("{0}{1}", ValidateDocumentPath(path).EnsureForwardSlashes().EnsureEndsWith('/'), fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments());
+                string.Format("{0}{1}", ValidateDocumentPath(path).EnsureForwardSlashes().EnsureEndsWith('/'), GetFileNameForUrl(fileName));
         }
 
         /// <summary>
-        /// Gets the searchable Url.
+        /// Gets the file name for use in a Url.
         /// </summary>
-        /// <param name="md">
-        /// The md.
-        /// </param>
-        /// <returns>
-        /// The searchable Url.
-        /// </returns>
-        internal static string SearchableUrl(this IMdFile md)
-        {
-            return GetSearchableUrl(md.Path.Value, md.FileName);
-        }
-
-        /// <summary>
-        /// Gets the relative path from the file store root 
-        /// </summary>
-        /// <param name="path">
-        /// The full path.
+        /// <param name="fileName">
+        /// The file name.
         /// </param>
         /// <returns>
         /// The <see cref="string"/>.
         /// </returns>
-        internal static string RelativePathFromFileStoreRoot(this string path)
+        internal static string GetFileNameForUrl(string fileName)
         {
-            var rootPath = IOHelper.MapPath(ConfigurationManager.AppSettings[Constants.MdRootDirectoryAlias]);
-            rootPath = rootPath.Substring(0, rootPath.Length - 1);
-            return path.Replace(rootPath, string.Empty);
-        }
-
-        /// <summary>
-        /// Gets the virtual content level.
-        /// </summary>
-        /// <param name="md">
-        /// The md.
-        /// </param>
-        /// <param name="contentLevel">
-        /// The content level.
-        /// </param>
-        /// <returns>
-        /// The virtual level.
-        /// </returns>
-        internal static int GetContentLevel(this IMdFile md, int contentLevel)
-        {
-            var folders = md.Path.Value.EnsureNotStartsWith('/').EnsureForwardSlashes().Split('/');
-
-            return contentLevel + folders.Count();
+            return fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments();
         }
 
         /// <summary>
@@ -284,7 +191,6 @@
             if (!string.IsNullOrEmpty(queryString) && !queryString.StartsWith("?")) queryString = string.Format("?{0}", queryString);
 
             return string.Format("{0}{1}{2}{3}{4}", protocol, host, port, relativeUrl, queryString);
-        } 
-
+        }
     }
 }

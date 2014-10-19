@@ -5,23 +5,8 @@
     /// <summary>
     /// Defines an MdFile.
     /// </summary>
-    public interface IMdFile
+    public interface IMdFile : IMdEntity
     {
-        /// <summary>
-        /// Gets or sets the key.
-        /// </summary>
-        string Key { get; set; }
-
-        /// <summary>
-        /// Gets or sets the relative path to the file with respect to the file store root.
-        /// </summary>
-        IMdPath Path { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name of the file.
-        /// </summary>
-        string FileName { get; set; }
-
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -35,7 +20,7 @@
         /// <summary>
         /// Gets or sets the meta data.
         /// </summary>
-        IMdFileMetaData MetaData { get; set; }
+        IMdMetaData MetaData { get; set; }
             
         /// <summary>
         /// Gets or sets the date created.

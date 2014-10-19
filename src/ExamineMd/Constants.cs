@@ -29,38 +29,68 @@
             }
         }
 
-        /// <summary>
-        /// Gets the markdown document route.
-        /// </summary>
-        public static string MarkdownDocumentRoute
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["ExamineMd:DocumentRoute"].ToLowerInvariant();
-            }
-        }
+        ///// <summary>
+        ///// Gets the markdown document route.
+        ///// </summary>
+        //public static string MarkdownDocumentRoute
+        //{
+        //    get
+        //    {
+        //        return ConfigurationManager.AppSettings["ExamineMd:DocumentRoute"].ToLowerInvariant();
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Gets the markdown listing route.
+        ///// </summary>
+        //public static string MarkdownListingRoute
+        //{
+        //    get
+        //    {
+        //        return ConfigurationManager.AppSettings["ExamineMd:ListingRoute"].ToLowerInvariant();
+        //    }
+        //}
 
         /// <summary>
-        /// Gets the markdown listing route.
+        /// The content types.
         /// </summary>
-        public static string MarkdownListingRoute
+        public static class ContentTypes
         {
-            get
+            /// <summary>
+            /// Gets the ExamineMd content type alias.
+            /// </summary>
+            public static string ExamineMd
             {
-                return ConfigurationManager.AppSettings["ExamineMd:ListingRoute"].ToLowerInvariant();
+                get
+                {
+                    return "ExamineMd";
+                }
             }
-        }
 
-        /// <summary>
-        /// Gets the ExamineMd content type alias.
-        /// </summary>
-        public static string ExamineMdContentTypeAlias
-        {
-            get
+            /// <summary>
+            /// Gets the content type for an ExamineMd document.
+            /// </summary>
+            public static string ExamineMdMarkdownDocument
             {
-                return "ExamineMd";
+                get
+                {
+                    return "ExamineMdMarkdownDocument";
+                }
+            }
+
+
+            /// <summary>
+            /// Gets the content type for an ExamineMd listing.
+            /// </summary>
+            public static string ExamineMdMarkdownListing
+            {
+                get
+                {
+                    return "ExamineMdMarkdownListing";
+                }
             }
         }
+        
 
         /// <summary>
         /// Gets the path to the App_Pluggins/ExamineMd folder.
@@ -79,13 +109,24 @@
         public static class IndexTypes
         {
             /// <summary>
-            /// Gets the Examine IndexType for an ExamineMd document.
+            /// Gets the Examine IndexType for an ExamineMd markdown documents.
             /// </summary>
             public static string ExamineMdDocument
             {
                 get
                 {
                     return "ExamineMdDocument";
+                }
+            }
+
+            /// <summary>
+            /// Gets the Examine IndexType for an ExamineMd document directory.
+            /// </summary>
+            public static string ExamineMdDirectory
+            {
+                get
+                {
+                    return "ExamineMdDirectory";
                 }
             }
         }

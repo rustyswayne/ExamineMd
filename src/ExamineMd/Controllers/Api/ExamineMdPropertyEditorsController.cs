@@ -22,7 +22,7 @@
         /// </returns>
         public IEnumerable<string> GetAllPaths()
         {
-            return new MarkdownQuery().GetAllPaths().Select(x => x.Value.EnsureForwardSlashes());
+            return new MarkdownQuery().Paths.GetAll().Select(x => x.Value.EnsureForwardSlashes());
         }
     }
 }

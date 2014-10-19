@@ -1,14 +1,10 @@
 ﻿namespace ExamineMd.Routing
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Web.Mvc;
     using System.Web.Routing;
 
-    using Umbraco.Core;
+    using Umbraco.Core.Logging;
     using Umbraco.Web.PublishedCache;
-
-    using Constants = ExamineMd.Constants;
 
     /// <summary>
     /// Manages ExamineMd MVC routes.
@@ -26,36 +22,37 @@
         /// </param>
         public static void MapRoutes(RouteCollection routes, ContextualPublishedCache umbracoCache)
         {
-            // For this version there I'm assuming only one node but it'd be cool if multiple nodes 
-            // could be used to start at various points in the file store tree.
-            var examineMdNode = umbracoCache.GetByXPath("//ExamineMd").FirstOrDefault();
             
-            if (examineMdNode == null) return;
+            var examineMdNodes = umbracoCache.GetByXPath("//ExamineMd").ToArray();
 
-            var examineMdNodePath = examineMdNode.Url.EnsureNotStartsOrEndsWith('/');
-            var documentPath = Constants.MarkdownDocumentRoute.SafeEncodeUrlSegments().EnsureNotStartsOrEndsWith('/');
-            var listingPath = Constants.MarkdownListingRoute.SafeEncodeUrlSegments().EnsureNotStartsOrEndsWith('/');
+            if (!examineMdNodes.Any()) return;
 
-            if (!string.IsNullOrWhiteSpace(examineMdNodePath))
+            using (routes.GetWriteLock())
             {
-                documentPath = examineMdNodePath + "/" + documentPath;
-                listingPath = examineMdNodePath + "/" + listingPath;
-            }
+                var groups = examineMdNodes.GroupBy(x => RouteCollectionExtensions.RoutePathFromNodeUrl(x.Url));
 
-            RemoveExisting(routes, new[] { "examinemd_markdown", "examinemd_listing" });
+                foreach (var group in groups)
+                {
+                    var groupHash = group.Key.GetHashCode();
 
-            routes.MapUmbracoRoute(
-                "examinemd_listing",
-                listingPath + "/{*path}",
-                new { controller = "ExamineMd", action = "Index" },
-                new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
+                    var examineMdNode = group.First();
 
-            routes.MapUmbracoRoute(
-            "examinemd-markdown",
-                documentPath + "/{*path}",
-                new { controller = "ExamineMdDocument", action = "Index" },
-                new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
+                    RemoveExisting(routes, new[] { "examinemd_" + groupHash });
+
+                    var routeName = "examinemd_" + groupHash;
+                    var routeUrl = examineMdNode.Url.EnsureNotStartsOrEndsWith('/') + "/{*path}";
+
+                    LogHelper.Info(typeof(ExamineMdRoutes), string.Format("{0}, {1}", routeName, routeUrl));
+
+                    routes.MapUmbracoRoute(
+                    routeName,
+                        routeUrl,
+                        new { controller = "ExamineMd", action = "Index" },
+                        new UmbracoVirtualNodeByIdRouteHandler(examineMdNode.Id));
+                }
+            }            
         }
+
 
         /// <summary>
         /// Removes existing routes
@@ -66,7 +63,7 @@
         /// <param name="names">
         /// The names.
         /// </param>
-        private static void RemoveExisting(RouteCollection routes, params string[] names)
+        public static void RemoveExisting(RouteCollection routes, params string[] names)
         {
             foreach (var name in names)
             {

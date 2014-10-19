@@ -1,14 +1,11 @@
 ﻿namespace ExamineMd.Controllers
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
+    using System;
     using System.Web.Mvc;
 
     using ExamineMd.Models;
-    using ExamineMd.Search;
 
-    using Umbraco.Web;
+    using Umbraco.Core;
     using Umbraco.Web.Models;
     using Umbraco.Web.Mvc;
 
@@ -33,13 +30,7 @@
         /// </returns>
         public ActionResult Index(RenderModel model, string path)
         {
-
-            var startPath = GetSafeStartPath(model);
-
-            var docs = (string.IsNullOrEmpty(path) ? MarkdownQuery.List(startPath) : MarkdownQuery.List(path))
-                .Select(x => new VirtualMarkdownDocument(model.Content, x));
-
-            return RenderView(model, docs);
+            return RenderView(model, path);
         }
 
         /// <summary>
@@ -48,20 +39,21 @@
         /// <param name="model">
         /// The model.
         /// </param>
-        /// <param name="documents">
+        /// <param name="path">
         /// The collection of documents to list
         /// </param>
         /// <returns>
         /// The <see cref="ActionResult"/>.
         /// </returns>
-        private ActionResult RenderView(IRenderModel model, IEnumerable<IVirtualMarkdownDocument> documents)
-        {
-            var virtualContent = new VirtualMarkdownListing(model.Content, documents);
+        private ActionResult RenderView(IRenderModel model, string path)
+        {            
+            var url = PathHelper.ValidateDocumentPath(path).EnsureForwardSlashes().EnsureStartsWith('/');
+         
+            var virtualContent = VirtualContentFactory.Build(model, url);
 
-            return this.View(PathHelper.GetViewPath("Listing"), virtualContent);
+            var viewName = virtualContent.IsDocument ? "Document" : "Listing";
+
+            return this.View(PathHelper.GetViewPath(viewName), virtualContent);
         }
-
-
-
     }
 }

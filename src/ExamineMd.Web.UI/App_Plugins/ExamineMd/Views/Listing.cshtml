@@ -4,15 +4,13 @@
 @{
     Layout = "Base.cshtml";
 }
- 
 
 @{
-    if (Model.Documents.Any())
+    if (Model.Children.Any())
     {
         <ul>
-            @foreach (var doc in Model.Documents)
+            @foreach (var doc in Model.Children)
             {
-                var brief = doc.Markdown.MetaData.Items.FirstOrDefault(x => x.Alias == "brief");
                 
                 <li>
                     <h3>

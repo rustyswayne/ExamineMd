@@ -1,15 +1,24 @@
-﻿@using ExamineMd
-@model ExamineMd.Models.IMdPath
-
+﻿@inherits UmbracoViewPage<IVirtualMarkdownBase>
+@using ExamineMd.Models
 @{
-    <h1> @Model.Value </h1>
+    var stack = new Stack<IPublishedContent>();
+    var current = Model;
 
-    var path = Model.Value.Split('/');
+    while (current.Id != Model.RootContent.Id)
+    {
+        stack.Push(current);
+        current = ((IVirtualMarkdownBase)current.Parent);
+    }
+   
 
-    <ul>
-        @foreach (var p in path.Where(x => !x.IsNullOrWhiteSpace()))
-        {
-            <li><a href="/@p/">@p.ToTitleCase()</a></li>
-        }
-    </ul>
+   if (stack.Any())
+   {
+       <ul>
+           @while (stack.Any())
+           {
+               var item = stack.Pop();
+               <li><a href="@item.Url">@item.Name</a></li>
+           }
+       </ul>
+   }
 }

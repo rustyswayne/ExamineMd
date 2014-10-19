@@ -31,7 +31,7 @@
             }
 
             foreach (var f in mdFiles)
-                Console.WriteLine("{0} -> {1} = {2}", f.Path, f.FileName, f.Title);
+                Console.WriteLine("{0} -> {1} = {2}", f.Path, f.Path.FileName, f.Title);
         }
     }
 }

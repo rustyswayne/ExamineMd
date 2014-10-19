@@ -27,16 +27,28 @@ namespace ExamineMd
         /// </returns>
         public static IMdFile ToMdFile(this SearchResult result)
         {
-            return new MdFile()
+            return new MdFile(result.FieldAsString("key"))
             {
-                Key = result.FieldAsString("key"),
-                FileName = result.FieldAsString("fileName"),
-                Path = new MdPath(result.FieldAsString("path").ReplaceRootSlash()),
+                Path = new MdPath(SearchHelper.GetPathKey(result.FieldAsString("path")), result.FieldAsString("path").ReplaceRootSlash(), result.FieldAsString("fileName")),
                 Title = result.FieldAsString("title"),
                 Body = result.FieldAsString("body"),
                 MetaData = result.FieldAsMetaItemCollection(),
                 DateCreated = result.FieldAsDateTime("createDate")
             };
+        }
+
+        /// <summary>
+        /// Maps an examine <see cref="SearchResult"/> to a <see cref="IMdPath"/>.
+        /// </summary>
+        /// <param name="result">
+        /// The result.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IMdPath"/>.
+        /// </returns>
+        public static IMdPath ToMdPath(this SearchResult result)
+        {
+            return new MdPath(result.FieldAsString("key"), result.FieldAsString("path").EnsureBackSlashes(), result.FieldAsString("fileName"));
         }
 
         /// <summary>
@@ -86,18 +98,18 @@ namespace ExamineMd
         /// <returns>
         /// The <see cref="IEnumerable{IMdMetaItem}"/>.
         /// </returns>
-        private static IMdFileMetaData FieldAsMetaItemCollection(this SearchResult result, string fieldName = "metaData")
+        private static IMdMetaData FieldAsMetaItemCollection(this SearchResult result, string fieldName = "metaData")
         {
             return !result.Fields.ContainsKey(fieldName)
-                       ? new MdFileMetaData()
+                       ? new MdMetaData()
                        {
                            MetaDescription = string.Empty,
                            PageTitle = string.Empty,
                            Relevance = string.Empty,
                            Revision = string.Empty,           
-                           Items   = Enumerable.Empty<MdMetaDataItem>()
+                           Items   = Enumerable.Empty<MdDataItem>()
                        }
-                       : JsonConvert.DeserializeObject<MdFileMetaData>(result.Fields[fieldName]);
+                       : JsonConvert.DeserializeObject<MdMetaData>(result.Fields[fieldName]);
         }
     }
 }

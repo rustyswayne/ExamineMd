@@ -1,42 +1,34 @@
 ﻿namespace ExamineMd.Models
 {
     using System;
-    using System.Globalization;
 
-    using Umbraco.Core;
     using Umbraco.Core.Models;
-    using Umbraco.Core.Models.PublishedContent;
-    using Umbraco.Web;
 
     using Constants = ExamineMd.Constants;
 
     /// <summary>
     /// A virtual content page for displaying markdown.
     /// </summary>
-    public class VirtualMarkdownDocument : BaseViewModel, IVirtualMarkdownDocument
-    {
-        /// <summary>
-        /// The document route.
-        /// </summary>
-        private static readonly string DocumentsRoute = Constants.MarkdownDocumentRoute.EnsureStartsAndEndsWith('/');
-
+    public class VirtualMarkdownDocument : VirtualMarkdownBase, IVirtualMarkdownDocument
+    {        
         /// <summary>
         /// Initializes a new instance of the <see cref="VirtualMarkdownDocument"/> class.
         /// </summary>
         /// <param name="content">
         /// The content.
         /// </param>
+        /// <param name="parent">
+        /// The parent List.
+        /// </param>
         /// <param name="md">
         /// The <see cref="IMdFile"/>
         /// </param>
-        public VirtualMarkdownDocument(IPublishedContent content, IMdFile md)
-            : base(content)
+        public VirtualMarkdownDocument(IPublishedContent content, IPublishedContent parent, IMdFile md)
+            : base(content, parent, md.Path)
         {
             Mandate.ParameterNotNull(md, "md");
 
             Markdown = md;
-
-            this.Initialize();
         }
 
         /// <summary>
@@ -72,44 +64,25 @@
 
         #region IPublishedContent
 
-        /// <summary>
-        /// Gets the url.
-        /// </summary>
-        /// <remarks>
-        /// This is a virtual path not associated with an actual Umbraco content node. 
-        /// </remarks>
-        public override string Url
-        {
-            get
-            {
-                var routeIndex = Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase);
-                if (routeIndex <= 0)
-                {
-                    return Content.Url.EnsureNotEndsWith('/') + DocumentsRoute.EnsureNotEndsWith('/') + Markdown.SearchableUrl();
-                }
-
-                return this.Content.Url.Substring(0, this.Content.Url.IndexOf(DocumentsRoute, StringComparison.InvariantCultureIgnoreCase) + DocumentsRoute.Length).EnsureNotEndsWith('/') + this.Markdown.SearchableUrl();
-            }
-        }
-
-        /// <summary>
-        /// Gets the content type which is N/A - so is ALWAYS null
-        /// </summary>
-        public override PublishedContentType ContentType
-        {
-            get { return null; }
-        }
-
         ///// <summary>
-        ///// Gets the parent.
+        ///// Gets the url.
         ///// </summary>
         ///// <remarks>
-        ///// This is always the <see cref="IPublishedContent"/> of the rendering node
+        ///// This is a virtual path not associated with an actual Umbraco content node. 
         ///// </remarks>
-        ////// TODO - this should go to the parent list
-        //public override IPublishedContent Parent
+        //public override string Url
         //{
-        //    get { return Content; }
+        //    get
+        //    {
+        //        var start = StartingPath.Value.EnsureForwardSlashes();
+        //        var routeIndex = Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase);
+        //        if (routeIndex <= 0)
+        //        {
+        //            return Content.Url.EnsureNotEndsWith('/') + Markdown.SearchableUrl();
+        //        }
+
+        //        return this.Content.Url.Substring(0, this.Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase) + start.Length).EnsureNotEndsWith('/') + this.Markdown.SearchableUrl();
+        //    }
         //}
 
         /// <summary>
@@ -151,50 +124,10 @@
         /// </summary>
         public override string DocumentTypeAlias
         {
-            get { return Constants.ExamineMdContentTypeAlias; }
-        }
-
-        /// <summary>
-        /// Gets the document type id.
-        /// </summary>
-        public override int DocumentTypeId
-        {
-            get { return int.MaxValue; }
-        }
-
-        /// <summary>
-        /// Gets the Umbraco path.
-        /// </summary>
-        public override string Path
-        {
-            get { return Content.Path.EnsureEndsWith(',') + Id; }
-        }
-
-        /// <summary>
-        /// Gets the Umbraco level.
-        /// </summary>
-        public override int Level
-        {
-            get { return Content.Level + 1; }
+            get { return Constants.ContentTypes.ExamineMdMarkdownDocument; }
         }
 
         #endregion
 
-        /// <summary>
-        /// Performs Initialization
-        /// </summary>
-        private void Initialize()
-        {
-
-            HeadleLine = Markdown.Title;
-
-            PageTitle = string.IsNullOrEmpty(Markdown.MetaData.PageTitle)
-                                 ? Markdown.Title
-                                 : Markdown.MetaData.PageTitle;
-
-            MetaDescription = string.IsNullOrEmpty(Markdown.MetaData.MetaDescription)
-                                ? string.Empty
-                                : Markdown.MetaData.MetaDescription;
-        }
     }
 }
