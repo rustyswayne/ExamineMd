@@ -14,10 +14,5 @@
         /// Gets or sets the max list count.
         /// </summary>
         int MaxListCount { get; set; }
-
-        /// <summary>
-        /// Gets the starting path.  
-        /// </summary>
-        IMdPath StartingPath { get; }
     }
 }

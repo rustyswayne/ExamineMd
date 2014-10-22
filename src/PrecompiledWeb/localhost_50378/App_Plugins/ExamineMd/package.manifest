@@ -1,6 +1,0 @@
-{
-	propertyEditors: [],       
-    javascript: [
-		'~/App_Plugins/ExamineMd/BackOffice/PropertyEditors/pathpicker.controller.js'
-    ]
-}

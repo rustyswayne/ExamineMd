@@ -8,7 +8,9 @@
     using ExamineMd.Models;
     using ExamineMd.Search;
 
+    using Umbraco.Core;
     using Umbraco.Core.Models;
+    using Umbraco.Web;
     using Umbraco.Web.Models;
 
     /// <summary>
@@ -48,6 +50,8 @@
         /// </returns>
         public IVirtualMarkdownBase Build(IRenderModel model, string url)
         {
+
+            url = GetStartingPath(model.Content).EnsureForwardSlashes().EnsureNotEndsWith('/') + url;
             var path = _query.Paths.GetByUrl(url);
 
             return Build(model, path);
@@ -90,7 +94,9 @@
         /// </returns>
         public IVirtualMarkdownDocument BuildDocument(IRenderModel model, IMdFile md)
         {
-            var parent = md.Path.IsRootPath() ? model.Content.Parent : BuildListing(model, md.Path.ParentPath());
+            var parent = md.Path.IsRootPath() || GetStartingPath(model.Content).Contains(md.Path.Value) ? 
+                model.Content.Parent : 
+                BuildListing(model, md.Path.ParentPath());
 
             var document = new VirtualMarkdownDocument(model.Content, parent, md)
             {
@@ -117,7 +123,7 @@
         /// </returns>
         public IVirtualMarkdownListing BuildListing(IRenderModel model, IMdPath path)
         {
-            var parent = path.IsRootPath()
+            var parent = path.IsRootPath() || GetStartingPath(model.Content).Contains(path.Value)
                              ? model.Content.Parent
                              : this.Build(model, path.ParentPath());
 
@@ -153,6 +159,12 @@
             }
 
             return contents;
+        }
+
+        private static string GetStartingPath(IPublishedContent content)
+        {
+            var startPathing = content.GetPropertyValue<string>("startingPath");
+            return string.IsNullOrEmpty(startPathing) ? "\\" : startPathing.EnsureBackSlashes();
         }
     }
 }

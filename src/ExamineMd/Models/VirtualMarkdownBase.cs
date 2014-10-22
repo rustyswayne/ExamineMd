@@ -174,10 +174,7 @@
         /// </summary>
         private void Initialize()
         {
-            var startPathing = Content.GetPropertyValue<string>("startingPath");
-            startPathing = string.IsNullOrEmpty(startPathing) ? "\\" : startPathing;
-
-            _startPath = MdPath.Value.Replace(startPathing, string.Empty).EnsureForwardSlashes().EnsureEndsWith('/');
+            _startPath = MdPath.Value.Replace(StartingPath.Value, string.Empty).EnsureForwardSlashes().EnsureEndsWith('/');
         }
     }
 }

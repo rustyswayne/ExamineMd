@@ -1,8 +1,0 @@
-﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IVirtualMarkdownDocument>
-@using ExamineMd
-@using ExamineMd.Models
-@{
-    Layout = "Base.cshtml";
-}
- 
-@Model.Markdown.BodyHtml()
