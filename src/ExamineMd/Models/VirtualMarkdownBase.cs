@@ -174,7 +174,11 @@
         /// </summary>
         private void Initialize()
         {
-            _startPath = MdPath.Value.Replace(StartingPath.Value, string.Empty).EnsureForwardSlashes().EnsureEndsWith('/');
+            _startPath = (!MdPath.IsRootPath()
+                             ? StartingPath.IsRootPath() ?
+                               MdPath.Value  :
+                               MdPath.Value.Replace(StartingPath.Value, string.Empty)
+                             : StartingPath.Value).EnsureForwardSlashes().EnsureStartsAndEndsWith('/');
         }
     }
 }
