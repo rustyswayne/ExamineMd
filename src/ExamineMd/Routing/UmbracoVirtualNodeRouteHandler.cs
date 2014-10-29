@@ -33,7 +33,10 @@
            public IHttpHandler GetHttpHandler(RequestContext requestContext)
         
         {
+              
             var umbracoContext = UmbracoContext.Current;
+
+            if (umbracoContext == null) return null;
 
             ////TODO: This is a huge hack - we need to publicize some stuff in the core
             ////TODO: publicize: ctor (or static method to create it), Prepared()

@@ -9,12 +9,15 @@
     
     using MarkdownDeep;
     using Models;
-    
+
+    using Umbraco.Core.IO;
+
     /// <summary>
     /// Extension methods for MarkdownAsHtmlString.
     /// </summary>
     public static class MarkdownExtensions
     {
+
         /// <summary>
         /// Transforms a MarkdownAsHtmlString (md) formatted string as Html
         /// </summary>
@@ -68,10 +71,15 @@
         public static IHtmlString BodyHtml(this IVirtualMarkdownDocument document)
         {
             var formatter = GetMarkdownFormatter();
+            
             formatter.UrlBaseLocation = PathHelper.MakeAbsolutUrl(document.Url, string.Empty);
             formatter.UrlRootLocation = PathHelper.MakeAbsolutUrl(document.RootContent.Url, string.Empty);
 
-            return string.IsNullOrEmpty(document.Markdown.Body) ? MvcHtmlString.Empty : new MvcHtmlString(formatter.Transform(document.Markdown.Body));
+            var virtualPath =
+                IOHelper.ResolveUrl((
+                    PathHelper.GetPhysicalPathToFileStore().EnsureNotEndsWith("\\") + document.Markdown.Path.Value).EnsureForwardSlashes());
+
+            return string.IsNullOrEmpty(document.Markdown.Body) ? MvcHtmlString.Empty : new MvcHtmlString(formatter.Transform(document.Markdown.Body).Replace("__markdown__src__", virtualPath.EnsureStartsAndEndsWith('/')));
         }
 
         /// <summary>
@@ -124,12 +132,34 @@
                     };
 
             formatter.PrepareLink += PrepareLink;
+            formatter.PrepareImage += PrepareImage;
 
             return formatter;
         }
 
         /// <summary>
-        /// Handles the PrepareLink event
+        /// Handles the PrepareImage.
+        /// </summary>
+        /// <param name="htmlTag">
+        /// The html tag.
+        /// </param>
+        /// <param name="b">
+        /// The b.
+        /// </param>
+        /// <returns>
+        /// The <see cref="bool"/>.
+        /// </returns>
+        private static bool PrepareImage(HtmlTag htmlTag, bool b)
+        {
+            var src = htmlTag.attributes["src"];
+            htmlTag.attributes["src"] = string.Format("__markdown__src__{0}", src); 
+            htmlTag.attributes["class"] = "markdown-image";
+            
+            return true;
+        }
+
+        /// <summary>
+        /// Handles the PrepareLink
         /// </summary>
         /// <param name="htmlTag">
         /// The html tag.
