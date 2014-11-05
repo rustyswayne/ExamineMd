@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>ExamineMd</id>
-    <version>1.0.3</version>
+    <version>1.0.7</version>
     <title>ExamineMd</title>
     <authors>Dina Berry, Rusty Swayne</authors>
     <owners>Mindfly, Inc.</owners>
@@ -18,9 +18,5 @@
   </metadata>
   <files>
     <file src="..\Temp\AllBinaries\ExamineMd.dll" target="lib\net40\ExamineMd.dll" />
-    <file src="..\transforms\web.config.transform" target="content\web.config.transform" />
-    <file src="..\transforms\examineindex.config.transform" target="content\config\examineindex.config.transform" />
-    <file src="..\transforms\examinesettings.config.transform" target="content\config\examinesettings.config.transform" />
-    <file src="content\App_Data\ExamineMdRoot\ExamineMd.md" target="content\App_Data\ExamineMdRoot\ExamineMd.md" />
   </files>
 </package>

@@ -95,6 +95,20 @@
         }
 
         /// <summary>
+        /// Gets the file name for use in a Url.
+        /// </summary>
+        /// <param name="fileName">
+        /// The file name.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
+        public static string GetFileNameForUrl(string fileName)
+        {
+            return fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments();
+        }
+
+        /// <summary>
         /// Validates a searchable path.
         /// </summary>
         /// <param name="path">
@@ -141,20 +155,6 @@
             return string.IsNullOrEmpty(fileName) ? 
                 string.Empty : 
                 string.Format("{0}{1}", ValidateDocumentPath(path).EnsureForwardSlashes().EnsureEndsWith('/'), GetFileNameForUrl(fileName));
-        }
-
-        /// <summary>
-        /// Gets the file name for use in a Url.
-        /// </summary>
-        /// <param name="fileName">
-        /// The file name.
-        /// </param>
-        /// <returns>
-        /// The <see cref="string"/>.
-        /// </returns>
-        internal static string GetFileNameForUrl(string fileName)
-        {
-            return fileName.Substring(0, fileName.Length - 3).SafeEncodeUrlSegments();
         }
 
         /// <summary>

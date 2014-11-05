@@ -16,7 +16,7 @@
     /// <summary>
     /// The virtual content factory.
     /// </summary>
-    internal class VirtualContentFactory
+    public class VirtualContentFactory
     {
         /// <summary>
         /// The <see cref="IMarkdownQuery"/>.
