@@ -4,9 +4,12 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
 
     using ExamineMd.Models;
     using ExamineMd.Search;
+
+    using Lucene.Net.Store;
 
     using Umbraco.Core;
     using Umbraco.Core.Models;
@@ -18,6 +21,13 @@
     /// </summary>
     public class VirtualContentFactory
     {
+        private System.Object _lock = new System.Object();
+
+        /// <summary>
+        /// The locker.
+        /// </summary>
+        private static readonly ReaderWriterLockSlim Locker = new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion);
+
         /// <summary>
         /// The <see cref="IMarkdownQuery"/>.
         /// </summary>
@@ -144,18 +154,21 @@
         {
             var contents = new List<IVirtualMarkdownBase>();
 
-            // Directories
-            var directories = _query.Paths.GetByPathKey(pathKey).Where(x => !x.IsRootPath()).ToArray();
-            if (directories.Any())
+            lock (_lock)
             {
-                contents.AddRange(directories.Select(x => this.BuildListing(new RenderModel(content), x)));
-            }
+                // Directories
+                var directories = _query.Paths.GetByPathKey(pathKey).Where(x => !x.IsRootPath()).ToArray();
+                if (directories.Any())
+                {
+                    contents.AddRange(directories.Select(x => this.BuildListing(new RenderModel(content), x)));
+                }
 
-            // Files
-            var files = _query.Files.GetByPathKey(pathKey).ToArray();
-            if (files.Any())
-            {
-                contents.AddRange(files.Select(x => this.BuildDocument(new RenderModel(content), x)));
+                // Files
+                var files = _query.Files.GetByPathKey(pathKey).ToArray();
+                if (files.Any())
+                {
+                    contents.AddRange(files.Select(x => this.BuildDocument(new RenderModel(content), x)));
+                }
             }
 
             return contents;

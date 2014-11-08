@@ -36,5 +36,10 @@
         /// Gets a value indicating whether is a document.
         /// </summary>
         bool IsDocument { get; }
+
+        /// <summary>
+        /// Gets or sets the examine md path.
+        /// </summary>
+        IMdPath MdPath { get; set; }
     }
 }

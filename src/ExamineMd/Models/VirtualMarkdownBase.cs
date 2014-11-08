@@ -167,7 +167,7 @@
         /// <summary>
         /// Gets or sets the examine md path.
         /// </summary>
-        internal IMdPath MdPath { get; set; }
+        public IMdPath MdPath { get; set; }
 
         /// <summary>
         /// Initializes the object.

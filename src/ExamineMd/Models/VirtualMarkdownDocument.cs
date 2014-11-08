@@ -64,27 +64,6 @@
 
         #region IPublishedContent
 
-        ///// <summary>
-        ///// Gets the url.
-        ///// </summary>
-        ///// <remarks>
-        ///// This is a virtual path not associated with an actual Umbraco content node. 
-        ///// </remarks>
-        //public override string Url
-        //{
-        //    get
-        //    {
-        //        var start = StartingPath.Value.EnsureForwardSlashes();
-        //        var routeIndex = Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase);
-        //        if (routeIndex <= 0)
-        //        {
-        //            return Content.Url.EnsureNotEndsWith('/') + Markdown.SearchableUrl();
-        //        }
-
-        //        return this.Content.Url.Substring(0, this.Content.Url.IndexOf(start, StringComparison.OrdinalIgnoreCase) + start.Length).EnsureNotEndsWith('/') + this.Markdown.SearchableUrl();
-        //    }
-        //}
-
         /// <summary>
         /// Gets the id.
         /// </summary>
