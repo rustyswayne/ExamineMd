@@ -47,6 +47,23 @@
         }
 
         /// <summary>
+        /// Gets the starting path from the <see cref="ExamineMd" /> content
+        /// </summary>
+        /// <param name="content">
+        /// The content.
+        /// </param>
+        /// <returns>
+        /// The starting path.
+        /// </returns>
+        public static string GetStartingPath(IPublishedContent content)
+        {
+            if (content.DocumentTypeAlias != "ExamineMd") return "\\";
+
+            var startPathing = content.GetPropertyValue<string>("startingPath");
+            return string.IsNullOrEmpty(startPathing) ? "\\" : startPathing.EnsureBackSlashes();
+        }
+
+        /// <summary>
         /// Builds <see cref="IVirtualMarkdownBase"/>.
         /// </summary>
         /// <param name="model">
@@ -137,8 +154,12 @@
                              ? model.Content.Parent
                              : this.Build(model, path.ParentPath());
 
-            return new VirtualMarkdownListing(model.Content, parent, path, GetChildren);
+            return new VirtualMarkdownListing(model.Content, parent, path, GetChildren)
+                       {
+                           Brief = model.Content.GetPropertyValue<string>("brief")
+                       };
         }
+
 
         /// <summary>
         /// Gets a list of virtual children
@@ -172,12 +193,6 @@
             }
 
             return contents;
-        }
-
-        private static string GetStartingPath(IPublishedContent content)
-        {
-            var startPathing = content.GetPropertyValue<string>("startingPath");
-            return string.IsNullOrEmpty(startPathing) ? "\\" : startPathing.EnsureBackSlashes();
         }
     }
 }
