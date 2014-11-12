@@ -1,13 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
-namespace ExamineMd.Models
+﻿namespace ExamineMd.Models
 {
+    using System.Collections;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Represents an MdFileMeta.
     /// </summary>
     internal class MdMetaData : IMdMetaData
     {
+        /// <summary>
+        /// Gets or sets the link title used in navigation.
+        /// </summary>
+        public string PageTitleLinks { get; set; }
+
         /// <summary>
         /// Gets or sets the page tile.
         /// </summary>

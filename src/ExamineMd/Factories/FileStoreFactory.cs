@@ -91,6 +91,7 @@
 
             if (root == null) return meta;
 
+            meta.PageTitleLinks = root.GetSafeAttribute("pageTitleLinks");
             meta.PageTitle = root.GetSafeAttribute("pageTitle");
             meta.MetaDescription = root.GetSafeAttribute("metaDescription");
             meta.Relevance = root.GetSafeAttribute("relevance");

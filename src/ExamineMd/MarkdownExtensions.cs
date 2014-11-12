@@ -170,6 +170,8 @@
         private static bool PrepareLink(HtmlTag htmlTag)
         {
             htmlTag.attributes["class"] = "markdown-link";
+            if (htmlTag.attributes["href"].EndsWith(".md"))
+                htmlTag.attributes["href"] = htmlTag.attributes["href"].Substring(0, htmlTag.attributes["href"].Length - 3);
             return true;
         }
     }

@@ -8,6 +8,11 @@ namespace ExamineMd.Models
     public interface IMdMetaData
     {
         /// <summary>
+        /// Gets or sets the link title used in navigation.
+        /// </summary>
+        string PageTitleLinks { get; set; }
+
+        /// <summary>
         /// Gets or sets the page tile.
         /// </summary>
         string PageTitle { get; set; }

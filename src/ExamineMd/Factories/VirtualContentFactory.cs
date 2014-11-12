@@ -127,7 +127,7 @@
 
             var document = new VirtualMarkdownDocument(model.Content, parent, md)
             {
-                HeadleLine = md.Title,
+                HeadleLine = string.IsNullOrEmpty(md.MetaData.PageTitle) ? md.Title : md.MetaData.PageTitle,
                 PageTitle = string.IsNullOrEmpty(md.MetaData.PageTitle) ? md.Title : md.MetaData.PageTitle,
                 MetaDescription = string.IsNullOrEmpty(md.MetaData.MetaDescription) ? string.Empty : md.MetaData.MetaDescription,
                 MdPath = md.Path

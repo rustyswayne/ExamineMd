@@ -104,6 +104,7 @@ namespace ExamineMd
                        ? new MdMetaData()
                        {
                            MetaDescription = string.Empty,
+                           PageTitleLinks = string.Empty,
                            PageTitle = string.Empty,
                            Relevance = string.Empty,
                            Revision = string.Empty,           
