@@ -18,6 +18,7 @@
     using Umbraco.Core.Services;
     using Umbraco.Web;
     using Umbraco.Web.UI.JavaScript;
+    using Umbraco.Web.Cache;
 
     /// <summary>
     /// Registers ExamineMd specific Umbraco application event handlers
@@ -39,11 +40,12 @@
         {
             //// Add custom routes
             LogHelper.Info<UmbracoApplicationEventHandler>("ExamineMd - Adding Custom Routes");
+
             ExamineMdRoutes.MapRoutes(RouteTable.Routes, UmbracoContext.Current.ContentCache);
-                       
+
             ContentService.Saved += ContentServiceOnSaved;
             ContentService.Deleted += ContentServiceOnDeleted;
-            
+
             // Back office resources
             ServerVariablesParser.Parsing += ServerVariablesParserOnParsing;
         }
@@ -85,7 +87,7 @@
             var contents = saveEventArgs.SavedEntities.Where(x => x.ContentType.Name.Equals("ExamineMd"));
             if (!contents.Any()) return;
 
-            MapExamineMdRoutes();
+            //MapExamineMdRoutes();
         }
 
 
@@ -95,7 +97,7 @@
             if (!contents.Any()) return;
 
             // TODO clear routes in the event there are none
-            MapExamineMdRoutes();
+            //MapExamineMdRoutes();
         }
 
         /// <summary>

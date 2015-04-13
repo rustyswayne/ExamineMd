@@ -5,6 +5,7 @@
 
     using Umbraco.Core.Models;
     using Umbraco.Web;
+    using Umbraco.Web.Routing;
 
     /// <summary>
     /// For MVC Routes, taken from https://github.com/Shandem/Articulate/blob/master/Articulate/UmbracoVirtualNodeByIdRouteHandler.cs
@@ -66,6 +67,21 @@
         protected virtual IPublishedContent FindContent(RequestContext requestContext, UmbracoContext umbracoContext, IPublishedContent baseContent)
         {
             return baseContent;
+        }
+
+        //NOTE: This is the manual way we could assign culture this but I think there's more logic for edge case scenarios in Umbraco's Prepare method.
+        // I've just left this code here as an example
+        protected override void PreparePublishedContentRequest(PublishedContentRequest publishedContentRequest)
+        {
+            //if (_hostsAndIds.Any(x => x.Item2 == publishedContentRequest.PublishedContent.Parent.Id))
+            //{
+            //    var hostAndId = _hostsAndIds.Single(x => x.Item2 == publishedContentRequest.PublishedContent.Parent.Id);
+            //    var domain = Domain.GetDomain(hostAndId.Item1);
+            //    publishedContentRequest.Culture = new CultureInfo(domain.Language.CultureAlias);
+            //}
+
+            base.PreparePublishedContentRequest(publishedContentRequest);
+
         }
     }
 }

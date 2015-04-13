@@ -109,7 +109,6 @@ C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\log4net.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\Lucene.Net.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\MarkdownDeep.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\Microsoft.ApplicationBlocks.Data.dll
-C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\Microsoft.Web.Helpers.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\Microsoft.Web.Infrastructure.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\MiniProfiler.dll
