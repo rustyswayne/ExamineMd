@@ -61,7 +61,7 @@
             requestContext.RouteData.DataTokens.Add("umbraco", renderModel);
             requestContext.RouteData.DataTokens.Add("umbraco-doc-request", umbracoContext.PublishedContentRequest);
             requestContext.RouteData.DataTokens.Add("umbraco-context", umbracoContext);
-            umbracoContext.PublishedContentRequest.ConfigureRequest();
+            umbracoContext.PublishedContentRequest.Prepare();
 
 
             var values = requestContext.RouteData.Values;
