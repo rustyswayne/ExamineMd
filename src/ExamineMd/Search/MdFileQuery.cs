@@ -153,10 +153,22 @@
         public IEnumerable<IMdFile> SearchAllRecords(string term)
         {
             var criteria = Searcher.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
+
             criteria.Field("allDocs", "1").And().Field("__IndexType", Constants.IndexTypes.ExamineMdDocument.ToLowerInvariant())
                 .And()
-                .GroupedOr(new[] { "title", "searchableBody" }, new[] { term, term })
-                .Compile();
+               .Field("title", term.Fuzzy().Value)
+               .Or()
+               .Field("bodyText", term.Fuzzy().Value)
+               .Or()
+               .Field("metaData", term.Fuzzy().Value)
+                .And()
+                .GroupedOr(new[] { "title", "searchableBody", "metaData", "pathSearchable", "searchableUrl" }, new[] { term, term })
+               .Compile();
+
+            //criteria.Field("allDocs", "1").And().Field("__IndexType", Constants.IndexTypes.ExamineMdDocument.ToLowerInvariant())
+            //    .And()
+            //    .GroupedOr(new[] { "title", "searchableBody", "metaData", "pathSearchable", "searchableUrl" }, new[] { term, term })
+            //    .Compile();
 
             return Searcher.Search(criteria).Select(x => x.ToMdFile());
         }

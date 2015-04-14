@@ -87,6 +87,7 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Rel
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.csprojResolveAssemblyReference.cache
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.csprojResolveAssemblyReference.cache
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\ExamineMd.Tests.UnitTests.dll.config
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\ExamineMd.Tests.UnitTests.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\ExamineMd.Tests.UnitTests.pdb
@@ -171,6 +172,5 @@ C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\umbraco.DataLaye
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\umbraco.editorControls.xml
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\umbraco.MacroEngines.xml
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\umbraco.providers.xml
-C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.csprojResolveAssemblyReference.cache
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.pdb
