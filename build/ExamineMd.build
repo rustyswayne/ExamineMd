@@ -68,7 +68,7 @@
     </Target>
 
     <!-- PACKAGE -->
-    <Target Name="Build" DependsOnTargets="PrepairFiles">
+    <Target Name="Build" DependsOnTargets="Manifest">
         <ItemGroup>
             <PackageFiles Include="$(BuildDir)\**\*.*" />
         </ItemGroup>

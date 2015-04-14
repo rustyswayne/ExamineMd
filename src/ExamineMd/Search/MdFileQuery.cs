@@ -142,6 +142,26 @@
         }
 
         /// <summary>
+        /// Searches for a term across all paths 
+        /// </summary>
+        /// <param name="term">
+        /// The term.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IEnumerable{IMdFile}"/>.
+        /// </returns>
+        public IEnumerable<IMdFile> SearchAllRecords(string term)
+        {
+            var criteria = Searcher.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
+            criteria.Field("allDocs", "1").And().Field("__IndexType", Constants.IndexTypes.ExamineMdDocument.ToLowerInvariant())
+                .And()
+                .GroupedOr(new[] { "title", "searchableBody" }, new[] { term, term })
+                .Compile();
+
+            return Searcher.Search(criteria).Select(x => x.ToMdFile());
+        }
+
+        /// <summary>
         /// List files associated with the path provided
         /// </summary>
         /// <param name="path">

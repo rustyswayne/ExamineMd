@@ -3,13 +3,13 @@
 	<info>
 		<package>
 			<name>ExamineMd</name>
-			<version>1.0.16</version>
+			<version>0.0.0</version>
             <license url="https://github.com/rustyswayne/ExamineMd/blob/master/LICENSE">MIT license</license>
             <url>https://github.com/rustyswayne/ExamineMd</url>
 			<requirements>
-				<major>1</major>
+				<major>0</major>
 				<minor>0</minor>
-				<patch>16</patch>
+				<patch>0</patch>
 			</requirements>
 		</package>
         <author>
@@ -27,33 +27,7 @@
 	<DictionaryItems />
 	<Languages />
 	<DataTypes />
-  <Actions>
-    <Action runat="install" undo="true" alias="ExamineMd_AddAppConfigKey" />
-    <Action runat="install" undo="true" alias="ExamineMd_AddExamineConfigs">
-      <ExamineMdIndexSets>
-        <IndexSet SetName="ExamineMdIndexSet" IndexPath="~/App_Data/TEMP/ExamineIndexes/ExamineMd/">
-          <IndexUserFields>
-            <add Name="key" />
-            <add Name="body" />
-            <add Name="searchableBody" />
-            <add Name="title" />
-            <add Name="fileName" />
-            <add Name="path" />
-            <add Name="metaData" />
-            <add Name="allDocs" />
-            <add Name="pathSearchable" />
-            <add Name="createDate" />
-          </IndexUserFields>
-        </IndexSet>
-      </ExamineMdIndexSets>
-      <ExamineMdIndexProviders>
-        <add name="ExamineMdIndexer" type="Examine.LuceneEngine.Providers.SimpleDataIndexer, Examine" indexTypes="ExamineMdDocument" dataService="ExamineMd.DataService.MarkdownFileIndexDataService, ExamineMd" />
-      </ExamineMdIndexProviders>
-      <ExamineMdSearchProviders>
-        <add name="ExamineMdSearcher" type="Examine.LuceneEngine.Providers.LuceneSearcher, Examine" />
-      </ExamineMdSearchProviders>
-    </Action>
-  </Actions>
+	<Actions />
 	<control />
 	<files />
 </umbPackage>
