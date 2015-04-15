@@ -1,4 +1,6 @@
-﻿namespace ExamineMd.Tests.UnitTests.Search
+﻿using Examine;
+
+namespace ExamineMd.Tests.UnitTests.Search
 {
     using System;
     using System.Linq;
@@ -100,6 +102,19 @@
         {
 
             var files = _markdownQuery.Files.Search("AngularJS");
+            this.ShowFileStoreInfo(files);
+        }
+
+        /// <summary>
+        /// Testing Title SafeBody and MetaData
+        /// </summary>
+        [Test]
+        public void Can_Search_For_Md_Files_Test_From_All_Fields()
+        {
+            // want to reindex while I'm testing
+            ExamineManager.Instance.IndexProviderCollection["ExamineMdIndexer"].RebuildIndex();
+
+            var files = _markdownQuery.Files.SearchAllRecords("pet");
             this.ShowFileStoreInfo(files);
         }
 

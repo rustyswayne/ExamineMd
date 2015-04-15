@@ -9,6 +9,20 @@
     using Examine.SearchCriteria;
 
     using ExamineMd.Models;
+    using System.Text.RegularExpressions;
+
+    public class SearchTerm
+    {
+        public string Term { get; set; }
+        public SearchTermType TermType { get; set; }
+    }
+
+
+    public enum SearchTermType
+    {
+        SingleWord,
+        MultiWord
+    }
 
     /// <summary>
     /// Represents a MdFileQuery.
@@ -154,24 +168,69 @@
         {
             var criteria = Searcher.CreateSearchCriteria(Constants.IndexTypes.ExamineMdDocument);
 
-            criteria.Field("allDocs", "1").And().Field("__IndexType", Constants.IndexTypes.ExamineMdDocument.ToLowerInvariant())
-                .And()
-               .Field("title", term.Fuzzy().Value)
-               .Or()
-               .Field("bodyText", term.Fuzzy().Value)
-               .Or()
-               .Field("metaData", term.Fuzzy().Value)
-                .And()
-                .GroupedOr(new[] { "title", "searchableBody", "metaData", "pathSearchable", "searchableUrl" }, new[] { term, term })
-               .Compile();
+            var query = BuildQuery(new string[] { "title", "bodyText", "metaData" }, term, criteria);
+
+
+            //criteria.Field("allDocs", "1").And().Field("__IndexType", Constants.IndexTypes.ExamineMdDocument.ToLowerInvariant())
+            //    .And()
+            //   .Field("title", term.Fuzzy().Value)
+            //   .Or()
+            //   .Field("bodyText", term.Fuzzy().Value)
+            //   .Or()
+            //   .Field("metaData", term.Fuzzy().Value)
+            //    .And()
+            //    .GroupedOr(new[] { "title", "searchableBody", "metaData", "pathSearchable", "searchableUrl" }, new[] { term, term })
+            //   .Compile();
 
             //criteria.Field("allDocs", "1").And().Field("__IndexType", Constants.IndexTypes.ExamineMdDocument.ToLowerInvariant())
             //    .And()
             //    .GroupedOr(new[] { "title", "searchableBody", "metaData", "pathSearchable", "searchableUrl" }, new[] { term, term })
             //    .Compile();
 
-            return Searcher.Search(criteria).Select(x => x.ToMdFile());
+            return Searcher.Search(query).Select(x => x.ToMdFile());
         }
+
+        private static ISearchCriteria BuildQuery(string[] textFields, string searchString, ISearchCriteria criteria)
+        {
+            List<SearchTerm> Terms = new List<SearchTerm>();
+
+            if ((searchString.Contains(@"""")) && (searchString.Count(t => t == '"') % 2 == 0)) // even number of quotes, more than zero
+            {
+                Regex quoteRegex = new Regex(@""".+?"""); // look for any content between quotes
+                foreach (Match item in quoteRegex.Matches(searchString))
+                {
+                    Terms.Add(new SearchTerm() { Term = item.Value.Replace('"', ' ').Trim(), TermType = SearchTermType.MultiWord });
+                    searchString = Regex.Replace(searchString, item.Value, string.Empty); // remove them from search string for subsequent parsing
+                }
+            }
+
+            List<string> singleTerms = new List<string>();
+            singleTerms = searchString.Split(' ').ToList();
+            singleTerms.ForEach(t => Terms.Add(new SearchTerm() { Term = t, TermType = SearchTermType.SingleWord }));
+
+            foreach (SearchTerm t in Terms)
+            {
+                if (!string.IsNullOrEmpty(t.Term))
+                {
+                    switch (t.TermType)
+                    {
+                        case SearchTermType.SingleWord:
+                            criteria.GroupedOr(textFields,
+                                new IExamineValue[] { Examine.LuceneEngine.SearchCriteria.LuceneSearchExtensions.Fuzzy(t.Term, 0.4F) });
+                            break;
+                        case SearchTermType.MultiWord:
+                            criteria.GroupedOr(textFields,
+                                new IExamineValue[] { Examine.LuceneEngine.SearchCriteria.LuceneSearchExtensions.Escape(t.Term) });
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return criteria;
+        }
+
 
         /// <summary>
         /// List files associated with the path provided

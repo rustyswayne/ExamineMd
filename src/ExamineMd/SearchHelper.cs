@@ -54,6 +54,10 @@
         /// </returns>
         internal static string RemoveSpecialCharacters(string input)
         {
+            // if we leave this in, the last word of the last line runs into the first word of the next line
+            // making a new word which makes no sense
+            input = input.Replace("\r\n", " ");
+
             var regex = new Regex("(?:[^a-z0-9 ]|(?<=['\"])s)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
             return regex.Replace(input, string.Empty);
         }

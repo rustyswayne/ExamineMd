@@ -174,3 +174,4 @@ C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\umbraco.MacroEng
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\umbraco.providers.xml
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.dll
 C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Release\ExamineMd.Tests.UnitTests.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Release\umbraco.XmlSerializers.dll
