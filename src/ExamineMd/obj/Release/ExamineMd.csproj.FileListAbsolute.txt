@@ -161,3 +161,4 @@ C:\github\ExamineMd\src\ExamineMd\bin\Release\umbraco.editorControls.xml
 C:\github\ExamineMd\src\ExamineMd\bin\Release\umbraco.MacroEngines.xml
 C:\github\ExamineMd\src\ExamineMd\bin\Release\umbraco.providers.xml
 C:\github\ExamineMd\src\ExamineMd\obj\Release\ExamineMd.dll
+c:\github\ExamineMd\src\ExamineMd\obj\Release\ExamineMd.csprojResolveAssemblyReference.cache
