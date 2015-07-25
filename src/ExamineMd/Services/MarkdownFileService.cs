@@ -1,4 +1,4 @@
-﻿namespace ExamineMd.Persistence.Repositories
+﻿namespace ExamineMd.Services
 {
     using System;
     using System.Collections.Generic;
@@ -6,9 +6,8 @@
     using System.IO;
     using System.Linq;
 
+    using ExamineMd.Factories;
     using ExamineMd.Models;
-    using ExamineMd.Persistence.Factories;
-    using ExamineMd.Services;
 
     using Umbraco.Core.IO;
 
@@ -46,11 +45,11 @@
         {
             Mandate.ParameterNotNullOrEmpty(pathToRoot, "pathToRoot");
 
-            Initialize(pathToRoot);
+            this.Initialize(pathToRoot);
         }
 
         /// <summary>
-        /// Finds the Markdown file store by it's file name
+        /// Finds the MarkdownAsHtmlString file store by it's file name
         /// </summary>
         /// <param name="fileName">
         /// An optional file name
@@ -60,11 +59,11 @@
         /// </returns>
         public IEnumerable<IMdFile> Find(string fileName)
         {
-            return this.GetAllMarkdownFiles().Where(x => x.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
+            return this.GetAllMarkdownFiles().Where(x => x.Path.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
-        /// Searches the Markdown file store by path and an optional fileNameFilter
+        /// Searches the MarkdownAsHtmlString file store by path and an optional fileNameFilter
         /// </summary>
         /// <param name="path">
         /// The relative path to the file. Example /directory1/directory2/
@@ -77,14 +76,13 @@
         /// </returns>
         public IEnumerable<IMdFile> Find(string path, string fileName)
         {
-            path = path.StartsWith("~") ? path.Remove(0, 1) : path;
-            path = path.StartsWith("/") ? path.Remove(0, 1) : path;
+            path = PathHelper.ValidateDocumentPath(path);
 
-            return GetAllMarkdownFiles().Where(x => x.Path.Equals(path, StringComparison.InvariantCultureIgnoreCase) && x.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
+            return this.List(path).Where(x => x.Path.FileName.StartsWith(fileName, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
-        /// Lists all Markdown files found at the path indicated
+        /// Lists all MarkdownAsHtmlString files found at the path indicated
         /// </summary>
         /// <param name="path">
         /// The path.
@@ -97,11 +95,13 @@
         /// </returns>
         public IEnumerable<IMdFile> List(string path, bool includeChildPaths = false)
         {
-            var allMatches = GetMarkdownFiles(GetDirectory(path).DirectoryInfo);
+            path = PathHelper.ValidateDocumentPath(path);
+
+            var allMatches = this.GetMarkdownFiles(this.GetDirectory(path).DirectoryInfo);
 
             return includeChildPaths
                        ? allMatches
-                       : allMatches.Where(x => x.Path.Equals(path, StringComparison.InvariantCultureIgnoreCase));
+                       : allMatches.Where(x => x.Path.Value.Equals(path, StringComparison.InvariantCultureIgnoreCase));
         }
 
         /// <summary>
@@ -111,11 +111,11 @@
         /// The <see cref="IEnumerable{IMdFile}"/>.
         /// </returns>
         /// <remarks>
-        /// TODO Dina - This is the method used by to Index the md files in Examine 
+        /// TODO This is the method used by to Index the md files in Examine 
         /// </remarks>
         public IEnumerable<IMdFile> GetAllMarkdownFiles()
         {
-            return GetMarkdownFiles(_root);
+            return this.GetMarkdownFiles(this._root);
         }
 
         /// <summary>
@@ -131,7 +131,7 @@
         {
             var directory = new DirectoryInfo(this.GetPhysicalPath(path));
 
-            return _factory.Value.Build(directory);
+            return this._factory.Value.Build(directory);
         }
 
         /// <summary>
@@ -142,11 +142,11 @@
         /// </returns>
         public IEnumerable<IMdDirectory> GetDirectories()
         {
-            return this.GetMarkdownDirectories(_root);
+            return this.GetMarkdownDirectories(this._root);
         }
 
         /// <summary>
-        /// Gets a collection of directories in the Markdown file store that match the starting path.
+        /// Gets a collection of directories in the MarkdownAsHtmlString file store that match the starting path.
         /// </summary>
         /// <param name="startPath">
         /// The start path.
@@ -158,11 +158,11 @@
         {
             var directory = new DirectoryInfo(this.GetPhysicalPath(startPath));
 
-            return GetMarkdownDirectories(directory);
+            return this.GetMarkdownDirectories(directory);
         }
 
         /// <summary>
-        /// Recursively gets a collection of Markdown files starting at the directory specified
+        /// Recursively gets a collection of MarkdownAsHtmlString files starting at the directory specified
         /// </summary>
         /// <param name="directory">
         /// The directory.
@@ -174,7 +174,7 @@
         {
             var files = new List<IMdFile>();
 
-            files.AddRange(directory.GetFiles("*.md").Select(x => _factory.Value.Build(x)));
+            files.AddRange(directory.GetFiles("*.md").Select(x => this._factory.Value.Build(x)));
 
             var subs = directory.GetDirectories();
             foreach (var sub in subs)
@@ -206,28 +206,41 @@
             return directories;
         }
 
+        /// <summary>
+        /// Gets the physical path to a file.
+        /// </summary>
+        /// <param name="path">
+        /// The path.
+        /// </param>
+        /// <returns>
+        /// The <see cref="string"/>.
+        /// </returns>
         private string GetPhysicalPath(string path)
-        {
-            var start = path.StartsWith(".") ? path.Remove(0, 1) : path;
-            start = start.Replace("/", "\\");
+        {   
+            var start = PathHelper.ValidateDocumentPath(path).StartsWith(".") ? path.Remove(0, 1) : path;
+            
+            //// remove the first \ - the root path with include it.
+            if (start.StartsWith("\\")) start = start.Remove(0, 1);
 
-            return IOHelper.MapPath(start);
+            return string.Format("{0}{1}", this._root.FullName, start);
         }
 
         /// <summary>
         /// Responsible for initializing the repository.
         /// </summary>
         /// <param name="pathToRoot">
-        /// The path to the root of the Markdown file store
+        /// The path to the root of the MarkdownAsHtmlString file store
         /// </param>
         private void Initialize(string pathToRoot)
         {
-
             var fullPath = IOHelper.MapPath(pathToRoot);
 
-            _root = new DirectoryInfo(fullPath);
+            // This is to assert there is actually a root.
+            if (!Directory.Exists(fullPath)) Directory.CreateDirectory(fullPath);
+                
+            this._root = new DirectoryInfo(fullPath);
 
-            _factory = new Lazy<FileStoreFactory>(() => new FileStoreFactory(fullPath));
+            this._factory = new Lazy<FileStoreFactory>(() => new FileStoreFactory(fullPath));
         }
     }
 }

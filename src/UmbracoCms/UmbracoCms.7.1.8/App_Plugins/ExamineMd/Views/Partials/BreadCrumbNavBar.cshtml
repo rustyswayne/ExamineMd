@@ -1,0 +1,24 @@
+﻿@inherits UmbracoViewPage<IVirtualMarkdownBase>
+@using ExamineMd.Models
+@{
+    var stack = new Stack<IPublishedContent>();
+    var current = Model;
+
+    while (current.Id != Model.RootContent.Id)
+    {
+        stack.Push(current);
+        current = ((IVirtualMarkdownBase)current.Parent);
+    }
+   
+
+   if (stack.Any())
+   {
+       <ul>
+           @while (stack.Any())
+           {
+               var item = stack.Pop();
+               <li><a href="@item.Url">@item.Name</a></li>
+           }
+       </ul>
+   }
+}

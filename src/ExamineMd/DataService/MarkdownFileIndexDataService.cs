@@ -2,23 +2,32 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
-    using System.Text.RegularExpressions;
 
     using Examine;
     using Examine.LuceneEngine;
 
-    using ExamineMd.Persistence.Repositories;
+    using ExamineMd.Models;
+    using ExamineMd.Search;
+    using ExamineMd.Services;
 
-    using umbraco.cms.businesslogic.packager;
+    using Newtonsoft.Json;
+
+    using StringExtensions = Umbraco.Core.StringExtensions;
 
     /// <summary>
-    /// The Examine IndexDataService used to index Markdown file contents.
+    /// The Examine IndexDataService used to index MarkdownAsHtmlString file contents.
     /// </summary>
     public class MarkdownFileIndexDataService : ISimpleDataService 
     {
         /// <summary>
-        /// Returns a collection of all Markdown content data.
+        /// The repository.
+        /// </summary>
+        private readonly IMarkdownFileService repository = new MarkdownFileService();
+
+        /// <summary>
+        /// Returns a collection of all MarkdownAsHtmlString content data.
         /// </summary>
         /// <param name="indexType">
         /// The index type.
@@ -28,45 +37,109 @@
         /// </returns>
         public IEnumerable<SimpleDataSet> GetAllData(string indexType)
         {
-            var repository = new MarkdownFileService();
-
-            var all = repository.GetAllMarkdownFiles();
-
-            var count = 0;
-
+            
             var dataset = new List<SimpleDataSet>();
 
-            foreach (var md in all)
-            {
-                count++;
-                var set =
-                    new SimpleDataSet()
-                        {
-                            NodeDefinition =
-                                new IndexedNode()
-                                    {
-                                        NodeId = count,
-                                        Type = Constants.IndexTypes.ExamineMdDocument
-                                    },
-                            RowData = new Dictionary<string, string>()
-                                {
-                                    { "fileName", md.FileName },
-                                    { "title", md.Title },
-                                    { "body", md.Body },
-                                    { "path", md.Path },
-                                    { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }
-                                }
-                        };
-                dataset.Add(set);
-            }
+            var directories = repository.GetDirectories();
 
+            if (indexType.Equals(Constants.IndexTypes.ExamineMdDocument))
+            {
+                var count = directories.Count();
+ 
+                // Index the MdFiles
+                var all = repository.GetAllMarkdownFiles();
+                foreach (var md in all)
+                {
+                    count++;
+                    dataset.Add(BuildMdFileDataSet(md, count));
+                }    
+            }
+            else if (indexType.Equals(Constants.IndexTypes.ExamineMdDirectory))
+            {
+                var count = 0;
+                foreach (var dir in directories)
+                {
+                    count++;
+                    dataset.Add(BuildMdDirectoryDataSet(dir, count));
+                }    
+            }
+            
             return dataset;
         }
 
-        private static string RemoveSpecialCharacters(string input)
+        /// <summary>
+        /// Builds a MdDirectory data set.
+        /// </summary>
+        /// <param name="directory">
+        /// The directory.
+        /// </param>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="SimpleDataSet"/>.
+        /// </returns>
+        private static SimpleDataSet BuildMdDirectoryDataSet(IMdDirectory directory, int id)
         {
-            var regex = new Regex("(?:[^a-z0-9 ]|(?<=['\"])s)", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.Compiled);
-            return regex.Replace(input, string.Empty);
+            
+            return new SimpleDataSet()
+                {
+                    NodeDefinition = 
+                        new IndexedNode()
+                            {
+                                NodeId = id,
+                                Type = Constants.IndexTypes.ExamineMdDirectory
+                            },
+                    RowData = new Dictionary<string, string>()
+                            {
+                                { "key", directory.Path.Key },
+                                { "path", directory.Path.Value.EnsureForwardSlashes() },
+                                { "pathSearchable", PathHelper.ValidateSearchablePath(directory.Path.Value) },
+                                { "pathKey", directory.Path.ParentPath().Key },
+                                { "allDocs", "1" }
+                            }
+                };
         }
+
+        /// <summary>
+        /// Builds a MdFile data set.
+        /// </summary>
+        /// <param name="md">
+        /// The md.
+        /// </param>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="SimpleDataSet"/>.
+        /// </returns>
+        private static SimpleDataSet BuildMdFileDataSet(IMdFile md, int id)
+        {
+            return
+                new SimpleDataSet()
+                {
+                    NodeDefinition =
+                        new IndexedNode()
+                        {
+                            NodeId = id,
+                            Type = Constants.IndexTypes.ExamineMdDocument
+                        },
+                    RowData = new Dictionary<string, string>()
+                            {
+                                { "key", md.Key },
+                                { "fileName", md.Path.FileName },
+                                { "title", md.Title },
+                                { "body", md.Body },
+                                { "searchableBody", SearchHelper.RemoveSpecialCharacters(md.Body) },
+                                { "path", string.IsNullOrEmpty(md.Path.Value) ? "root" : md.Path.Value.EnsureForwardSlashes() },
+                                { "pathSearchable", PathHelper.ValidateSearchablePath(md.Path.Value) + " " + SearchHelper.RemoveSpecialCharacters(md.Path.FileName.EnsureNotEndsWith(".md")) },
+                                { "pathKey", md.Path.Key },
+                                { "searchableUrl",  PathHelper.GetSearchableUrl(md.Path.Value, md.Path.FileName) },
+                                { "metaData", JsonConvert.SerializeObject(md.MetaData) },
+                                { "allDocs", "1" },
+                                { "createDate", md.DateCreated.ToString("yyyy-MM-dd-HH:mm:ss") }
+                            }
+                };
+            }
     }
 }

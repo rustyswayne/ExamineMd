@@ -15,3 +15,17 @@ Cached/
 # Make sure to include details from VisualStudio.gitignore BEFORE this
 !**/App_Data/[Pp]ackages/
 !**/[Uu]mbraco/developer/[Pp]ackages
+Tests/ExamineMd.Tests.UnitTests/obj/
+src/ExamineMd/App_Data/NuGetBackup/
+Tests/ExamineMd.Tests.UnitTests/App_Data/NuGetBackup/
+src/ExamineMd/bin/
+Tests/ExamineMd.Tests.UnitTests/App_Data/ExamineIndexes/
+build/Temp/
+Tests/ExamineMd.Tests.UnitTests/bin/
+src/ExamineMd/obj/
+src/ExamineMd.Web.UI/Bin/
+*.suo
+src/UmbracoCms/UmbracoCms.7.1.8/App_Data/TEMP/ExamineIndexes/
+src/UmbracoCms/UmbracoCms.7.1.8/App_Data/TEMP/
+src/UmbracoCms/UmbracoCms.7.1.8/App_Data/Logs/
+src/UmbracoCms/UmbracoCms.7.1.8/App_Data/umbraco.config

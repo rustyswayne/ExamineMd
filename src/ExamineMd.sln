@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamineMd", "ExamineMd\ExamineMd.csproj", "{00265365-A838-4555-AF9A-8E1EC90CA1C0}"
 EndProject
@@ -11,14 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{BF9E0692
 	ProjectSection(SolutionItems) = preProject
 		..\build\build.bat = ..\build\build.bat
 		..\build\ExamineMd.build = ..\build\ExamineMd.build
+		..\build\NuSpec\content\App_Data\ExamineMdRoot\ExamineMd.md = ..\build\NuSpec\content\App_Data\ExamineMdRoot\ExamineMd.md
 		..\build\NuSpec\ExamineMd.nuspec = ..\build\NuSpec\ExamineMd.nuspec
 		..\tools\ExamineMd\ExamineMd.props = ..\tools\ExamineMd\ExamineMd.props
 		..\tools\ExamineMd\ExamineMd.targets = ..\tools\ExamineMd\ExamineMd.targets
 		..\build\package.xml = ..\build\package.xml
 		..\build\readme.txt = ..\build\readme.txt
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamineMd.Tests.IntegrationTests", "..\Tests\ExamineMd.Tests.IntegrationTests\ExamineMd.Tests.IntegrationTests.csproj", "{9A2E33A1-5561-4CA9-AF93-ECAB2789F875}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExamineMd.Tests.UnitTests", "..\Tests\ExamineMd.Tests.UnitTests\ExamineMd.Tests.UnitTests.csproj", "{595E8ED3-E2FA-4816-9E2C-0E9F8A0B312C}"
 EndProject
@@ -32,10 +31,6 @@ Global
 		{00265365-A838-4555-AF9A-8E1EC90CA1C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00265365-A838-4555-AF9A-8E1EC90CA1C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00265365-A838-4555-AF9A-8E1EC90CA1C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A2E33A1-5561-4CA9-AF93-ECAB2789F875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A2E33A1-5561-4CA9-AF93-ECAB2789F875}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A2E33A1-5561-4CA9-AF93-ECAB2789F875}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A2E33A1-5561-4CA9-AF93-ECAB2789F875}.Release|Any CPU.Build.0 = Release|Any CPU
 		{595E8ED3-E2FA-4816-9E2C-0E9F8A0B312C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{595E8ED3-E2FA-4816-9E2C-0E9F8A0B312C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{595E8ED3-E2FA-4816-9E2C-0E9F8A0B312C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,7 +40,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9A2E33A1-5561-4CA9-AF93-ECAB2789F875} = {743FF9A5-6DC3-4088-AB78-F70CCB48907F}
 		{595E8ED3-E2FA-4816-9E2C-0E9F8A0B312C} = {743FF9A5-6DC3-4088-AB78-F70CCB48907F}
 	EndGlobalSection
 EndGlobal

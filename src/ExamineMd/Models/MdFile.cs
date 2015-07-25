@@ -5,17 +5,36 @@
     /// <summary>
     /// Represents an MdFile
     /// </summary>
-    public class MdFile : IMdFile
+    public class MdFile : MdEntity, IMdFile
     {
         /// <summary>
-        /// Gets or sets the relative path to the file with respect to the file store root.
+        /// Initializes a new instance of the <see cref="MdFile"/> class.
         /// </summary>
-        public string Path { get; set; }
+        /// <param name="key">
+        /// The key.
+        /// </param>
+        public MdFile(string key)
+            : this(key, new MdMetaData())
+        {
+        }
 
         /// <summary>
-        /// Gets or sets the name of the file.
+        /// Initializes a new instance of the <see cref="MdFile"/> class.
         /// </summary>
-        public string FileName { get; set; }
+        /// <param name="key">
+        /// The key.
+        /// </param>
+        /// <param name="metaData">
+        /// The meta data.
+        /// </param>
+        internal MdFile(string key, IMdMetaData metaData)
+            : base(key)
+        {
+            Mandate.ParameterNotNull(metaData, "metaData");
+
+            MetaData = metaData;
+        }
+
 
         /// <summary>
         /// Gets or sets the title.
@@ -26,6 +45,11 @@
         /// Gets or sets the body.
         /// </summary>
         public string Body { get; set; }
+
+        /// <summary>
+        /// Gets or sets the meta data data.
+        /// </summary>
+        public IMdMetaData MetaData { get; set; }
 
         /// <summary>
         /// Gets or sets the date created.

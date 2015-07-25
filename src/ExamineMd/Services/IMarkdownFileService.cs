@@ -10,7 +10,7 @@
     internal interface IMarkdownFileService
     {
         /// <summary>
-        /// Finds the Markdown file store by it's file name
+        /// Finds the MarkdownAsHtmlString file store by it's file name
         /// </summary>
         /// <param name="fileName">
         /// An optional file name
@@ -21,7 +21,7 @@
         IEnumerable<IMdFile> Find(string fileName); 
             
         /// <summary>
-        /// Searches the Markdown file store by path and an optional fileNameFilter
+        /// Searches the MarkdownAsHtmlString file store by path and an optional fileNameFilter
         /// </summary>
         /// <param name="path">
         /// The relative path to the file. Example \directory1\directory2\
@@ -36,7 +36,7 @@
         IEnumerable<IMdFile> Find(string path, string fileName);
 
         /// <summary>
-        /// Lists all Markdown files found at the path indicated
+        /// Lists all MarkdownAsHtmlString files found at the path indicated
         /// </summary>
         /// <param name="path">
         /// The path.
@@ -50,7 +50,7 @@
         IEnumerable<IMdFile> List(string path, bool includeChildPaths = false); 
             
         /// <summary>
-        /// Gets the Markdown file store directory represented by the path string.
+        /// Gets the MarkdownAsHtmlString file store directory represented by the path string.
         /// </summary>
         /// <param name="path">
         /// The path.
@@ -69,7 +69,7 @@
         IEnumerable<IMdDirectory> GetDirectories();
 
         /// <summary>
-        /// Gets a collection of directories in the Markdown file store that match the starting path.
+        /// Gets a collection of directories in the MarkdownAsHtmlString file store that match the starting path.
         /// </summary>
         /// <param name="startPath">
         /// The start path.
@@ -80,7 +80,7 @@
         IEnumerable<IMdDirectory> GetDirectories(string startPath); 
             
         /// <summary>
-        /// Gets a collection of all Markdown files in the file store.
+        /// Gets a collection of all MarkdownAsHtmlString files in the file store.
         /// </summary>
         /// <returns>
         /// The <see cref="IEnumerable{IMdFile}"/>.

@@ -1,8 +1,11 @@
 <StyleCopSettings Version="105">
   <GlobalSettings>
     <CollectionProperty Name="RecognizedWords">
+      <Value>Api</Value>
+      <Value>doctype</Value>
       <Value>ExamineMd</Value>
       <Value>Md</Value>
+      <Value>Umbraco</Value>
     </CollectionProperty>
   </GlobalSettings>
   <Analyzers>
@@ -34,6 +37,16 @@
           </RuleSettings>
         </Rule>
         <Rule Name="PrefixCallsCorrectly">
+          <RuleSettings>
+            <BooleanProperty Name="Enabled">False</BooleanProperty>
+          </RuleSettings>
+        </Rule>
+      </Rules>
+      <AnalyzerSettings />
+    </Analyzer>
+    <Analyzer AnalyzerId="StyleCop.CSharp.LayoutRules">
+      <Rules>
+        <Rule Name="CurlyBracketsMustNotBeOmitted">
           <RuleSettings>
             <BooleanProperty Name="Enabled">False</BooleanProperty>
           </RuleSettings>

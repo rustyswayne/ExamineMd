@@ -1,0 +1,1 @@
+﻿This is a blue cat as an animal pet.

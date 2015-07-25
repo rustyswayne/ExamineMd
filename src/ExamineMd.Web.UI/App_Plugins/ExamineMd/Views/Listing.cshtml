@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<IVirtualMarkdownListing>
+@using ExamineMd
+@using ExamineMd.Models
+@{
+    Layout = "Base.cshtml";
+}
+
+@{
+    if (Model.Children.Any())
+    {
+        <ul>
+            @foreach (var doc in Model.Children)
+            {
+                
+                <li>
+                    <h3>
+                        <a href="@doc.Url">@doc.Name</a>
+                        <p>This is the brief content</p>
+                    </h3>
+                </li>
+            }
+        </ul>
+    }
+
+}

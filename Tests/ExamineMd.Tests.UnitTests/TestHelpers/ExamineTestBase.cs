@@ -24,11 +24,14 @@
         protected void ShowFileStoreInfo(IEnumerable<IMdFile> files)
         {
             var mdFiles = files as IMdFile[] ?? files.ToArray();
+            if (mdFiles.Any())
+            {
+                var first = mdFiles.First();
+                Console.WriteLine(first.BodyHtml());    
+            }
 
-            var first = mdFiles.First();
-            Console.WriteLine(first.Markdown());
             foreach (var f in mdFiles)
-                Console.WriteLine("{0} -> {1} = {2}", f.Path, f.FileName, f.Title);
+                Console.WriteLine("{0} -> {1} = {2}", f.Path, f.Path.FileName, f.Title);
         }
     }
 }

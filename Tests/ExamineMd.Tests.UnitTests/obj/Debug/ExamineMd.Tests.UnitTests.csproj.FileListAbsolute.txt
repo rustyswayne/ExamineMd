@@ -1,3 +1,7 @@
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.csprojResolveAssemblyReference.cache
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll.config
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\AutoMapper.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\AutoMapper.Net4.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\businesslogic.dll
@@ -15,6 +19,7 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Deb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\interfaces.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\log4net.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Lucene.Net.dll
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.Web.Helpers.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.Web.Infrastructure.dll
@@ -59,6 +64,7 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Deb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\HtmlAgilityPack.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\interfaces.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Lucene.Net.xml
+C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MiniProfiler.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MiniProfiler.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Moq.xml
@@ -79,11 +85,93 @@ C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Deb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.editorControls.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.MacroEngines.xml
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.providers.xml
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.csprojResolveAssemblyReference.cache
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll.config
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.pdb
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.dll
 C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.pdb
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.dll
-C:\Working Repositories\GitHub\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll.config
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.Tests.UnitTests.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\AutoMapper.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\AutoMapper.Net4.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\businesslogic.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ClientDependency.Core.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ClientDependency.Core.Mvc.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\cms.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\controls.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\CookComputing.XmlRpcV2.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Examine.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\HtmlAgilityPack.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ImageProcessor.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ImageProcessor.Web.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\interfaces.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\log4net.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Lucene.Net.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.Web.Helpers.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MiniProfiler.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Moq.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MySql.Data.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Newtonsoft.Json.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\nunit.framework.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\SQLCE4Umbraco.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Data.SqlServerCe.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Data.SqlServerCe.Entity.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Net.Http.Formatting.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Helpers.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Http.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Http.WebHost.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Mvc.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Razor.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.WebPages.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.WebPages.Razor.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\TidyNet.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Umbraco.Core.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.DataLayer.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.editorControls.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.MacroEngines.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.providers.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Umbraco.Web.UI.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\UmbracoExamine.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\UrlRewritingNet.UrlRewriter.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ExamineMd.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\AutoMapper.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\businesslogic.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ClientDependency.Core.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\ClientDependency.Core.Mvc.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\cms.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\controls.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Examine.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\HtmlAgilityPack.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\HtmlAgilityPack.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\interfaces.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Lucene.Net.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MarkdownDeep.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MiniProfiler.pdb
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\MiniProfiler.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Moq.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Newtonsoft.Json.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\nunit.framework.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Net.Http.Formatting.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Helpers.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Http.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Http.WebHost.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Mvc.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.Razor.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.WebPages.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\System.Web.WebPages.Razor.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\Umbraco.Core.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.DataLayer.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.editorControls.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.MacroEngines.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\bin\Debug\umbraco.providers.xml
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.csprojResolveAssemblyReference.cache
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.dll
+C:\github\ExamineMd\Tests\ExamineMd.Tests.UnitTests\obj\Debug\ExamineMd.Tests.UnitTests.pdb

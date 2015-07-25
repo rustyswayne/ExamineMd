@@ -8,20 +8,27 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "UmbracoCms.7.1.8", "http://
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_58802"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Working Repositories\GitHub\ExamineMd\src\UmbracoCms\UmbracoCms.7.1.8\"
+		Debug.AspNetCompiler.PhysicalPath = "UmbracoCms.7.1.8\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58802\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_58802"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\Working Repositories\GitHub\ExamineMd\src\UmbracoCms\UmbracoCms.7.1.8\"
+		Release.AspNetCompiler.PhysicalPath = "UmbracoCms.7.1.8\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58802\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\..\..\..\..\..\Working Repositories\GitHub\ExamineMd\src\UmbracoCms\UmbracoCms.7.1.8\"
+		SlnRelativePath = "UmbracoCms.7.1.8\"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F6389B12-E349-44A1-BA05-8F645B5EA9F3}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Global
