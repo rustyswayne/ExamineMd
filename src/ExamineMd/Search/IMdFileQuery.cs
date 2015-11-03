@@ -82,6 +82,17 @@
         IEnumerable<IMdFile> Search(string term, string path);
 
         /// <summary>
+        /// Searches for a term across all paths 
+        /// </summary>
+        /// <param name="term">
+        /// The term.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IEnumerable{IMdFile}"/>.
+        /// </returns>
+        IEnumerable<IMdFile> SearchAllRecords(string term);
+
+        /// <summary>
         /// Lists all files matching a the path specified.
         /// </summary>
         /// <param name="path">

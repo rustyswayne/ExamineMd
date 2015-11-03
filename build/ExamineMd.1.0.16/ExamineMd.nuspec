@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>ExamineMd</id>
+    <version>1.0.16</version>
+    <title>ExamineMd</title>
+    <authors>Dina Berry, Rusty Swayne</authors>
+    <owners>Mindfly, Inc.</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>ExamineMd loads a directory tree of Markdown files into a Umbraco Examine index and provides a provider to search the Markdown.</description>
+    <summary />
+    <language>en-US</language>
+    <tags>umbraco, Examine, Markdown</tags>
+    <dependencies>
+      <dependency id="MarkdownDeep.NET" version="1.5.0" />
+    </dependencies>
+  </metadata>
+</package>
